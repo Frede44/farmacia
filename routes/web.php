@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name("welcome")->middleware("auth");
 
 
 
 Route::get("/login", [loginController::class, "index"])->name("login.index");
-
+Route::post("/login-w", [loginController::class, "store"])->name("login.store");
+route::get('/logout', [loginController::class, 'destroy'])->name('logout');
 
 
 Route::get("/register", [RegisterController::class, "index"])->name("register.index");
