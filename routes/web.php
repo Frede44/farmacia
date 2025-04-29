@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\InicioController;
+use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\loginController;
-use App\Http\Controllers\Procutos\productosController;
+use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +28,18 @@ Route::get('/', function () {
 
 
 Route::get("/login", [loginController::class, "index"])->name("login.index");
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+
 Route::post("/login-w", [loginController::class, "store"])->name("login.store");
-route::get('/logout', [loginController::class, 'destroy'])->name('logout');
+//Productos
+Route::get('/dashboard/productos', [ProductosController::class, 'index'])->name('productos');
+Route::get('/dashboard/productos/create', [ProductosController::class, 'create'])->name('productos.create');
+//Categorias
+Route::get('/dashboard/categorias',[CategoriasController::class, 'index'])->name('categorias');
+//Inventario
+Route::get('/dashboard/inventario',[InventarioController::class, 'index'])->name('inventario');
+
 
 
 Route::get("/register", [RegisterController::class, "index"])->name("register.index");

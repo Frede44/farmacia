@@ -1,0 +1,147 @@
+/*  dashboard */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    background-color: #ffffff; /* fondo negro general */
+}
+
+.contenedor {
+    display: flex;
+    height: 100%;
+}
+.vistas {
+    margin-left: 0;
+    flex-grow: 1;
+    background-color: #ffffff; /* Fondo  */
+    margin: 0;
+    padding: 0;
+    color: white; /* Asegura que el texto sea visible sobre fondo negro */
+    height: 100%;
+    flex:1;
+    overflow-y: auto;
+}
+
+/* Sidebar (Menú de la izquierda) */
+.sidebar {
+    width: 250px;
+    background-color: #303030;
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    padding-left: 20px;
+    padding-top: 20px;
+    min-width: 250px;
+}
+
+.sidebar h2 {
+    color: #fff; /* Título en blanco */
+    font-size: 15px; /* Tamaño de la fuente para el título */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    
+}
+.opciones{
+    margin-bottom: 20px; /* Espacio debajo de las opciones */
+    
+    
+ 
+}
+.sidebar a {
+   
+    align-items: center;
+    gap: 18px; /* espacio entre icono y texto */
+    color: #fdfdfd;
+    border-radius: 7px;
+    text-decoration: none;
+    padding: 12px;
+    font-size: 14px; /* aumenta el texto para equilibrar con el icono */
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar a i {
+    font-size: 18px; /* un poco más pequeño para no opacar el texto */
+    min-width: 18px; /* fija un ancho mínimo para alinear */
+    text-align: center;
+    margin-right: 25px;/*separacion de icono y texto*/
+    margin-top: 10px;
+}
+
+.sidebar a:hover {
+    background-color: #34b134;
+    width: 7%;
+    border-radius: 10px; /* Cambia el color de fondo cuando el usuario pasa el mouse por encima */
+}
+/*Seleccionar opcion y que se mantenga*/
+.sidebar a.active { 
+    background-color: #34b134 !important;
+    color: white;
+    border-radius: 10px;
+}
+.sidebar ul {
+    list-style: none; /* Elimina los puntos de las listas */
+    padding: 0; /* Elimina el padding de la lista */
+    
+    
+    
+}
+
+.sidebar li {
+    width: 100%; /* Asegura que los elementos de la lista ocupen todo el ancho */
+}
+
+
+
+/* Contenido principal */
+.content {
+    flex: 1; /* Hace que el contenido ocupe el espacio restante */
+    padding: 20px; /* Relleno alrededor del contenido */
+    margin-left: 250px; /* Desplaza el contenido hacia la derecha para no superponerse con el sidebar */
+    transition: margin-left 0.3s ease; /* Transición suave al ajustar el margen */
+}
+
+/* Contenedor principal del dashboard */
+.dashboard-container {
+    margin-left: 250px; /* Desplaza el contenido hacia la derecha */
+    width: calc(100% - 250px); /* Ajusta el ancho para que no se solape con el sidebar */
+    padding: 20px; /* Añade espacio alrededor del contenido */
+    background-color: #fff; /* Fondo blanco para el contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para un efecto de profundidad */
+}
+
+h2 {
+    text-align: center; /* Centra el texto del título */
+    color: #333; /* Color gris oscuro para el título */
+}
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        position: relative;
+        transform: none;
+    }
+    .sidebar.open {
+        transform: translateX(0); /* Mueve el sidebar hacia dentro de la pantalla cuando se abre */
+    }
+    .content {
+        margin-left: 0; /* El contenido ocupa todo el ancho en pantallas pequeñas */
+    }
+    .sidebar-toggle {
+        display: block; /* Muestra el botón de abrir/cerrar el sidebar */
+    }
+    .dashboard-container {
+        margin-left: 0; /* El contenido ocupa todo el ancho disponible */
+        width: 100%; /* Ajusta el ancho al 100% */
+    }
+    .vistas {
+        width: 100%;
+    }
+}
