@@ -17,12 +17,12 @@ class loginController extends Controller
 
         if (auth()->attempt($credentials)) {
             // Authentication passed...
-            return redirect()->intended('/');
+            return redirect()->intended('/dashboard');
+        }else{
+            return redirect()->back()->with('error', 'Invalid credentials!');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+      
     }
 
     public function destroy(Request $request)

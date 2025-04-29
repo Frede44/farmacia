@@ -28,23 +28,25 @@ Route::get('/', function () {
 
 
 Route::get("/login", [loginController::class, "index"])->name("login.index");
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-
-Route::post("/login-w", [loginController::class, "store"])->name("login.store");
-//Productos
-Route::get('/dashboard/productos', [ProductosController::class, 'index'])->name('productos');
-Route::get('/dashboard/productos/create', [ProductosController::class, 'create'])->name('productos.create');
-//Categorias
-Route::get('/dashboard/categorias',[CategoriasController::class, 'index'])->name('categorias');
-//Inventario
-Route::get('/dashboard/inventario',[InventarioController::class, 'index'])->name('inventario');
-
-
 
 Route::get("/register", [RegisterController::class, "index"])->name("register.index");
 Route::post("/register-login", [RegisterController::class, "store"])->name("register.store");
 
-Route::middleware(['auth'])->group(function (){
+
+Route::post("/login-w", [loginController::class, "store"])->name("login.store");
+Route::get("/logout", [loginController::class, "destroy"])->name("logout.store");
+
+
+
+Route::middleware(['auth'])->group(function () {
     Route::get('/productos', [productosController::class, "index"])->name('productos.index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    //Productos
+    Route::get('/dashboard/productos', [ProductosController::class, 'index'])->name('productos');
+    Route::get('/dashboard/productos/create', [ProductosController::class, 'create'])->name('productos.create');
+    //Categorias
+    Route::get('/dashboard/categorias', [CategoriasController::class, 'index'])->name('categorias');
+    //Inventario
+    Route::get('/dashboard/inventario', [InventarioController::class, 'index'])->name('inventario');
+
 });

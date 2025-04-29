@@ -7,6 +7,6 @@
 </head>
 <body>
     <a href="{{route('register.index')}}">registro</a>
-    <a href="{{ route('logout') }}">Logout</a>
+    <a href="{{ route('logout.store') }}">Logout</a>
 </body>
 </html>

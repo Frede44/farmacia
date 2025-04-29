@@ -26,6 +26,6 @@ class RegisterController extends Controller
 
         // Logic to create a new user
 
-        return redirect()->route('welcome')->with('success', 'Registration successful!');
+        return redirect()->route('dashboard.index')->with('success', 'Registration successful!');
     }
 }
