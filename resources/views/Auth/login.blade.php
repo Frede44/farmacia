@@ -9,33 +9,49 @@
 </head>
 
 <body>
-    <div class="container">
-        
-        @if (session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-        @endif
 
-        @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-        @endif
-        <div class="container-form">
-        <h1>Login</h1>
-            <form action=" {{ route('login.store') }}" method="POST">
-                @csrf
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required><br><br>
+    <ul class="background">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <div class="container">
 
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" required><br><br>
+@if (session('error'))
+<div class="alert alert-danger">
+    {{ session('error') }}
+</div>
+@endif
 
-                <button type="submit">Login</button>
-            </form>
-        </div>
-    </div>
+@if (session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+</div>
+@endif
+<div class="container-form">
+    <img class="imagen" src="{{ asset('image/inicio_sesion}.png') }}" alt="imagen inisio de sesion">
+    <form action=" {{ route('login.store') }}" method="POST">
+        @csrf
+     
+        <input type="email" id="email" name="email" required  placeholder="Correo electronico"><br><br>
+
+     
+        <input type="password" placeholder="Contraseña" id="password" name="password" required><br><br>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+</div>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+   
+
+
 </body>
 
 </html>
