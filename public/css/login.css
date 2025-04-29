@@ -88,6 +88,17 @@ form{
     animation: fadeIn 0.5s;
 }
 
+.alert-success{
+    background-color: rgb(0, 255, 0);
+    color: rgb(0, 0, 0);
+}
+
+.alert-danger{
+    background-color: rgb(255, 0, 0);
+    color: rgb(0, 0, 0);
+    color: white;
+}
+
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1; }

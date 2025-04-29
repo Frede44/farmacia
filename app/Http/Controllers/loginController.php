@@ -29,7 +29,7 @@ class loginController extends Controller
     {
         auth()->logout();
 
-        return redirect()->route('login.index')->with('success', 'Logged out successfully!');
+        return redirect()->route('login.index')->with('success', 'sesion cerrada con exito!');
     }
 }
 
