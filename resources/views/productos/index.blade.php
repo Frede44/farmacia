@@ -8,221 +8,102 @@
     <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}"> 
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js"></script>
+
 </head>
-@section('contenido')
+
 
 
 <body>
-
-    <div class="content">
-        
-        <h1>Contenido Productos</h1>
-
-        
-
-       <button class="btn-agregar" onclick="window.location.href='/dashboard/productos/create'">
-    <i class="fas fa-plus"></i> Producto
-</button>
-
-        <!-- Tabla de productos -->
-        <table>
-            <thead>
-                <tr>
-                    <th class="titulo">Codigo</th>
-                    <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Precio</th>
-                    <th>Stock</th>
-                    <th>Acciones</th>
-                    
-                    
-                    
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="datos">
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado" ><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado"><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado"><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr class="datos">
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado" ><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado"><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado"><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr class="datos">
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado" ><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado"><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado"><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr class="datos">
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado" ><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Producto A</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado"><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Producto b</td>
-                    <td>Medicamento</td>
-                    <td>$10.00</td>
-                    <td>25</td>
-                    <td class="acciones">
-                        <button class="btn-editar"><i class="fas fa-edit"></i> Editar</button>
-                        <button class="btn-estado"><i class="fas fa-exchange-alt"></i> Estado</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        
-        <!-- Contenedor para los botones de paginación -->
-<div class="npagina" id="pagination" style="text-align:center; margin-top: 15px;"></div>
-
-    </div>
-
-    @endsection
+@section('contenido')
+<h2>Tabla de Usuarios</h2>
+<div class="table-container">
+  
+  <table id="tablaUsuarios" class="display nowrap" >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Edad</th>
+        <th>perro</th>
+        <th>gato</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr><td>1</td><td>Ana</td><td>ana@email.com</td><td>28</td><td>Sí</td><td>No</td></tr>
+    <tr><td>2</td><td>Juan</td><td>juan@email.com</td><td>34</td><td>No</td><td>Sí</td></tr>
+    <tr><td>3</td><td>María</td><td>maria@email.com</td><td>22</td><td>No</td><td>No</td></tr>
+    <tr><td>4</td><td>Carlos</td><td>carlos@email.com</td><td>30</td><td>Sí</td><td>Sí</td></tr>
+    <tr><td>5</td><td>Lucía</td><td>lucia@email.com</td><td>25</td><td>Sí</td><td>No</td></tr>
+    <tr><td>1</td><td>Ana</td><td>ana@email.com</td><td>28</td><td>Sí</td><td>No</td></tr>
+    <tr><td>2</td><td>Juan</td><td>juan@email.com</td><td>34</td><td>No</td><td>Sí</td></tr>
+    <tr><td>3</td><td>María</td><td>maria@email.com</td><td>22</td><td>No</td><td>No</td></tr>
+    <tr><td>4</td><td>Carlos</td><td>carlos@email.com</td><td>30</td><td>Sí</td><td>Sí</td></tr>
+    <tr><td>5</td><td>Lucía</td><td>lucia@email.com</td><td>25</td><td>Sí</td><td>No</td></tr>
+    <tr><td>1</td><td>Ana</td><td>ana@email.com</td><td>28</td><td>Sí</td><td>No</td></tr>
+    <tr><td>2</td><td>Juan</td><td>juan@email.com</td><td>34</td><td>No</td><td>Sí</td></tr>
+    <tr><td>3</td><td>María</td><td>maria@email.com</td><td>22</td><td>No</td><td>No</td></tr>
+    <tr><td>4</td><td>Carlos</td><td>carlos@email.com</td><td>30</td><td>Sí</td><td>Sí</td></tr>
+    <tr><td>5</td><td>Lucía</td><td>lucia@email.com</td><td>25</td><td>Sí</td><td>No</td></tr>
+    <tr><td>1</td><td>Ana</td><td>ana@email.com</td><td>28</td><td>Sí</td><td>No</td></tr>
+    <tr><td>2</td><td>Juan</td><td>juan@email.com</td><td>34</td><td>No</td><td>Sí</td></tr>
+    <tr><td>3</td><td>María</td><td>maria@email.com</td><td>22</td><td>No</td><td>No</td></tr>
+    <tr><td>4</td><td>Carlos</td><td>carlos@email.com</td><td>30</td><td>Sí</td><td>Sí</td></tr>
+    <tr><td>5</td><td>Lucía</td><td>lucia@email.com</td><td>25</td><td>Sí</td><td>No</td></tr>
     
+      <!-- Puedes agregar más filas -->
+    </tbody>
+  </table>
+  </div>
 
-</body>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const rowsPerPage = 6; // nmero de filas por página
-        const table = document.querySelector("table");// Seleccion de tabla
-        const tbody = table.querySelector("tbody");
-        const rows = Array.from(tbody.querySelectorAll("tr"));
-        const paginationContainer = document.getElementById("pagination");
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
-        function showPage(page) {
-            const start = (page - 1) * rowsPerPage;
-            const end = start + rowsPerPage;
+  <!-- DataTables JS -->
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
 
-            rows.forEach((row, index) => {
-                row.style.display = index >= start && index < end ? "" : "none";
-            });
+  <!-- Inicialización -->
+  <script>
+    $(document).ready(function () {
+      $('#tablaUsuarios').DataTable({
+        dom: 'Bfrtip',
 
-            // Actualiza los botones activos
-            const pageButtons = document.querySelectorAll("#pagination button");
-            pageButtons.forEach((btn, idx) => {
-                btn.classList.toggle("active", idx === page - 1);
-            });
+        buttons: [
+          'copyHtml5',
+          'excelHtml5',
+          'pdfHtml5'
+        ],
+        pageLength: 10,  // Fija la cantidad de registros a  mostrar
+        lengthMenu: [5, 10, 25, 50, 100],
+        responsive: true,
+        language: {
+          search: "Buscar:",
+          lengthMenu: "Mostrar _MENU_ registros",
+          info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+          paginate: {
+            previous: "Anterior",
+            next: "Siguiente"
+          },
+          zeroRecords: "No se encontraron resultados"
         }
-
-        function setupPagination() {
-            paginationContainer.innerHTML = "";
-            const pageCount = Math.ceil(rows.length / rowsPerPage);
-
-            for (let i = 1; i <= pageCount; i++) {
-                const btn = document.createElement("button");
-                btn.textContent = i;
-                btn.addEventListener("click", () => showPage(i));
-                paginationContainer.appendChild(btn);
-            }
-        }
-
-        setupPagination();
-        showPage(1); // Mostrar primera página al cargar
+      });
     });
-</script>
+  </script>
+</body>
 
+@endsection
 </html>
