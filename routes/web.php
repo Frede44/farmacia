@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\Procutos\productosController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,3 +29,7 @@ route::get('/logout', [loginController::class, 'destroy'])->name('logout');
 
 Route::get("/register", [RegisterController::class, "index"])->name("register.index");
 Route::post("/register-login", [RegisterController::class, "store"])->name("register.store");
+
+Route::middleware(['auth'])->group(function (){
+    Route::get('/productos', [productosController::class, "index"])->name('productos.index');
+});
