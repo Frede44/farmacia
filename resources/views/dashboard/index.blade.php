@@ -14,7 +14,8 @@
 
     <!-- Sidebar (Menú de la izquierda) -->
     <div class="sidebar">
-        <h2>Mi Sidebar</h2>
+    <img src="{{ asset('img/logo.png') }}" alt="Logo" class="logo">
+        
         <ul>
             <li class="opciones"><a href="#"><i class="fas fa-home"></i>Inicio</a></li>
 

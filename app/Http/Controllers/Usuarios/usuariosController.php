@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Usuarios;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class usuariosController extends Controller
 {
     public function index()
     {
-        return view("usuarios.index");
+        // Aquí puedes manejar la lógica para mostrar la lista de usuarios
+        $users = User::all(); // Obtener todos los usuarios de la base de datos
+        return view("usuarios.index", compact("users")); // Pasar los usuarios a la vista
     }
 
     public function store(Request $request)

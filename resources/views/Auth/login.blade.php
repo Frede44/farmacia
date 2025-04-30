@@ -2,56 +2,51 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
-    <title>Login farmacia</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zoho Style Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css/login.css')}}" />
+    <style>
+
+    </style>
 </head>
 
 <body>
 
-    <ul class="background">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <div class="container">
 
-@if (session('error'))
-<div class="alert alert-danger">
-    {{ session('error') }}
-</div>
-@endif
+    <div class="container">
+        <div class="left">
+            <img src="{{asset('img/logoFcF.png')}}" alt="Login illustration" />
+        </div>
+        <div class="right">
+            <h2>Inicio de sesion</h2>
+            <form action=" {{ route('login.store') }}" method="POST">
+                @csrf
+                <div class="form-group">
+                    <input type="email" placeholder="ejemplo@email.com" name="email" />
+                </div>
+                <div class="form-group">
+                    <input type="password" placeholder="Password" name="password"/>
+                </div>
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
 
-@if (session('success'))
-<div class="alert alert-success">
-    {{ session('success') }}
-</div>
-@endif
-<div class="container-form">
-    <img class="imagen" src="{{ asset('image/inicio_sesion}.png') }}" alt="imagen inisio de sesion">
-    <form action=" {{ route('login.store') }}" method="POST">
-        @csrf
-     
-        <input type="email" id="email" name="email" required  placeholder="Correo electronico"><br><br>
+                @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+                <button type="submit" class="btn">Inicio de sesion</button>
 
-     
-        <input type="password" placeholder="Contraseña" id="password" name="password" required><br><br>
-
-        <button type="submit">Login</button>
-    </form>
-</div>
-</div>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-   
+            </form>
 
 
+        </div>
+    </div>
 </body>
 
 </html>
