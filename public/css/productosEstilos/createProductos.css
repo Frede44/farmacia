@@ -1,24 +1,11 @@
 
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 0; /* Eliminar márgenes por defecto */
-    padding: 0;
-    height: 100%;
-    width: 100%;
-    background-color:green;
-    
-}
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+    background-color: #c20b0b;
+  }
 
 
 
-h1 {
-    color: #333;
-    text-align: center; /* <--  centra el h1 */
-    
-}
-.txtAreas{
-  
-    background-color: red;
-  
-    align-items: center;
-}
+

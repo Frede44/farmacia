@@ -7,8 +7,33 @@
     }
 
     table.dataTable thead { /*titulos de la tabla*/
-      background-color: #007bff;
+      background-color: #3b3b3b;
+      
+      
+    }
+    table{
+      background-color: rgb(235, 235, 235);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+      
+      
+    }
+    .nombre{
+      background-color: #134e85;
+    }
+    button{
+      background-color: rgb(2, 167, 2);
+    
       color: white;
+      border: none;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100px;
+      height: 50px;
+      margin-left: 25px;
+      font-size: 15px;
+      font-weight: bold;
+      
     }
 
     .dataTables_wrapper .dataTables_filter input {
@@ -18,16 +43,27 @@
     h2 {
       margin-bottom: 20px;
     }
-  .table-container {
+    th{
+      color: rgb(248, 248, 248);
+    }
+    td{
+      color: black;
+    }
+  
       
-      
-      overflow-x: auto; /* Habilita el scroll horizontal si hay muchas columnas */
-      padding: 0px;
+      /*Fondo de la tabla*/
+    .table-container {
+      background-color: rgb(243, 243, 243); 
+      padding: 10px; /* Separación interna de  en todos los lados */
+      overflow-x: auto;
       width: 95%;
-      margin-left: 40px;
-      margin-top: 100px;
-      
+      margin: 20px auto; /* Centra el contenedor horizontalmente */
+    
   }
+      
+
+  
+
   
   
   table.dataTable {
@@ -42,6 +78,29 @@
       text-align: center;
   }
 
+  /* Cambiar el color, borde y tamaño */
+.dt-button {
+  background-color: #474747 !important;
+  color: white !important;
+  border: none !important;
+  padding: 4px 10px !important;
+  font-size: 12px !important;
+  border-radius: 2px !important;
+  margin-right: 1px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  
+}
+
+/* Hover */
+.dt-button:hover {
+  background-color: #398b99;
+}
+
+
+
+
 
 /* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
@@ -49,4 +108,6 @@
         margin-left: 0; /* El contenido ocupa todo el ancho en pantallas pequeñas */
     }
 }
+
+
 
