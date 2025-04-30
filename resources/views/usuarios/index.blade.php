@@ -19,8 +19,8 @@
         <h1>Contenido Productos</h1>
 
         
-     <a href="{{ route('productos.create') }}"  class="btn-agregar" >producto</a>
-      
+
+       <button class="btn-agregar" onclick="window.location.href='/dashboard/productos/create'">
     <i class="fas fa-plus"></i> Producto
 </button>
 

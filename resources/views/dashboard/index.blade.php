@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Farmacia X</title>
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}"> 
+    
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
@@ -17,7 +18,7 @@
         <ul>
             <li class="opciones"><a href="#"><i class="fas fa-home"></i>Inicio</a></li>
 
-            <li class="opciones"><a href="{{ route('productos') }}" class="{{ request()->routeIs('productos')? 'active' : '' }}">
+            <li class="opciones"><a href="{{ route('productos.index') }}" class="{{ request()->routeIs('productos')? 'active' : '' }}">
                     <i class="fas fa-pills"></i>Productos</a></li>
 
             <li class="opciones"><a href="{{ route('categorias')}}" class="{{ request()->routeIs('categorias') ? 'active' : '' }}">
@@ -33,7 +34,7 @@
             <li class="opciones"><a href="#"><i class="fas fa-building"></i>Proveedor</a></li>
             <li class="opciones"><a href="#"><i class="fas fa-box"></i>Inventario por lote</a></li>
             <li class="opciones"><a href="#"><i class="fas fa-users"></i>Personas</a></li>
-            <li class="opciones"><a href="#"><i class="fas fa-user"></i>Usuarios</a></li>
+            <li class="opciones"><a href="{{ route('usuarios.index') }}"><i class="fas fa-user"></i>Usuarios</a></li>
             <li class="opciones"><a href="{{ route('logout.store') }}"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a></li>
         </ul>
     </div>

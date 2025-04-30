@@ -5,8 +5,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\Procutos\productosController as ProcutosProductosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Usuarios\usuariosController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -39,14 +41,14 @@ Route::get("/logout", [loginController::class, "destroy"])->name("logout.store")
 
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/productos', [productosController::class, "index"])->name('productos.index');
+    Route::resource('/productos', ProcutosProductosController::class)->parameters(['productos '=> 'producto' ]);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    //Productos
-    Route::get('/dashboard/productos', [ProductosController::class, 'index'])->name('productos');
-    Route::get('/dashboard/productos/create', [ProductosController::class, 'create'])->name('productos.create');
+
     //Categorias
-    Route::get('/dashboard/categorias', [CategoriasController::class, 'index'])->name('categorias');
+    Route::get('categorias', [CategoriasController::class, 'index'])->name('categorias');
     //Inventario
-    Route::get('/dashboard/inventario', [InventarioController::class, 'index'])->name('inventario');
+    Route::get('inventario', [InventarioController::class, 'index'])->name('inventario');
+
+    Route::resource('/usuarios', usuariosController::class)->parameters(['usuarios '=> 'usuario' ]);
 
 });
