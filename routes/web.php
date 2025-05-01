@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\Categoria\categoriaController;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InicioController;
+use App\Http\Controllers\Inventario\inventarioController as InventarioInventarioController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\Procutos\productosController as ProcutosProductosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\Rol\rolController;
 use App\Http\Controllers\Usuarios\usuariosController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
@@ -44,11 +47,13 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/productos', ProcutosProductosController::class)->parameters(['productos '=> 'producto' ]);
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
-    //Categorias
-    Route::get('categorias', [CategoriasController::class, 'index'])->name('categorias');
-    //Inventario
-    Route::get('inventario', [InventarioController::class, 'index'])->name('inventario');
 
     Route::resource('/usuarios', usuariosController::class)->parameters(['usuarios '=> 'usuario' ]);
+
+    Route::resource('/categorias', categoriaController::class)->parameters(['categorias '=> 'categoria' ]);
+
+    Route::resource('/inventario', InventarioInventarioController::class)->parameters(['inventario '=> 'inventario' ]);
+
+    Route::resource('/rol', rolController::class)->parameters(['rol '=> 'rol' ]);
 
 });
