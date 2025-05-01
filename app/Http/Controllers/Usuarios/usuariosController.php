@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class usuariosController extends Controller
 {
+
+    public function __construct()
+    {
+    
+        $this->middleware("can:usuarios.index")->only("index"); // Permiso para ver la lista de usuarios
+        $this->middleware("can:usuarios.create")->only("create", "store"); // Permiso para crear usuarios
+        $this->middleware("can:usuarios.edit")->only("edit", "update"); // Permiso para editar usuarios
+        $this->middleware("can:usuarios.destroy")->only("destroy"); // Permiso para eliminar usuarios
+    }
+
     public function index()
     {
         // Aquí puedes manejar la lógica para mostrar la lista de usuarios

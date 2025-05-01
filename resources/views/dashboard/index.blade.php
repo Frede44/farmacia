@@ -35,7 +35,9 @@
             <li class="opciones"><a href="#"><i class="fas fa-building"></i>Proveedor</a></li>
             <li class="opciones"><a href="#"><i class="fas fa-box"></i>Inventario por lote</a></li>
             <li class="opciones"><a href="#"><i class="fas fa-users"></i>Personas</a></li>
+            @can('usuarios.index')
             <li class="opciones"><a href="{{ route('usuarios.index') }}"><i class="fas fa-user"></i>Usuarios</a></li>
+            @endcan
             <li class="opciones"><a href="{{ route('logout.store') }}"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a></li>
         </ul>
     </div>
