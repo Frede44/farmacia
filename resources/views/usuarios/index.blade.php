@@ -26,7 +26,7 @@
 
     <body>
     @section('contenido')
-    <h2>PRODUCTOS</h2>
+    <h2>USUARIOS</h2>
  
     <a href="{{ route('register.index') }}">
     <button class="btnAgregar">Agregar Usuario</button>
