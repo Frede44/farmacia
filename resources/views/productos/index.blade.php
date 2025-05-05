@@ -41,19 +41,23 @@
         <tr>
             <th>Codigo</th>
             <th class="nombre">Producto</th>
-            <th>Categoria</th>
+            <th>Descripción</th>
             <th>Precio Venta</th>
-            <th>Stock</th>
-            <th>Precio Compra</th>
-            <th>Acciones</th>
+         
+    
+          
             
         </tr>
         </thead>
         <tbody>
-        <tr><td>1</td><td>Ana</td><td>Email</td><td>28</td><td>Sí</td><td>No</td><td>No</td></tr>
-        <tr><td>1</td><td>Ana</td><td>Email</td><td>28</td><td>Sí</td><td>No</td><td>No</td></tr>
-        <tr><td>1</td><td>Ana</td><td>Email</td><td>28</td><td>Sí</td><td>No</td><td>No</td></tr>
-        <tr><td>1</td><td>Ana</td><td>Email</td><td>28</td><td>Sí</td><td>No</td><td>No</td></tr>
+        @foreach($productos as $producto)
+        <tr>
+            <td>{{ $producto->codigo }}</td>
+            <td>{{ $producto->nombre }}</td>
+            <td>{{ $producto->descripcion }}</td>
+            <td>{{ $producto->precio_venta }}</td>
+        </tr>
+        @endforeach
 
     
         
@@ -84,15 +88,15 @@
                         buttons: [
                 {
                     extend: 'copyHtml5',
-                    text: 'Copiar' 
+                     text: '<i class="fas fa-copy"></i> Copiar'
                 },
                 {
                     extend: 'excelHtml5',
-                    text: 'Excel'
+                    text: '<i class="fas fa-file-excel"></i> Excel'
                 },
                 {
                     extend: 'pdfHtml5',
-                    text: 'PDF'
+                    text: '<i class="fas fa-file-pdf"></i> PDF'
                 },
                
             ],

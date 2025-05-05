@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
             UserSedder::class,
             // Add other seeders here
         ]);
+        $this->call([
+            CategoriaSeeder::class,
+            // Add other seeders here
+        ]);
     }
 }

@@ -4,126 +4,78 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     @extends('dashboard.index')
-    <title>Productos</title>
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}"> 
+    <title>Crear productos</title>
+    <link rel="stylesheet" href="{{ asset('css/productosEstilos/createProductos.css') }}"> 
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
 
-    <!-- DataTables CSS -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
-
-
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js"></script>
-
-   
-
-
-    </head>
+<link href="https://cdn.datatables.net/v/dt/dt-2.2.2/b-3.2.3/b-colvis-3.2.3/b-html5-3.2.3/b-print-3.2.3/r-3.0.4/rr-1.5.0/sb-1.8.2/datatables.min.css" rel="stylesheet" integrity="sha384-7OG4hcSLohnvJO+lbBJjJFRAjv+fviYGllCE2hGpAflRok8nXfvl63MOkYjzqGJm" crossorigin="anonymous">
+ 
+<script src="https://cdn.datatables.net/v/dt/dt-2.2.2/b-3.2.3/b-colvis-3.2.3/b-html5-3.2.3/b-print-3.2.3/r-3.0.4/rr-1.5.0/sb-1.8.2/datatables.min.js" integrity="sha384-FFQxq76hs6g5HqAK1+xdA0Xtd3QmeEI7+l9TCXGEhfCcakwq6vPL0ohx5R2dhiOP" crossorigin="anonymous"></script>
+</head>
 
 
 
     <body>
     @section('contenido')
-    <h2>PRODUCTOS</h2>
- 
-    <a href="{{ route('productos.create') }}">
-    <button class="btnAgregar">+Producto</button>
-    </a>
-    
-    <div class="table-container">
-    
-    
-    
-    <table id="tablaUsuarios" class="display nowrap" >
-        <thead>
-        <tr>
-            <th>Codigo</th>
-            <th class="nombre">Producto</th>
-            <th>Categoria</th>
-            <th>Precio Venta</th>
-            <th>Stock</th>
-            <th>Precio Compra</th>
-            <th>Acciones</th>
-            
-        </tr>
-        </thead>
-        <tbody>
-        <tr><td>1</td><td>Ana</td><td>Email</td><td>28</td><td>Sí</td><td>No</td><td>No</td></tr>
-        <tr><td>1</td><td>Ana</td><td>Email</td><td>28</td><td>Sí</td><td>No</td><td>No</td></tr>
-        <tr><td>1</td><td>Ana</td><td>Email</td><td>28</td><td>Sí</td><td>No</td><td>No</td></tr>
-        <tr><td>1</td><td>Ana</td><td>Email</td><td>28</td><td>Sí</td><td>No</td><td>No</td></tr>
 
-    
-        
-        <!-- Puedes agregar más filas -->
-        </tbody>
-    </table>
+    <h2> CREAR PRODUCTOS</h2>
+ 
+    <div class="container">
+    <form action="{{ route('productos.store') }}" method="POST">
+            
+        @csrf
+            <div class="form-columns">
+                <div class="form-group">
+                    <label for="codigo">Código</label>
+                    <input type="text" id="codigo" name="codigo" placeholder="Código">
+
+                    <label for="producto">Producto</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre del producto">
+
+                    <label for="precio_venta">Precio venta</label>
+                    <input type="number" id="precio_venta" name="precio_venta" placeholder="Precio de venta">
+                  
+                </div>
+
+                <div class="form-group">
+                    
+
+                    <!--<label for="categoria" class="txtcategoria">Categoría</label >
+                    <select id="categoria" name="categoria" >
+                        <option value="categoria1">Categoría 1</option>
+                        <option value="categoria2">Categoría 2</option>
+                        <option value="categoria3">Categoría 3</option>
+</select>-->
+                    <label for="descripcion">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto"></textarea>
+                    </textarea>
+                    <label for="imagen">Seleccionar imagen</label>
+                  <div class="image-box">Sube un imagen
+                      <input type="file" id="imagen" name="imagen" accept="image/*">
+                  </div>
+                  <!-- Contenedor para vista previa -->
+                  <div id="preview" class="preview-box"></div>
+
+
+
+                    
+                </div>
+            </div>
+
+            <div class="grupoBotones">
+            
+            <button type="submit" class="btn-guardar">Guardar</button>
+            <a href="" class="btn-cancelar">Cancelar</a>
+            </div>
+        </form>
     </div>
     
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-
-    <!-- Inicialización -->
-    <script>
-        $(document).ready(function () {
-        $('#tablaUsuarios').DataTable({
-            dom: 'Bfrtip',
-//Botones de acciones de la tabla
-                        buttons: [
-                {
-                    extend: 'copyHtml5',
-                    text: 'Copiar' 
-                },
-                {
-                    extend: 'excelHtml5',
-                    text: 'Excel'
-                },
-                {
-                    extend: 'pdfHtml5',
-                    text: 'PDF'
-                },
-               
-            ],
-            
-            pageLength: 10,  // Fija la cantidad de registros a  mostrar
-            lengthMenu: [5, 10, 25, 50, 100],
-            responsive: true,
-            language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
-                search: "Buscar:",
-                lengthMenu: "Mostrar _MENU_ registros",
-                info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                paginate: {
-                    previous: "Anterior",
-                    next: "Siguiente"
-                },
-                zeroRecords: "No se encontraron resultados",
-                buttons: {
-                    copyTitle: 'Copiado al portapapeles',
-                    copySuccess: {
-                        _: '%d filas copiadas',
-                        1: '1 fila copiada'
-                    }
-                }
-            }
-           
-        });
-                  
-            });
-    </script>
     </body>
-
+    
     @endsection
-    </html>
+
+
+
+</html>

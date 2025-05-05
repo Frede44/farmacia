@@ -8,9 +8,10 @@ body {
     background-color: #ffffff; /* fondo negro general */
 }
 .logo {
-    width: 130px;      
+    width: 115px;      
     margin-left: 45px;
     display: block;
+    
     
 }
 .contenedor {
@@ -20,7 +21,7 @@ body {
 .vistas {
     margin-left: 0;
     flex-grow: 1;
-    background-color: #e2e2e2; /* Fondo  */
+    background-color: #e4e4e4; /* Fondo  */
     margin: 0;
     padding: 0;
     color: rgb(0, 0, 0); /* Asegura que el texto sea visible sobre fondo negro */
@@ -32,15 +33,45 @@ body {
 
 /* Sidebar (Menú de la izquierda) */
 .sidebar {
-    width: 250px;
-    background-color: #303030;
-    color: #fff;
+    width: 270px;
+    background-color: #1a2325;
+    
     height: 100vh;
     position: fixed;
-    padding-left: 20px;
+    padding-left: 25px;
     padding-top: 20px;
     min-width: 250px;
+    overflow-y: auto; /*  scroll cuando el contenido es largo */
+    box-sizing: border-box; /* para que padding no exceda 100vh */
+    
 }
+
+
+/* Estilo del scrollbar  */
+.sidebar::-webkit-scrollbar {
+    width: 10px; /* Ancho del scrollbar */
+}
+
+
+.sidebar::-webkit-scrollbar-track {
+    background: #303030; /* Fondo del scrollbar, el mismo color que el sidebar */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #555; /* Color del scrollbar (similar al sidebar, pero un poco más claro) */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 2px solid #303030; /* Agrega un borde que combine con el fondo */
+}
+
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #91919148; /* Color del scrollbar al pasar el mouse */
+}
+
+
+
 
 .sidebar h2 {
     color: #fff; /* Título en blanco */
@@ -49,7 +80,8 @@ body {
     
 }
 .opciones{
-    margin-bottom: 20px; /* Espacio debajo de las opciones */
+    margin-bottom: 15px; /* Espacio debajo de las opciones */
+    
     
     
  
@@ -77,19 +109,20 @@ body {
 }
 
 .sidebar a:hover {
-    background-color: #398b99;
+    background-color: #fcfcfc31;
     width: 7%;
     border-radius: 10px; /* Cambia el color de fondo cuando el usuario pasa el mouse por encima */
 }
 /*Seleccionar opcion y que se mantenga*/
 .sidebar a.active { 
-    background-color: #34b134 !important;
+    background-color: #135ec0 !important;
     color: white;
     border-radius: 10px;
 }
 .sidebar ul {
     list-style: none; /* Elimina los puntos de las listas */
     padding: 0; /* Elimina el padding de la lista */
+   
     
     
     
@@ -130,12 +163,16 @@ h2 {
         flex-direction: column;
     }
     .sidebar {
-        width: 100%;
-        position: relative;
-        transform: none;
+        position: fixed;  /* Hacerlo fijo cuando se hace pequeño */
+        width: 100%; /* Ancho completo */
+        height: 100vh; /* Asegura que cubra toda la pantalla */
+        top: 0; /* No se mueva con el scroll */
+        left: 0;
+        transform: translateX(-100%); /* Empuja el sidebar fuera de la vista */
+        transition: transform 0.3s ease;
     }
     .sidebar.open {
-        transform: translateX(0); /* Mueve el sidebar hacia dentro de la pantalla cuando se abre */
+        transform: translateX(0); /* Al abrirlo, trae el sidebar a la vista */
     }
     .content {
         margin-left: 0; /* El contenido ocupa todo el ancho en pantallas pequeñas */

@@ -89,17 +89,17 @@
             dom: 'Bfrtip',
 //Botones de acciones de la tabla
                         buttons: [
-                {
+                            {
                     extend: 'copyHtml5',
-                    text: 'Copiar' 
+                     text: '<i class="fas fa-copy"></i> Copiar'
                 },
                 {
                     extend: 'excelHtml5',
-                    text: 'Excel'
+                    text: '<i class="fas fa-file-excel"></i> Excel'
                 },
                 {
                     extend: 'pdfHtml5',
-                    text: 'PDF'
+                    text: '<i class="fas fa-file-pdf"></i> PDF'
                 },
                
             ],

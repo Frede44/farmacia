@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Procutos;
 
 use App\Http\Controllers\Controller;
+use App\Models\Productos;
 use Illuminate\Http\Request;
 
 class productosController extends Controller
@@ -16,10 +17,34 @@ class productosController extends Controller
     }
     
     public function index(){
-        return view("productos.index");
+        $productos=Productos::select('id','codigo','nombre','descripcion','precio_venta')
+        ->get();
+
+        return view("productos.index",["productos"=>$productos]);
     }
 
     public function create(){
         return view("productos.create");
     }
+    public function store(Request $request)
+    {
+        $request->validate([
+            'codigo' => 'required|string|max:35|unique:productos,codigo',
+            'nombre' => 'required|string|max:35|unique:productos,nombre',
+            'descripcion' => 'nullable|string|max:500',
+            'precio_venta' => 'required|numeric|min:0',
+        ]);
+        Productos::create(
+            [
+                'codigo' => $request->codigo,
+                'nombre' => $request->nombre,
+                'descripcion' => $request->descripcion,
+                'precio_venta' => $request->precio_venta,
+            ]
+        
+        );
+        return redirect()->route('productos.index')->with('success', 'Producto creado con éxito.');
+    }
+    
 }
+
