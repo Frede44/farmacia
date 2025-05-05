@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
-    <title>Usuarios</title>
+    <title>Roles</title>
     <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
 
 
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="{{asset('css/rolesEstilos/rolesEstilo.css')}}" />
     <script src="script.js"></script>
 
 
@@ -27,50 +27,70 @@
 
 <body>
     @section('contenido')
-    <h2>USUARIOS</h2>
+    <h2>Crear roles</h2>
 
-    <a href="{{ route('register.index') }}">
-        <button class="btnAgregar">Agregar Usuario</button>
-    </a>
-
+    @if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="table-container">
 
 
+        <form action="{{ route('rol.store') }}" method="POST">
+            @csrf
+            <div class="form-group">
+                <div class="input-name">
+                    <label for="id_rol">Nombre del rol:</label>
+                    <input type="text" name="name" id="nombre_rol" placeholder="Nombre del rol" required>
+                </div>
 
-        <table id="tablaUsuarios" class="display nowrap">
-            <thead>
-                <tr>
-                    <th>Codigo</th>
-                    <th>nombre</th>
-                    <th>correo</th>
-                    <th>roles</th>
+                <!-- <div class="checkbox-group">
+                    <h2>permisos</h2>
+                    <div class="permisos-group">
+                        <p class="nombre_permiso">usuarios</p>
+                        <div class="Checkbox-group-permisos">
+                            <input type="checkbox" name="permisos[]" id="usuarios.create" value="[usuarios.create, usuarios.store]">
+                            <label for="permiso1">Crear</label><br>
+                        </div>
+                        <div class="Checkbox-group-permisos">
 
+                            <input type="checkbox" name="permisos[]" id="permiso2" value="usuarios.edit">
+                            <label for="permiso2">Modificar</label><br>
+                        </div>
+                        <div class="Checkbox-group-permisos">
+                            <input type="checkbox" name="permisos[]" id="permiso3" value="usuarios.destroy">
+                            <label for="permiso2">eliminar</label><br>
+                        </div>
+                        <div class="Checkbox-group-permisos">
+                            <input type="checkbox" name="permisos[]" id="permiso4" value="usuarios.index">
+                            <label for="permiso4">Consultar</label><br>
+                        </div>
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $user)
-                <tr>
-                    <td>{{ $user->id }}</td>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
+                    </div> -->
 
-                    <td>
-                        @foreach ($user->roles as $role)
-                        {{ $role->name }}
+                @foreach($permissions as $grupo => $permisos)
+                <div class="permisos-group">
+                    <p class="nombre_permiso">{{ ucfirst($grupo) }}</p>
+                    <div class="Checkbox-group-permisos">
+                        @foreach($permisos as $permiso)
+                        <div class="Checkbox-group-permisos">
+                            <input type="checkbox" name="permissions[]" id="{{ $permiso->name }}" value="{{ $permiso->name }}">
+                            <label for="{{ $permiso->name }}">{{ $permiso->descripcion }}</label>
+                        </div>
                         @endforeach
-                    </td>
+                    </div>
+                </div>
+                @endforeach
 
+            </div>
 
-                    @endforeach
+            <button type="submit">Crear</button>
 
+        </form>
 
-
-
-                    <!-- Puedes agregar más filas -->
-            </tbody>
-        </table>
     </div>
+
 
 
     <!-- jQuery -->

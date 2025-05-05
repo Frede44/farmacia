@@ -21,7 +21,11 @@ class usuariosController extends Controller
     public function index()
     {
         // Aquí puedes manejar la lógica para mostrar la lista de usuarios
-        $users = User::all(); // Obtener todos los usuarios de la base de datos
+        $users = User::with('roles')->get();
+
+        // unir roles con usuarios
+        
+
         return view("usuarios.index", compact("users")); // Pasar los usuarios a la vista
     }
 

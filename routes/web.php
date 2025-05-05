@@ -7,6 +7,7 @@ use App\Http\Controllers\InicioController;
 use App\Http\Controllers\Inventario\inventarioController as InventarioInventarioController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\Persona\personasController;
 use App\Http\Controllers\Procutos\productosController as ProcutosProductosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\RegisterController;
@@ -54,6 +55,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/inventario', InventarioInventarioController::class)->parameters(['inventario '=> 'inventario' ]);
 
-    Route::resource('/rol', rolController::class)->parameters(['rol '=> 'rol' ]);
+    Route::resource('/rol', rolController::class)->parameters(['rol'=> 'rol' ]);
+
+ Route::resource('/persona', personasController::class)->parameters(['persona'=> 'persona']);
+
+
 
 });

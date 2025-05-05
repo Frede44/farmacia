@@ -1,0 +1,110 @@
+
+
+
+
+
+.form-group{
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+label{
+    display: block;
+    margin-bottom: 5px;
+    
+}
+
+input[type="text"]{
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input[type="text"]:focus
+{
+    border-color: #000000;
+    outline: none;
+}
+
+.checkbox-group{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    flex-direction: column ;
+    width: 95%;
+}
+
+.permisos-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-left: 5px solid #007bff;  /* línea azul al costado */
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: 95%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.nombre_permiso {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #007bff;
+    text-transform: capitalize;
+}
+
+.permisos-group > .Checkbox-group-permisos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.Checkbox-group-permisos > div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.Checkbox-group-permisos > div:hover {
+    background-color: #eef6ff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.Checkbox-group-permisos input[type="checkbox"] {
+    margin-right: 8px;
+    width: 18px;
+    height: 18px;
+    accent-color: #007bff;  /* color del checkbox moderno */
+}
+
+.Checkbox-group-permisos label {
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+}
+
+
+.input-name{
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+

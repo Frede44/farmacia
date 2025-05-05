@@ -17,6 +17,13 @@
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required><br><br>
 
+        <label for="rol">rol</label>
+        <select name="rol" id="rol">
+            @foreach ($roles as $rol)
+                <option value="{{ $rol->id }}">{{ $rol->name }}</option>
+            @endforeach
+        </select>
+
         <button type="submit">Registrar</button>
     </form>
 </body>
