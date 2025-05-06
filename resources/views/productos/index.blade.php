@@ -43,6 +43,7 @@
             <th class="nombre">Producto</th>
             <th>Descripción</th>
             <th>Precio Venta</th>
+            <th>Imagen</th>
          
     
           
@@ -56,6 +57,13 @@
             <td>{{ $producto->nombre }}</td>
             <td>{{ $producto->descripcion }}</td>
             <td>{{ $producto->precio_venta }}</td>
+            <td>
+                @if($producto->imagen)
+                <img src="{{ asset('imagenes/' . $producto->imagen) }}" width="50" height="50" alt="Imagen del producto">
+                @else
+                Sin Imagen
+                @endif
+            </td>
         </tr>
         @endforeach
 

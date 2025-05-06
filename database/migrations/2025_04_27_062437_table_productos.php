@@ -20,6 +20,7 @@ class TableProductos extends Migration
           
             $table->string('descripcion');
             $table->decimal('precio_venta', 8, 2); //8 dígitos en total, 2 después del punto decimal
+            $table->string('imagen')->nullable(); // Campo para la imagen, puede ser nulo
             $table->timestamps();
         });
     }

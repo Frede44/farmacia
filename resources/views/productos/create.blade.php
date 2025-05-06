@@ -22,60 +22,97 @@
 
     <h2> CREAR PRODUCTOS</h2>
  
-    <div class="container">
-    <form action="{{ route('productos.store') }}" method="POST">
-            
-        @csrf
-            <div class="form-columns">
-                <div class="form-group">
-                    <label for="codigo">Código</label>
-                    <input type="text" id="codigo" name="codigo" placeholder="Código">
+                    <div class="container">
+                    <form action="{{ route('productos.store') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="form-columns">
+                            <div class="form-group">
 
-                    <label for="producto">Producto</label>
-                    <input type="text" id="nombre" name="nombre" placeholder="Nombre del producto">
+                                <!--Codigo del producto-->
+                                <label for="codigo">Código</label>
+                                <input type="text" id="codigo" name="codigo" placeholder="Código">
+                                @error('codigo')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
 
-                    <label for="precio_venta">Precio venta</label>
-                    <input type="number" id="precio_venta" name="precio_venta" placeholder="Precio de venta">
-                  
+                                <!--Nombre del producto-->
+                                <label for="producto">Producto</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Nombre del producto">
+
+                                <!--P del producto-->
+                                <label for="precio_venta">Precio venta</label>
+                                <input type="number" id="precio_venta" name="precio_venta" placeholder="Precio de venta">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="descripcion">Descripción</label>
+                                <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto..."></textarea>
+
+
+
+
+                                <label for="descripcion">Selecciona una imagen</label>
+                                <div class="fondoimagen">
+                                
+                                <label for="imagen" class="upload-text">
+                                    <i class="fas fa-image"></i>
+                                    <span id="upload-label-text">Imagen del producto</span>
+                                </label>
+
+                                <input type="file" id="imagen" name="imagen" accept="image/*">
+                                <img id="previewImg" src="" alt="Vista previa" style="display: none;" />
+
+                                @error('imagen')
+                                    <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
+                                </div>
+
+
+                                
+                            </div>
+                        </div>
+
+                        <div class="grupoBotones">
+                            <button type="submit" class="btn-guardar">Guardar</button>
+                            <a href="#" class="btn-cancelar">Cancelar</a>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="form-group">
-                    
+                <script>
+  const input = document.getElementById('imagen');
+  const previewImg = document.getElementById('previewImg');
+  const uploadText = document.querySelector('.upload-text');
+  const labelText = document.getElementById('upload-label-text');
 
-                    <!--<label for="categoria" class="txtcategoria">Categoría</label >
-                    <select id="categoria" name="categoria" >
-                        <option value="categoria1">Categoría 1</option>
-                        <option value="categoria2">Categoría 2</option>
-                        <option value="categoria3">Categoría 3</option>
-</select>-->
-                    <label for="descripcion">Descripción</label>
-                    <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto"></textarea>
-                    </textarea>
-                    <label for="imagen">Seleccionar imagen</label>
-                  <div class="image-box">Sube un imagen
-                      <input type="file" id="imagen" name="imagen" accept="image/*">
-                  </div>
-                  <!-- Contenedor para vista previa -->
-                  <div id="preview" class="preview-box"></div>
+  input.addEventListener('change', function () {
+    const file = this.files[0];
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
 
+      reader.onload = function (e) {
+        previewImg.src = e.target.result;
+        previewImg.style.display = 'block';
+        uploadText.style.opacity = '1';
+        labelText.textContent = 'Clic para remplazar'; // Cambia el texto
+      };
 
-
-                    
-                </div>
-            </div>
-
-            <div class="grupoBotones">
-            
-            <button type="submit" class="btn-guardar">Guardar</button>
-            <a href="" class="btn-cancelar">Cancelar</a>
-            </div>
-        </form>
-    </div>
+      reader.readAsDataURL(file);
+    } else {
+      previewImg.src = '';
+      previewImg.style.display = 'none';
+      uploadText.style.opacity = '1';
+      labelText.textContent = 'Sube tu imagen'; // Restaura texto si no es imagen
+    }
+  });
+</script>
     
-    </body>
+   
     
     @endsection
 
+
+    </body>
 
 
 </html>

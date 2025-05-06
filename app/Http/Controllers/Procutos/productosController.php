@@ -17,7 +17,7 @@ class productosController extends Controller
     }
     
     public function index(){
-        $productos=Productos::select('id','codigo','nombre','descripcion','precio_venta')
+        $productos=Productos::select('id','codigo','nombre','descripcion','precio_venta','imagen')
         ->get();
 
         return view("productos.index",["productos"=>$productos]);
@@ -27,24 +27,31 @@ class productosController extends Controller
         return view("productos.create");
     }
     public function store(Request $request)
-    {
-        $request->validate([
-            'codigo' => 'required|string|max:35|unique:productos,codigo',
-            'nombre' => 'required|string|max:35|unique:productos,nombre',
-            'descripcion' => 'nullable|string|max:500',
-            'precio_venta' => 'required|numeric|min:0',
-        ]);
-        Productos::create(
-            [
-                'codigo' => $request->codigo,
-                'nombre' => $request->nombre,
-                'descripcion' => $request->descripcion,
-                'precio_venta' => $request->precio_venta,
-            ]
-        
-        );
-        return redirect()->route('productos.index')->with('success', 'Producto creado con éxito.');
-    }
+
+            {
+                
+                $request->validate([
+                    'codigo' => 'required|string|max:35|unique:productos,codigo',
+                    'nombre' => 'required|string|max:35|unique:productos,nombre',
+                    'descripcion' => 'nullable|string|max:500',
+                    'precio_venta' => 'required|numeric|min:0',
+                    'imagen' => 'required|image|mimes:png,jpg'
+                ]);
+
+                $file = $request->file('imagen');
+                $name = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('imagenes'), $name); // Guarda en public/imagenes
+
+                Productos::create([
+                    'codigo' => $request->codigo,
+                    'nombre' => $request->nombre,
+                    'descripcion' => $request->descripcion,
+                    'precio_venta' => $request->precio_venta,
+                    'imagen' => $name,
+                ]);
+                
+                return redirect()->route('productos.index')->with('success', 'Producto creado con éxito.');
+            }
     
 }
 
