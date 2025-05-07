@@ -117,50 +117,51 @@
 
     <!-- Inicialización -->
     <script>
-        $(document).ready(function() {
-            $('#tablaUsuarios').DataTable({
-                dom: 'Bfrtip',
-                //Botones de acciones de la tabla
-                buttons: [{
-                        extend: 'copyHtml5',
-                        text: 'Copiar'
-                    },
-                    {
-                        extend: 'excelHtml5',
-                        text: 'Excel'
-                    },
-                    {
-                        extend: 'pdfHtml5',
-                        text: 'PDF'
-                    },
-
-                ],
-
-                pageLength: 10, // Fija la cantidad de registros a  mostrar
-                lengthMenu: [5, 10, 25, 50, 100],
-                responsive: true,
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
-                    search: "Buscar:",
-                    lengthMenu: "Mostrar _MENU_ registros",
-                    info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                    paginate: {
-                        previous: "Anterior",
-                        next: "Siguiente"
-                    },
-                    zeroRecords: "No se encontraron resultados",
-                    buttons: {
-                        copyTitle: 'Copiado al portapapeles',
-                        copySuccess: {
-                            _: '%d filas copiadas',
-                            1: '1 fila copiada'
-                        }
+        $(document).ready(function () {
+        $('#tablaUsuarios').DataTable({
+            dom: 'Bfrtip',
+//Botones de acciones de la tabla
+                        buttons: [
+                {
+                    extend: 'copyHtml5',
+                     text: '<i class="fas fa-copy"></i> Copiar'
+                },
+                {
+                    extend: 'excelHtml5',
+                    text: '<i class="fas fa-file-excel"></i> Excel'
+                },
+                {
+                    extend: 'pdfHtml5',
+                    text: '<i class="fas fa-file-pdf"></i> PDF'
+                },
+               
+            ],
+            
+            pageLength: 10,  // Fija la cantidad de registros a  mostrar
+            lengthMenu: [5, 10, 25, 50, 100],
+            responsive: true,
+            language: {
+                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                search: "Buscar:",
+                lengthMenu: "Mostrar _MENU_ registros",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                paginate: {
+                    previous: "Anterior",
+                    next: "Siguiente"
+                },
+                zeroRecords: "No se encontraron resultados",
+                buttons: {
+                    copyTitle: 'Copiado al portapapeles',
+                    copySuccess: {
+                        _: '%d filas copiadas',
+                        1: '1 fila copiada'
                     }
                 }
-
-            });
-
+            }
+           
         });
+                  
+            });
     </script>
 
 
