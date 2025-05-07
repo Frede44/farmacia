@@ -21,71 +21,55 @@
 <body>
     @section('contenido')
     <h2>PRODUCTOS</h2>
+ 
+ <a href="{{ route('productos.create') }}">
+ <button class="btnAgregar">+Producto</button>
+ </a>
+ 
+ <div class="table-container">
+ 
+ 
+ 
+ <table id="tablaUsuarios" class="display nowrap" >
+     <thead>
+     <tr>
+         <th>Codigo</th>
+         <th class="nombre">Producto</th>
+         <th>Descripción</th>
+         <th>Categoría</th>
+         <th>Precio Venta</th>
+         <th>Imagen</th>
+      
+ 
+       
+         
+     </tr>
+     </thead>
+     <tbody>
+     @foreach($productos as $producto)
+     <tr>
+         <td>{{ $producto->codigo }}</td>
+         <td>{{ $producto->nombre }}</td>
+         <td>{{ $producto->descripcion }}</td>
+         <td>{{ $producto->categoria->nombre }}</td>
+         <td>{{ $producto->precio_venta }}</td>
+         <td>
+             @if($producto->imagen)
+             <img src="{{ asset('imagenes/' . $producto->imagen) }}" width="50" height="50" alt="Imagen del producto">
+             @else
+             Sin Imagen
+             @endif
+         </td>
+     </tr>
+     @endforeach
 
-    <a href="{{ route('productos.create') }}">
-        <button class="btnAgregar">+Producto</button>
-    </a>
-
-    <div class="table-container">
-
-
-
-        <table id="tablaUsuarios" class="display nowrap">
-            <thead>
-                <tr>
-                    <th>Codigo</th>
-                    <th class="nombre">Producto</th>
-                    <th>Categoria</th>
-                    <th>Precio Venta</th>
-                    <th>Stock</th>
-                    <th>Precio Compra</th>
-                    <th>Acciones</th>
-
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Ana</td>
-                    <td>Email</td>
-                    <td>28</td>
-                    <td>Sí</td>
-                    <td>No</td>
-                    <td>No</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Ana</td>
-                    <td>Email</td>
-                    <td>28</td>
-                    <td>Sí</td>
-                    <td>No</td>
-                    <td>No</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Ana</td>
-                    <td>Email</td>
-                    <td>28</td>
-                    <td>Sí</td>
-                    <td>No</td>
-                    <td>No</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Ana</td>
-                    <td>Email</td>
-                    <td>28</td>
-                    <td>Sí</td>
-                    <td>No</td>
-                    <td>No</td>
-                </tr>
-
-
-
-                <!-- Puedes agregar más filas -->
-            </tbody>
-        </table>
+ 
+     
+     <!-- Puedes agregar más filas -->
+     </tbody>
+ </table>
+ </div>
+ <div style="height:1px;"></div>
     </div>
 
 

@@ -1,123 +1,161 @@
-/* General body and html reset */
+/*  dashboard */
 body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
     display: flex;
     height: 100vh;
-    background-color: #ffffff; /* fondo negro general */
+    background-color: #e4e4e4; /* Fondo  */
 }
 .logo {
-    width: 130px;      
+    width: 115px;      
     margin-left: 45px;
     display: block;
     
+    
 }
-
-/* Contenedor principal */
 .contenedor {
     display: flex;
-    flex-direction: row;
-    min-height: 100vh;
+    height: 100%;
+}
+.vistas {
+    margin-left: 0;
+    flex-grow: 1;
+    background-color: #e4e4e4; /* Fondo  */
+    margin: 0;
+    padding: 0;
+    color: rgb(0, 0, 0); /* Asegura que el texto sea visible sobre fondo negro */
+    height: 100%;
+    width: 100%;
+    flex:1;
+    margin-left: 270px;
+    
 }
 
-/* Sidebar (menú de la izquierda) */
+/* Sidebar (Menú de la izquierda) */
 .sidebar {
-    width: 250px;
-    background-color: #303030;
-    color: #fff;
+    width: 270px;
+    background-color: #1a2325;
+    
+    height: 100vh;
     position: fixed;
-    padding-left: 20px;
+    padding-left: 25px;
     padding-top: 20px;
-    min-height: 100vh;
+    min-width: 250px;
+    overflow-y: auto; /*  scroll cuando el contenido es largo */
+    box-sizing: border-box; /* para que padding no exceda 100vh */
+    
 }
+
+
+/* Estilo del scrollbar  */
+.sidebar::-webkit-scrollbar {
+    width: 10px; /* Ancho del scrollbar */
+}
+
+
+.sidebar::-webkit-scrollbar-track {
+    background: #303030; /* Fondo del scrollbar, el mismo color que el sidebar */
+    border-radius: 10px; /* Bordes redondeados */
+}
+
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #555; /* Color del scrollbar (similar al sidebar, pero un poco más claro) */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 2px solid #303030; /* Agrega un borde que combine con el fondo */
+}
+
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: #91919148; /* Color del scrollbar al pasar el mouse */
+}
+
+
+
 
 .sidebar h2 {
-    color: #fff;
-    font-size: 15px;
-    margin-bottom: 20px;
+    color: #fff; /* Título en blanco */
+    font-size: 15px; /* Tamaño de la fuente para el título */
+    margin-bottom: 20px; /* Espacio debajo del título */
+    
 }
-
-.opciones {
-    margin-bottom: 20px;
+.opciones{
+    margin-bottom: 15px; /* Espacio debajo de las opciones */
+    
+    
+    
+ 
 }
-
 .sidebar a {
-    display: flex;
+   
     align-items: center;
-    gap: 18px;
+    gap: 18px; /* espacio entre icono y texto */
     color: #fdfdfd;
     border-radius: 7px;
     text-decoration: none;
-    padding-bottom: 12px;
-    padding-top: 12px;
-    font-size: 14px;
+    padding: 12px;
+    font-size: 14px; /* aumenta el texto para equilibrar con el icono */
     width: 100%;
     text-align: left;
     transition: background-color 0.3s ease;
 }
 
 .sidebar a i {
-    font-size: 18px;
-    min-width: 18px;
+    font-size: 18px; /* un poco más pequeño para no opacar el texto */
+    min-width: 18px; /* fija un ancho mínimo para alinear */
     text-align: center;
-    margin-right: 25px;
+    margin-right: 25px;/*separacion de icono y texto*/
     margin-top: 10px;
 }
 
 .sidebar a:hover {
-    background-color: #398b99;
-    border-radius: 10px;
-    width: 100%;
+    background-color: #fcfcfc31;
+    width: 7%;
+    border-radius: 10px; /* Cambia el color de fondo cuando el usuario pasa el mouse por encima */
 }
-
-.sidebar a.active {
-    background-color: #34b134 !important;
+/*Seleccionar opcion y que se mantenga*/
+.sidebar a.active { 
+    background-color: #135ec0 !important;
     color: white;
     border-radius: 10px;
 }
-
 .sidebar ul {
-    list-style: none;
-    padding: 0;
+    list-style: none; /* Elimina los puntos de las listas */
+    padding: 0; /* Elimina el padding de la lista */
+   
+    
+    
+    
 }
 
 .sidebar li {
-    width: 100%;
+    width: 100%; /* Asegura que los elementos de la lista ocupen todo el ancho */
 }
 
+
+
 /* Contenido principal */
-.vistas {
-    flex-grow: 1;
-    margin-left: 270px;
-    background-color: #e2e2e2;
-    color: rgb(0, 0, 0);
-    min-height: 100vh;
-    padding: 20px 20px 40px 20px;
-    overflow: auto;
+.content {
+    flex: 1; /* Hace que el contenido ocupe el espacio restante */
+    padding: 20px; /* Relleno alrededor del contenido */
+    margin-left: 250px; /* Desplaza el contenido hacia la derecha para no superponerse con el sidebar */
+    transition: margin-left 0.3s ease; /* Transición suave al ajustar el margen */
 }
 
 /* Contenedor principal del dashboard */
 .dashboard-container {
-    margin-left: 250px;
-    width: calc(100% - 250px);
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-left: 250px; /* Desplaza el contenido hacia la derecha */
+    width: calc(100% - 250px); /* Ajusta el ancho para que no se solape con el sidebar */
+    padding: 20px; /* Añade espacio alrededor del contenido */
+    background-color: #fff; /* Fondo blanco para el contenedor */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para un efecto de profundidad */
 }
 
 h2 {
-    text-align: center;
-    color: #333;
-}
-
-/* Contenido adicional */
-.content {
-    flex: 1;
-    padding: 20px;
-    margin-left: 250px;
-    transition: margin-left 0.3s ease;
+    text-align: center; /* Centra el texto del título */
+    color: #333; /* Color gris oscuro para el título */
 }
 
 /* Responsividad para pantallas pequeñas */
@@ -126,22 +164,28 @@ h2 {
         flex-direction: column;
     }
     .sidebar {
-        width: 100%;
-        position: relative;
-        transform: none;
+        position: fixed;  /* Hacerlo fijo cuando se hace pequeño */
+        width: 100%; /* Ancho completo */
+        height: 100vh; /* Asegura que cubra toda la pantalla */
+        top: 0; /* No se mueva con el scroll */
+        left: 0;
+        transform: translateX(-100%); /* Empuja el sidebar fuera de la vista */
+        transition: transform 0.3s ease;
     }
     .sidebar.open {
-        transform: translateX(0);
+        transform: translateX(0); /* Al abrirlo, trae el sidebar a la vista */
     }
     .content {
-        margin-left: 0;
+        margin-left: 0; /* El contenido ocupa todo el ancho en pantallas pequeñas */
+    }
+    .sidebar-toggle {
+        display: block; /* Muestra el botón de abrir/cerrar el sidebar */
     }
     .dashboard-container {
-        margin-left: 0;
-        width: 100%;
+        margin-left: 0; /* El contenido ocupa todo el ancho disponible */
+        width: 100%; /* Ajusta el ancho al 100% */
     }
     .vistas {
-        margin-left: 0;
         width: 100%;
     }
 }

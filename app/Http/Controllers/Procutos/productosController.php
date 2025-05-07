@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Procutos;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categoria;
+use App\Models\Productos;
 use Illuminate\Http\Request;
 
 class productosController extends Controller
@@ -16,10 +18,46 @@ class productosController extends Controller
     }
     
     public function index(){
-        return view("productos.index");
+        $productos=Productos::with('categoria:id,nombre') // Cargar la relación con la categoría
+        ->select('id','codigo','nombre','descripcion','precio_venta','imagen','categoria_id')
+        ->get();
+
+        return view("productos.index",["productos"=>$productos]);
     }
 
     public function create(){
-        return view("productos.create");
+        // $categorias = Categoria::all(['id', 'nombre']);
+        $categorias = Categoria::all(['id', 'nombre']);
+        return view('productos.create', compact('categorias'));
     }
+    public function store(Request $request)
+
+            {
+                
+                $request->validate([
+                    'codigo' => 'required|string|max:35|unique:productos,codigo',
+                    'nombre' => 'required|string|max:35|unique:productos,nombre',
+                    'descripcion' => 'nullable|string|max:500',
+                    'precio_venta' => 'required|numeric|gt:0',
+                    'imagen' => 'required|image|mimes:png,jpg',
+                    'categoria_id' => 'required|exists:categoria,id', 
+                ]);
+                //Donde se va guardar la imagen seleccionada
+                $file = $request->file('imagen');
+                $name = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('imagenes'), $name); // Guarda en public/imagenes
+
+                Productos::create([
+                    'codigo' => $request->codigo,
+                    'nombre' => $request->nombre,
+                    'descripcion' => $request->descripcion,
+                    'precio_venta' => $request->precio_venta,
+                    'imagen' => $name,
+                    'categoria_id' => $request->categoria_id,
+                ]);
+                
+                return redirect()->route('productos.index')->with('success', '¡Producto guardado correctamente!');
+            }
+    
 }
+

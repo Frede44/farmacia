@@ -16,6 +16,9 @@
 
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+      <!--Diseño-->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -23,18 +26,24 @@
 
     <!-- Sidebar (Menú de la izquierda) -->
     <div class="sidebar">
+
+    
         <img src="{{ asset('img/logo.png') }}" alt="Logo" class="logo">
 
         <ul>
-            <li class="opciones"><a href="#"><i class="fas fa-home"></i>Inicio</a></li>
+            <li class="opciones"><a href="#"><i class="fas fa-home"></i><span>Inicio</span></a></li>
             @can('productos.index')
-            <li class="opciones"><a href="{{ route('productos.index') }}" class="{{ request()->routeIs('productos')? 'active' : '' }}">
-                    <i class="fas fa-pills"></i>Productos</a></li>
+
+            <li class="opciones">
+            <a href="{{ route('productos.index') }}" class="{{ request()->routeIs('productos.*') ? 'active' : '' }}">
+                <i class="fas fa-pills"></i> Productos
+            </a>
+            </li>
             @endcan
 
             @can('categorias.index')
-            <li class="opciones"><a href="{{ route('categorias.index')}}" class="{{ request()->routeIs('categorias') ? 'active' : '' }}">
-                    <i class="fas fa-box"></i>Categorias</a></li>
+            <li class="opciones"><a href="{{ route('categorias.index')}}" class="{{ request()->routeIs('categorias.*') ? 'active' : '' }}">
+                    <i class="fas fa-box"></i>Categorías</a></li>
             @endcan
 
             @can('inventario.index')

@@ -7,21 +7,26 @@
     }
 
     table.dataTable thead { /*titulos de la tabla*/
-      background-color: #3b3b3b;
+      background-color: #333333;
       
       
     }
     table{
       background-color: rgb(235, 235, 235);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+      border-radius: 8px; /* Bordes redondeados */
+      overflow: hidden; /* Para que los bordes redondeados se vean bien */
       
       
     }
+    
     .nombre{
-      background-color: #134e85;
+      background-color: #2e5a94;
     }
     button{
-      background-color: rgb(2, 167, 2);
+      background-color: rgb(37, 167, 25);
+      border-radius: 8px !important;
+
     
       color: white;
       border: none;
@@ -33,6 +38,7 @@
       margin-left: 25px;
       font-size: 15px;
       font-weight: bold;
+   
       
     }
 
@@ -53,11 +59,12 @@
       
       /*Fondo de la tabla*/
     .table-container {
-      background-color: rgb(243, 243, 243); 
+      background-color: rgb(245, 245, 245); 
       padding: 10px; /* Separación interna de  en todos los lados */
       overflow-x: auto;
       width: 95%;
       margin: 20px auto; /* Centra el contenedor horizontalmente */
+      border-radius: 8px;
     
   }
       
@@ -80,16 +87,19 @@
 
   /* Cambiar el color, borde y tamaño */
 .dt-button {
-  background-color: #474747 !important;
+  background-color: #696969 !important;
   color: white !important;
   border: none !important;
   padding: 4px 10px !important;
-  font-size: 12px !important;
+  font-size: 13px !important;
   border-radius: 2px !important;
   margin-right: 1px;
   font-weight: bold;
   cursor: pointer;
   box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  border-radius: 4px !important;
+  width: 90px !important;   
+  height: 40px !important; 
   
 }
 

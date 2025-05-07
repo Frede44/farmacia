@@ -20,7 +20,7 @@
             <img src="{{asset('img/logoFcF.png')}}" alt="Login illustration" />
         </div>
         <div class="right">
-            <h2>Inicio de sesion</h2>
+            <h2>Inicio de Sesión</h2>
             <form action=" {{ route('login.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
@@ -40,7 +40,7 @@
                     {{ session('success') }}
                 </div>
                 @endif
-                <button type="submit" class="btn">Inicio de sesion</button>
+                <button type="submit" class="btn">Inicio de Sesión</button>
 
             </form>
 

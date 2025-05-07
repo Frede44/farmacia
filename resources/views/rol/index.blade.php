@@ -6,13 +6,9 @@
     @extends('dashboard.index')
     <title>Productos</title>
     <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}"> 
-   
-
-
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
 
-   
 
 
     </head>
@@ -28,12 +24,7 @@
     <a href="{{ route('rol.create') }}">
     <button class="btnAgregar">Crear roles</button>
     </a>
-    
-    @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-    @endif
+
  
     <div class="table-container">
     
@@ -71,6 +62,34 @@
         </tbody>
     </table>
     </div>
+
+    
+    <!--Mensaje cuando se guarda correctamente-->
+@if (session('success'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: "{{ session('success') }}",
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+            });
+        });
+    </script>
+@endif
+<!--Mensaje cuando se cancela correctamente-->
+@if(request()->has('cancelado'))
+<script>
+    Swal.fire({
+        icon: 'info',
+        title: 'Cancelado',
+        text: 'La operación fue cancelada correctamente',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: ' #09b410', 
+    });
+</script>
+@endif
     
 
   
