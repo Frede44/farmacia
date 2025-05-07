@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
    
 
 
@@ -42,6 +42,7 @@
             <th>Codigo</th>
             <th class="nombre">Producto</th>
             <th>Descripción</th>
+            <th>Categoría</th>
             <th>Precio Venta</th>
             <th>Imagen</th>
          
@@ -56,6 +57,7 @@
             <td>{{ $producto->codigo }}</td>
             <td>{{ $producto->nombre }}</td>
             <td>{{ $producto->descripcion }}</td>
+            <td>{{ $producto->categoria->nombre }}</td>
             <td>{{ $producto->precio_venta }}</td>
             <td>
                 @if($producto->imagen)
@@ -73,6 +75,7 @@
         </tbody>
     </table>
     </div>
+    <div style="height:1px;"></div>
     
 
     <!-- jQuery -->
@@ -109,7 +112,7 @@
                
             ],
             
-            pageLength: 10,  // Fija la cantidad de registros a  mostrar
+            pageLength: 6,  // Fija la cantidad de registros a  mostrar
             lengthMenu: [5, 10, 25, 50, 100],
             responsive: true,
             language: {
@@ -135,6 +138,32 @@
                   
             });
     </script>
+<!--Mensaje cuando se guarda correctamente-->
+@if (session('success'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: "{{ session('success') }}",
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+            });
+        });
+    </script>
+@endif
+<!--Mensaje cuando se cancela correctamente-->
+@if(request()->has('cancelado'))
+<script>
+    Swal.fire({
+        icon: 'info',
+        title: 'Cancelado',
+        text: 'La operación fue cancelada correctamente',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: ' #09b410', 
+    });
+</script>
+@endif
     </body>
 
     @endsection

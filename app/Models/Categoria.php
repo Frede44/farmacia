@@ -13,6 +13,13 @@ class Categoria extends Model
         'nombre',
         'descripcion',
     ];
-  
-
+    public function producto()
+    {
+        return $this->hasMany(Productos::class, 'categoria_id');
+    }
+    public function scopeActivos($query)
+    {
+       return $query->whereNotIn('estado', [1,0]);
+    }
 }
+    

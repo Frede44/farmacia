@@ -37,11 +37,12 @@
 
                 <div class="grupoBotones">
                 <button type="submit" class="btn-guardar">Guardar</button>
-                    <a href="" class="btn-cancelar">Cancelar</a>
+                <a href="{{ route('categorias.index') }}?cancelado=1" class="btn-cancelar">Cancelar</a>
                 </div>
             </form>
             
              </div>
+             <div style="height:1px;"></div>
              
     
     </body>

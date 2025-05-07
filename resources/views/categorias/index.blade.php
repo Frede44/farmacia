@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
+    <!--Diseño-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
     </head>
@@ -120,6 +122,32 @@
                   
             });
     </script>
+    <!--Mensaje cuando se guarda correctamente-->
+@if (session('success'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: "{{ session('success') }}",
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'Aceptar'
+            });
+        });
+    </script>
+@endif
+<!--Mensaje cuando se cancela correctamente-->
+@if(request()->has('cancelado'))
+<script>
+    Swal.fire({
+        icon: 'info',
+        title: 'Cancelado',
+        text: 'La operación fue cancelada correctamente',
+        confirmButtonText: 'Aceptar',
+        confirmButtonColor: ' #09b410', 
+    });
+</script>
+@endif
     </body>
 
     @endsection
