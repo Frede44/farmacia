@@ -39,6 +39,7 @@
          <th>Categoría</th>
          <th>Precio Venta</th>
          <th>Imagen</th>
+         <th>Acciones</th>
       
  
        
@@ -60,12 +61,53 @@
              Sin Imagen
              @endif
          </td>
+
+
+         {{-- Acciones --}}
+         <td>
+                         <!-- Botón Editar -->
+                <div class="flex flex-col justify-center items-center gap-2">
+                <form  method="GET">
+                        @csrf
+                        <a href="{{ route('productos.edit', $producto->id) }}" class="btnEditar" >
+                            <i class="fa-regular fa-pen-to-square fa-lg" style="color:rgb(255, 255, 255);"></i>
+                        </a>
+                    </form>
+
+                    <!-- Botón Eliminar -->
+                    <form action="{{route('productos.destroy',$producto->id)}}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <a href="#" class="btnEliminar" onclick="confirmarEliminacion(event, this)">
+                            <i class="fa-regular fa-trash-can fa-xl" style="color:rgb(255, 255, 255);"></i>
+                        </a>
+                    </form>
+                </div>
+        </td>
      </tr>
      @endforeach
 
  
+     <script>
+    function confirmarEliminacion(event, elemento) {
+        event.preventDefault();
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Esta acción no se puede deshacer!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                elemento.closest('form').submit();
+            }
+        });
+    }
+</script>
      
-     <!-- Puedes agregar más filas -->
      </tbody>
  </table>
  </div>

@@ -1,0 +1,276 @@
+
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    padding: 20px;
+   
+  }
+  
+  .container {
+    max-width: 85%;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    font-family: sans-serif;
+    min-height: 400px;
+  }
+  
+  /* Título centrado */
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estructura del formulario */
+  form {
+    display: flex;
+    flex-direction: column; /* elementos en columna */
+  }
+  
+  /* Contenedor de las dos columnas */
+  .form-columns {
+    display: flex; /* activa flexbox */
+    gap: 50px; /* separación entre columnas */
+    justify-content: space-between; /* espacio uniforme */
+    margin-bottom: 20px;
+  }
+  
+  /* Cada columna individual */
+  .form-group {
+    
+        flex: 1;
+        padding: 20px;
+        border: 1px solid #27272746;
+        border-radius: 10px;
+        background-color: #f7f7f7;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.356);
+      
+  }
+  .form-header {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #062f58;
+    border-left: 4px solid #0050fd;
+    padding-left: 10px;
+    background-color: #ffffff34;
+    border-radius: 6px;
+    padding: 6px 10px;
+}
+  
+  /* Estilo de etiquetas (label) */
+  label {
+    display: block; /* para que cada etiqueta esté encima del input */
+    margin-bottom: 5px;
+   
+  }
+  select{
+    width: 70%;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc; /* mantiene el mismo grosor */
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    height: 40px;
+  }
+  
+  
+  /* Estilo cuando pasa el mouse  */
+  input:hover{
+    border-color: #0077ffad; 
+    box-shadow: 0 0 5px rgba(0, 119, 255, 0.5);
+  }
+  
+  /* Estilo general de los campos de texto  */
+  input[type="text"],
+  input[type="number"],
+  image-box {
+    width: 65%;
+    height: 20px;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc; /* mantiene el mismo grosor */
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  .fecha-input {
+    width: 20%;
+    height: 40px;
+    border-radius: 10px;
+    border: 2px solid #ccc; /* mantiene el mismo grosor */
+    transition: border-color 0.3s, box-shadow 0.3s;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+    
+   
+ 
+}
+
+  
+  /* Solo cambia el color del borde */
+  input[type="text"]:focus,
+  select:focus,
+  input[type="number"]:focus {
+    border-color: #3575c9; /* verde */
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 202, 202, 0.5);
+  }
+  textarea {
+    width: 80%;
+    height: 100px;
+    padding: 8px 12px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+   
+    resize: none; /* <-- esto evita que se pueda estirar */
+  }
+  
+  textarea:focus {
+    border-color: #3575c9;
+    outline: none;
+    box-shadow: 0 0 5px rgba(52, 202, 202, 0.5);
+  }
+  
+  
+  /* Estilo de los botones de acción */
+  .fondoimagen {
+    position: relative;
+    display: inline-block;
+    padding: 5px;
+    border: 2px dashed #aaa;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    max-width: 83%;         /* Para que el fondo tampoco se pase del ancho */
+    box-sizing: border-box; /* Para que padding no aumente el tamaño total */
+  }
+  
+  .fondoimagen input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .upload-text {
+    color: #666;
+    font-size: 16px;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  /* Imagen adaptativa con límites */
+  #previewImg {
+    display: none;
+    max-width: 100%;      /* No se pasa del contenedor */
+    width: auto;          /* Se adapta a su tamaño natural */
+    max-height: 350px;    /* Máximo de altura permitida */
+    height: auto;         /* Mantiene proporciones */
+    border-radius: 6px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  
+  
+  
+  .upload-text {
+    z-index: 1;
+    text-align: center;
+  }
+  
+  .upload-text {
+    z-index: 1;
+  }
+  .image-box:hover {
+    border-color: #2e60cc; /* verde al pasar el mouse */
+  }
+  
+  
+  
+  
+  /* Botón de envío */
+  .btn-guardar{
+    padding: 10px 20px;
+    background-color: #0383ec; /* azul */
+    border: none;
+    color: white; /* texto blanco */
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer; /* puntero al pasar el mouse */
+    width: 100px;
+    text-decoration: none; /* sin subrayado */
+   
+  }
+  .btn-guardar:hover {
+    background-color: #005bb5; /* azul más oscuro al pasar el mouse */
+  }
+  
+  .btn-cancelar {
+    padding: 10px 20px;
+    background-color: #ff4d4d00; 
+    border: none;
+    color: rgb(70, 70, 70);
+    border-radius: 8px;
+    font-size: 16px;
+    align-self: flex-end; /* alinea el botón a la derecha */
+    width: 80px;
+    text-decoration: none; /* sin subrayado */
+   
+    
+  }
+  /*Texto de error*/
+  .error-message {
+    color: #c50707;
+    background-color: #ffffff;
+    
+    padding: 8px 12px;
+    border-radius: 10px;
+    margin-top: 1px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    /* Asegura que coincida con el ancho de los inputs */
+    width: 80%;
+    box-sizing: border-box;
+  }
+  
+  .textarea-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  #descripcion {
+    width: 100%;
+    padding-right: 60px; /* espacio para el contador */
+    box-sizing: border-box;
+  }
+  
+  .char-counter {
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 12px;
+    color: #666;
+  }
+  
+  .char-counter.exceeded {
+    color: red;
+    font-weight: bold;
+  }
+  

@@ -34,6 +34,7 @@
             <th>Codigo</th>
             <th class="nombre">Nombre</th>
             <th>Descripcion</th>
+            <th>Acciones</th>
           
             
         </tr>
@@ -44,6 +45,27 @@
             <td>{{ $categoria->id }}</td>
             <td>{{ $categoria->nombre }}</td>
             <td>{{ $categoria->descripcion }}</td>
+            {{-- Acciones --}}
+         <td>
+                         <!-- Botón Editar -->
+                <div class="flex flex-col justify-center items-center gap-2">
+                <form  method="GET">
+                        @csrf
+                        <a  href="{{ route('categorias.edit', $categoria->id) }}" class="btnEditar" >
+                            <i class="fa-regular fa-pen-to-square fa-lg" style="color:rgb(255, 255, 255);"></i>
+                        </a>
+                    </form>
+
+                    <!-- Botón Eliminar -->
+                    <form action="{{ route('categorias.destroy', $categoria->id) }}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <a href="#" class="btnEliminar" onclick="confirmarEliminacion(event, this)">
+                            <i class="fa-regular fa-trash-can fa-xl" style="color:rgb(255, 255, 255);"></i>
+                        </a>
+                    </form>
+                </div>
+        </td>
         </tr>
         @endforeach
        

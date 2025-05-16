@@ -41,6 +41,12 @@ class RolSeeder extends Seeder
           Permission::create(['name' => 'inventario.edit', 'descripcion' => 'Vista editar inventario'])->syncRoles([$role1]);
           Permission::create(['name' => 'inventario.destroy', 'descripcion' => 'Eliminar registro de inventario'])->syncRoles([$role1]);
 
+          Permission::create(['name' => 'proveedor.index', 'descripcion' => 'Vista proveedor'])->syncRoles([$role1, $role2]);
+          Permission::create(['name' => 'proveedor.create', 'descripcion' => 'Vista crear proveedor'])->syncRoles([$role1]);
+           Permission::create(['name' => 'proveedor.show', 'descripcion' => 'Ver detalles de proveedor'])->syncRoles([$role1]);
+           Permission::create(['name' => 'proveedor.edit', 'descripcion' => 'Vista editar proveedor'])->syncRoles([$role1]);
+           Permission::create(['name' => 'proveedor.destroy', 'descripcion' => 'Eliminar registro de proveedor'])->syncRoles([$role1]);
+
         Permission::create(['name' => 'rol.index', 'descripcion' => 'Vista roles'])->syncRoles([$role1]);
         Permission::create(['name' => 'rol.create', 'descripcion' => 'Vista crear rol'])->syncRoles([$role1]);
         Permission::create(['name' => 'rol.show', 'descripcion' => 'Ver detalles de rol'])->syncRoles([$role1]);

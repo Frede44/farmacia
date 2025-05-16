@@ -89,25 +89,28 @@ body {
 }
 .sidebar a {
    
-    align-items: center;
-    gap: 18px; /* espacio entre icono y texto */
+
+    align-items: center;       /* Centra verticalmente ícono y texto */
+               /* Espacio uniforme entre el ícono y el texto */        /* Espacio uniforme entre el ícono y el texto */
     color: #fdfdfd;
     border-radius: 7px;
     text-decoration: none;
-    padding: 12px;
+    padding: 15px; /* Espaciado interno para mejor clicabilidad */
     font-size: 14px; /* aumenta el texto para equilibrar con el icono */
     width: 100%;
     text-align: left;
     transition: background-color 0.3s ease;
+             /* Alinea el contenido del texto a la izquierda */
 }
 
 .sidebar a i {
-    font-size: 18px; /* un poco más pequeño para no opacar el texto */
-    min-width: 18px; /* fija un ancho mínimo para alinear */
+    font-size: 18px;           /* Tamaño del ícono */
+    min-width: 20px;           /* Ancho mínimo para alinear todos los íconos */
     text-align: center;
-    margin-right: 25px;/*separacion de icono y texto*/
-    margin-top: 10px;
+    margin-right: 30px;/*separacion de icono y texto*/
+    margin-top: 15px; /* Espacio entre cada opcion */
 }
+
 
 .sidebar a:hover {
     background-color: #fcfcfc31;
@@ -123,6 +126,7 @@ body {
 .sidebar ul {
     list-style: none; /* Elimina los puntos de las listas */
     padding: 0; /* Elimina el padding de la lista */
+    margin-bottom: 35px; /* Espacio debajo de la lista el final final */
    
     
     
