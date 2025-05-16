@@ -52,6 +52,14 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'persona.show', 'descripcion' => 'Ver detalles de persona'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'persona.edit', 'descripcion' => 'Vista editar persona'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'persona.destroy', 'descripcion' => 'Eliminar persona'])->syncRoles([$role1, $role2]);
+
+        Permission::create(['name' => 'ventas.index', 'descripcion' => 'Vista ventas'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'ventas.create', 'descripcion' => 'Vista crear venta'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'ventas.show', 'descripcion' => 'Ver detalles de venta'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'ventas.edit', 'descripcion' => 'Vista editar venta'])->syncRoles([$role1, $role2]);
+        Permission::create(['name' => 'ventas.destroy', 'descripcion' => 'Eliminar venta'])->syncRoles([$role1, $role2]);
+
+        Permission::create(['name' => 'panel.index', 'descripcion' => 'Vista panel de control'])->syncRoles([$role1, $role2]);
         
     
           

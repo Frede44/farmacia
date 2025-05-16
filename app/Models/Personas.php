@@ -9,6 +9,7 @@ class Personas extends Model
 {
     use HasFactory;
 
+      protected $table = 'personas';
     protected $fillable = [
         'nombre',
         'dpi',
@@ -16,6 +17,6 @@ class Personas extends Model
         'direccion',
         'correo'
     ];
-    protected $table = 'personas';
+  
 
 }

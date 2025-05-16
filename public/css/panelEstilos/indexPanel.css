@@ -1,0 +1,138 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin: 20px 40px;
+}
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.card {
+    flex: 1 1 250px;
+    max-width: 300px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.card-content p {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.card-content small {
+    color: #4CAF50;
+    margin-top: 5px;
+}
+
+.conteiner-grafica {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+    gap: 20px;
+}
+
+.grafica, .inventario {
+    flex: 1 1 400px;
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.inventario ul {
+    list-style: none;
+    margin-top: 5px;
+    padding: 0;
+}
+
+.inventario li {
+    padding: 5px 3px;
+    border-bottom: 1px solid #eee;
+    line-height: 1.4;
+}
+
+.inventario .producto {
+    display: flex;
+    flex-direction: column;
+}
+
+.inventario strong::before {
+    margin-right: 5px;
+}
+
+.low::before {
+    content: '🔴';
+}
+
+.medium::before {
+    content: '🟠';
+}
+
+.inventario .cantidad {
+    font-size: 0.9rem;
+    color: #555;
+    margin-left: 1.5em;
+}
+
+
+
+
+.recordatorios {
+    background: #fff;
+    margin: 20px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.recordatorios div {
+    display: flex;
+    
+    align-items: center;
+    padding: 10px 0;
+}
+
+.recordatorios div::before {
+    content: '🔔 ';
+    margin-right: 10px;
+}
+
+.recordatorios h2 {
+    margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .conteiner-grafica {
+        flex-direction: column;
+        align-items: center;
+    }
+}

@@ -7,12 +7,14 @@ use App\Http\Controllers\InicioController;
 use App\Http\Controllers\Inventario\inventarioController as InventarioInventarioController;
 use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\Panel\PanelController;
 use App\Http\Controllers\Persona\personasController;
 use App\Http\Controllers\Procutos\productosController as ProcutosProductosController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Rol\rolController;
 use App\Http\Controllers\Usuarios\usuariosController;
+use App\Http\Controllers\Ventas\ventasController;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -57,7 +59,13 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/rol', rolController::class)->parameters(['rol'=> 'rol' ]);
 
- Route::resource('/persona', personasController::class)->parameters(['persona'=> 'persona']);
+    Route::resource('/persona', personasController::class)->parameters(['persona'=> 'persona']);
+
+    Route::resource('/ventas', ventasController::class)->parameters(['ventas'=> 'venta' ]);
+
+    Route::get('/panel_de_control', [PanelController::class, 'index'])->name('panel.index');
+
+
 
 
 

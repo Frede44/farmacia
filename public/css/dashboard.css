@@ -5,7 +5,7 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     height: 100vh;
-    background-color: #e4e4e4; /* Fondo  */
+    background-color: #ffffff; /* Fondo  */
 }
 .logo {
     width: 115px;      
@@ -21,7 +21,7 @@ body {
 .vistas {
     margin-left: 0;
     flex-grow: 1;
-    background-color: #e4e4e4; /* Fondo  */
+    background-color: #ffffff; /* Fondo  */
     margin: 0;
     padding: 0;
     color: rgb(0, 0, 0); /* Asegura que el texto sea visible sobre fondo negro */
@@ -187,5 +187,6 @@ h2 {
     }
     .vistas {
         width: 100%;
+        margin: 10px ; /* Espacio alrededor del contenido */
     }
 }

@@ -31,7 +31,7 @@
         <img src="{{ asset('img/logo.png') }}" alt="Logo" class="logo">
 
         <ul>
-            <li class="opciones"><a href="#"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+            <li class="opciones"><a href="{{route('panel.index')}}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
             @can('productos.index')
 
             <li class="opciones">
@@ -50,7 +50,7 @@
             <li class="opciones"><a href="{{ route('inventario.index')}}" class="{{ request()->routeIs('inventario') ? 'active' : '' }}">
                     <i class="fas fa-list"></i>Inventario</a></li>
             @endcan
-            <li class="opciones"><a href="#"><i class="fas fa-shopping-bag"></i>Venta</a></li>
+            <li class="opciones"><a href="{{route('ventas.index')}}"><i class="fas fa-shopping-bag"></i>Venta</a></li>
 
             <li class="opciones"><a href="#"><i class="fas fa-chart-line"></i>Reporte de ventas</a></li>
 
