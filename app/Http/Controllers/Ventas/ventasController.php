@@ -3,15 +3,20 @@
 namespace App\Http\Controllers\Ventas;
 
 use App\Http\Controllers\Controller;
+use App\Models\DetalleVentas;
+use App\Models\Inventario;
 use App\Models\Personas;
+use App\Models\Ventas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Monolog\Handler\IFTTTHandler;
 
 class ventasController extends Controller
 {
 
     public function __construct()
     {
-    
+
         $this->middleware('can:ventas.index')->only(['index']);
         $this->middleware('can:ventas.create')->only(['create', 'store']);
         $this->middleware('can:ventas.show')->only(['show']);
@@ -21,25 +26,129 @@ class ventasController extends Controller
 
     public function index()
     {
-        $personas = Personas::all();
-        return view('ventas.index', compact('personas'));
+        $ventas = Ventas::with(['cliente','usuario'])->get();
+        return view('ventas.index', compact('ventas'));
     }
 
     public function create()
     {
         $personas = Personas::all();
-        return view('ventas.create', compact('personas'));
+        $productosInventario = Inventario::with(['producto'])->get();
+        return view('ventas.create', compact('personas', "productosInventario"));
     }
 
     public function store(Request $request)
     {
-        // Logic to store the sale
+
+
+
+        // Validar datos mínimos
+        $request->validate([
+            'id_cliente' => 'required|exists:personas,id',
+            'productos' => 'required|array|min:1',
+            'productos.*.nombre' => 'required|string',
+            'productos.*.tipo' => 'required|string',
+            'productos.*.precio' => 'required|numeric',
+            'productos.*.cantidad' => 'required|integer|min:1',
+        ]);
+
+        $usuario = Auth::user()->id;
+
+        $total = 0;
+
+        // Calcular total
+        foreach ($request->productos as $producto) {
+            $total += $producto['precio'] * $producto['cantidad'];
+        }
+
+        // Crear la venta
+        $venta = Ventas::create([
+            'cliente_id' => $request->id_cliente,
+            'usuario_id' => $usuario,
+            'fecha' => now(),
+            'total' => $total,
+            'estado' => true
+            // Agrega otros campos si es necesario
+        ]);
+
+
+
+        foreach ($request->productos as $producto) {
+            // Crear detalle de venta
+            DetalleVentas::create([
+                'venta_id'        => $venta->id,
+                'producto_id'     => $producto['id_producto'],
+                'tipo_venta'      => $producto['tipo'],
+                'cantidad'        => $producto['cantidad'],
+                'precio_unitario' => $producto['precio'],
+                'subtotal'        => $producto['precio'] * $producto['cantidad'],
+            ]);
+
+            // Obtener inventario FIFO (por fecha más próxima)
+            $inventarios = Inventario::where('id_producto', $producto['id_producto'])
+                ->orderBy('caducidad', 'asc')
+                ->get();
+
+            $cantidadRestante = $producto['cantidad'];
+
+            foreach ($inventarios as $inv) {
+                if ($producto['tipo'] === 'Unidad') {
+                    $unidadCaja = $inv->unidad_caja;
+
+                    if ($inv->total_unidad >= $cantidadRestante) {
+                        // Restar la cantidad vendida
+                        $inv->total_unidad -= $cantidadRestante;
+
+                        // Recalcular la cantidad de cajas disponibles según el total de unidades restantes
+                        $inv->cantidad_caja = intdiv($inv->total_unidad, $unidadCaja);
+
+                        $inv->save();
+                        $cantidadRestante = 0;
+                    } else {
+                        // Vender todo lo disponible en este lote
+                        $cantidadVendidaDesdeEsteLote = $inv->total_unidad;
+
+                        $inv->total_unidad = 0;
+                        $inv->cantidad_caja = 0;
+
+                        $inv->save();
+
+                        $cantidadRestante -= $cantidadVendidaDesdeEsteLote;
+                    }
+                } elseif ($producto['tipo'] === 'Caja') {
+                    if ($inv->cantidad_caja >= $cantidadRestante) {
+                        $inv->cantidad_caja -= $cantidadRestante;
+                        $inv->total_unidad -= ($cantidadRestante * $inv->unidad_caja);
+                        $inv->save();
+                        $cantidadRestante = 0;
+                    } else {
+                        $cajasDisponibles = $inv->cantidad_caja;
+                        $inv->cantidad_caja = 0;
+                        $inv->total_unidad -= ($cajasDisponibles * $inv->unidad_caja);
+                        $inv->save();
+                        $cantidadRestante -= $cajasDisponibles;
+                    }
+                }
+
+                // Eliminar el registro si ya no tiene unidades
+                if ($inv->total_unidad <= 0 && $inv->cantidad_caja <= 0) {
+                    $inv->delete();
+                }
+
+                if ($cantidadRestante <= 0) break;
+            }
+        }
+
+
+
         return redirect()->route('ventas.index')->with('success', 'Venta creada con éxito.');
     }
 
     public function show($id)
     {
-        return view('ventas.show', compact('id'));
+
+        $detalles = DetalleVentas::where('venta_id', $id)->with(['producto'])->get();    
+        return view('ventas.show', compact('detalles'));
     }
 
     public function edit($id)

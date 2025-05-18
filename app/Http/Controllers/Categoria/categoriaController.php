@@ -34,4 +34,34 @@ class categoriaController extends Controller
         );
         return redirect()->route('categorias.index')->with('success', 'Categoria creada con éxito.');
     }
+    public function edit($id)
+    {
+        $categoria = Categoria::findOrFail($id);
+        return view('categorias.edit', ['categoria' => $categoria]);
+    }
+    public function update(Request $request, Categoria $categoria)
+            {
+                $request->validate([
+                    
+                    'nombre' => 'required|string|max:35|unique:productos,nombre,',
+                    'descripcion' => 'nullable|string|max:500',
+                     
+                ]);
+
+                // Actualiza otros campos
+                $categoria->update([
+                   
+                    'nombre' => $request->nombre,
+                    'descripcion' => $request->descripcion,
+                  // ya actualizada arriba si es necesario
+                ]);
+            
+                return redirect()->route('categorias.index')->with('success', 'Producto actualizado correctamente.');
+            }  
+    public function destroy($id)
+    {
+        $categoria = Categoria::findOrFail($id);
+        $categoria->delete();
+        return redirect()->route('categorias.index')->with('success', 'Categoria eliminada con éxito.');
+    }   
 }

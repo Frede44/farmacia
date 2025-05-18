@@ -148,6 +148,13 @@ return [
 
     'attributes' => [
     'categoria_id' => 'categoría',
+    'id_producto' => 'producto',
+    'caducidad' => 'fecha de caducidad',
+        'xcaja' => 'precio por caja',
+        'xunidad' => 'precio por unidad',
+        'cantidad_caja' => 'cantidad de cajas',
+        'unidad_caja' => ' unidades por caja',
+        'numero_telefono'=> 'número de teléfono',
 ],
 
 ];

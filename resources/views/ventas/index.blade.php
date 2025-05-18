@@ -35,17 +35,30 @@
         <table id="tablaUsuarios" class="display nowrap">
             <thead>
                 <tr>
-                    <th>Codigo</th>
-                    <th>nombre</th>
-                    <th>correo</th>
-                    <th>roles</th>
+                    <th>Numero de venta </th>
+                    <th>cliente</th>
+                    <th>Usuario </th>
+                    <th>total</th>
+                    <th>Estado</th>
+                    <th>Fecha</th>
+                    <th>Acciones</th>
 
 
                 </tr>
             </thead>
             <tbody>
               
-
+                 @foreach($ventas as $venta)
+                   <tr>
+                     <td>{{$venta->id}}</td>
+                     <td>{{$venta->cliente->nombre}}</td>
+                     <td>{{$venta->usuario->name}}</td>
+                     <td>{{$venta->total}}</td>
+                     <td>{{$venta->estado}}</td>
+                     <td>{{$venta->fecha}}</td>
+                     <td><a href="{{ route('ventas.show',$venta->id) }}"><button>Ver</button></a></td>
+                   </tr>
+                 @endforeach
 
 
 

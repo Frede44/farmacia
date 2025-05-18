@@ -28,11 +28,16 @@
                 <div class="form-group">
                     <label for="nombre">Nombre de la categoría</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Nombre de la categoría">
+                    @error('nombre')
+                <div class="error-message">
+                    <i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}
+                </div>
+                @enderror
                 </div>
 
                 <div class="form-group">
-                    <label for="descripcion">Descripción</label>
-                    <textarea id="descripcion" name="descripcion" placeholder="Descripción de la categoría"></textarea>
+                    <small id="contador" style="display: block; color: #666; font-size: 12px; margin-top: 4px;">Quedan 500 caracteres</small>
+                 <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto..." maxlength="500" oninput="actualizarContador()">{{ old('descripcion') }}</textarea>
                 </div>
 
                 <div class="grupoBotones">
@@ -46,7 +51,26 @@
              
     
     </body>
-    
+    <script>
+    function actualizarContador() {
+        const textarea = document.getElementById('descripcion');
+        const contador = document.getElementById('contador');
+        const restante = 150 - textarea.value.length;
+
+        contador.textContent = `Quedan ${restante} caracteres`;
+
+        if (restante < 0) {
+            contador.style.color = 'red';
+            contador.textContent = `Te has pasado por ${Math.abs(restante)} caracteres`;
+        } else {
+            contador.style.color = '#666';
+        }
+    }
+
+    // Inicializa contador si hay contenido
+    document.addEventListener('DOMContentLoaded', actualizarContador);
+</script>
+
     @endsection
 
 

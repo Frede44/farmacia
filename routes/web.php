@@ -11,6 +11,7 @@ use App\Http\Controllers\Panel\PanelController;
 use App\Http\Controllers\Persona\personasController;
 use App\Http\Controllers\Procutos\productosController as ProcutosProductosController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\Proveedor\ProveedorController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\Rol\rolController;
 use App\Http\Controllers\Usuarios\usuariosController;
@@ -56,6 +57,8 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/categorias', categoriaController::class)->parameters(['categorias '=> 'categoria' ]);
 
     Route::resource('/inventario', InventarioInventarioController::class)->parameters(['inventario '=> 'inventario' ]);
+
+    Route::resource('/proveedor', ProveedorController::class)->parameters(['proveedor '=> 'proveedor' ]);
 
     Route::resource('/rol', rolController::class)->parameters(['rol'=> 'rol' ]);
 

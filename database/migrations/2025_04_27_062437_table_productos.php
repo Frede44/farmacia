@@ -15,7 +15,7 @@ class TableProductos extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo', 35)->unique();
+             $table->string('codigo', 35)->unique();
             $table->string('nombre');
             $table->string('descripcion');
             $table->decimal('precio_venta', 8, 2); //8 dígitos en total, 2 después del punto decimal

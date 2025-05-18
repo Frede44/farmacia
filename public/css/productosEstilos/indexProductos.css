@@ -41,7 +41,40 @@
    
       
     }
+    /***/
+    .flex {
+      display: flex;
+      justify-content: center; /* Alinea horizontalmente */
+      align-items: center; /* Alinea verticalmente */
+      gap: 10px; /* Espacio entre los botones */
+  }
+    .btnEditar {
+      background-color: #22336d; 
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+  }
+  
+  .btnEditar:hover {
+      background-color: #007ef3; /* Azul oscuro cuando pasas el cursor */
+  }
+  
+  /* Estilo para el botón de eliminar */
+  .btnEliminar {
+      background-color: #22336d; 
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+  }
+  
+  .btnEliminar:hover {
+      background-color: #c82333; /* Rojo oscuro cuando pasas el cursor */
+  }
 
+
+      /***/
     .dataTables_wrapper .dataTables_filter input {
       padding: 5px;
     }
@@ -80,10 +113,12 @@
      
   }
   
-  table.dataTable th, table.dataTable td {
-      white-space: nowrap; /* Evita el salto de línea en celdas */
-      text-align: center;
-  }
+  table.dataTable th,
+table.dataTable td {
+    padding: 16px 24px !important; /* <- Forzar mayor espacio interno */
+    white-space: nowrap;
+    text-align: center;
+}
 
   /* Cambiar el color, borde y tamaño */
 .dt-button {

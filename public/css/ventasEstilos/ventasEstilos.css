@@ -336,6 +336,7 @@
     border-radius: 5px;
     padding: 10px;
     margin-top: 5px;
+    width: 100%;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -393,21 +394,53 @@
     border-radius: 8px;
 }
 
-.cliente {
-    background-color: #ffffff;
-    padding: 10px;
+ /* Estilos adicionales para la búsqueda de clientes */
+        .cliente.seleccionado {
+            background-color: #f0f0f0; /* Cambia el color de fondo para indicar selección */
+            font-weight: bold;
+        }
 
-    border: 1px solid #ddd;
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-}
+        #nombre_cliente {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            max-width: 300px; /* Limita el ancho del input */
+            margin-right: 10px;
+            margin-bottom: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease; /* Transición suave para el color del borde */
+        }
 
-.cliente:hover {
-    background-color: #f0f0f0;
-    border-color: #aaa;
-    cursor: pointer;
-}
+        #nombre_cliente:focus {
+            border-color: #007bff; /* Cambia el borde al hacer foco (azul de Bootstrap, por ejemplo) */
+            outline: none; /* Elimina el outline por defecto del navegador */
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Añade una sombra suave al hacer foco */
+        }
+        .lista_clientes {
+            max-height: 200px; /* Altura máxima de la lista */
+            overflow-y: auto; /* Agrega scrollbar vertical si es necesario */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+            padding: 5px;
+            background-color: #fff;
+        }
+
+        .cliente {
+            padding: 8px;
+            border-bottom: 1px solid #eee; /* Separador entre clientes */
+            cursor: pointer;
+            transition: background-color 0.2s ease; /* Transición suave para el fondo */
+        }
+
+        .cliente:hover {
+            background-color: #f8f9fa; /* Color de fondo al pasar el mouse (gris claro de Bootstrap) */
+        }
+
+        .cliente:last-child {
+            border-bottom: none; /* Elimina el borde del último cliente */
+        }
 
 .cliente .nombre {
     font-weight: bold;

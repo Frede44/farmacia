@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Farmacia X</title>
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+   
 
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -19,6 +20,11 @@
 
       <!--Diseño-->
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+      <!-- Select2 CSS + JS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 </head>
 
 <body>
@@ -36,7 +42,7 @@
 
             <li class="opciones">
             <a href="{{ route('productos.index') }}" class="{{ request()->routeIs('productos.*') ? 'active' : '' }}">
-                <i class="fas fa-pills"></i> Productos
+                <i class="fas fa-pills"></i>Productos
             </a>
             </li>
             @endcan
@@ -47,7 +53,7 @@
             @endcan
 
             @can('inventario.index')
-            <li class="opciones"><a href="{{ route('inventario.index')}}" class="{{ request()->routeIs('inventario') ? 'active' : '' }}">
+            <li class="opciones"><a href="{{ route('inventario.index')}}" class="{{ request()->routeIs('inventario.*') ? 'active' : '' }}">
                     <i class="fas fa-list"></i>Inventario</a></li>
             @endcan
             <li class="opciones"><a href="{{route('ventas.index')}}"><i class="fas fa-shopping-bag"></i>Venta</a></li>
@@ -56,7 +62,12 @@
 
             <li class="opciones"><a href="#"><i class="fas fa-shopping-cart"></i>Compra</a></li>
 
-            <li class="opciones"><a href="#"><i class="fas fa-building"></i>Proveedor</a></li>
+            @can('proveedor.index')
+            <li class="opciones"><a href="{{ route('proveedor.index')}}" class="{{ request()->routeIs('proveedor.*') ? 'active' : '' }}">
+                    <i class="fas fa-building"></i>Proveedor</a></li>
+            @endcan
+
+            
 
             <li class="opciones"><a href="#"><i class="fas fa-box"></i>Inventario por lote</a></li>
 
@@ -74,6 +85,7 @@
             <li class="opciones"><a href="{{ route('logout.store') }}"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a></li>
         </ul>
     </div>
+    
 
 
     <!-- Vistas o opciones mas el sidebar -->
@@ -81,6 +93,7 @@
         @yield('contenido')
     </div>
 
+  
 
     <script>
         // funcion para abrir y cerrar el sidebar en pantallas pequeñas
@@ -102,6 +115,77 @@
             });
         });
     </script>
+
+
+   <!--Mensaje cuando se guarda correctamente-->
+            @if (session('success'))
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Éxito!',
+                            text: "{{ session('success') }}",
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Aceptar'
+                        });
+                    });
+                </script>
+            @endif
+            <!--Mensaje cuando se cancela correctamente-->
+            @if(request()->has('cancelado'))
+            <script>
+                Swal.fire({
+                    icon: 'info',
+                    title: 'Cancelado',
+                    text: 'La operación fue cancelada correctamente',
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: 'rgb(38, 128, 189)', 
+                });
+            </script>
+            @endif
+            <script>
+    function confirmarEliminacion(event, elemento) {
+        event.preventDefault();
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Esta acción no se puede deshacer!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                elemento.closest('form').submit();
+            }
+        });
+    }
+</script>
+
+<!-- Contador de descripcion-->
+<script>
+    function actualizarContador() {
+        const textarea = document.getElementById('descripcion');
+        const contador = document.getElementById('contador');
+        const restante = 150 - textarea.value.length;
+
+        contador.textContent = `Quedan ${restante} caracteres`;
+
+        if (restante < 0) {
+            contador.style.color = 'red';
+            contador.textContent = `Te has pasado por ${Math.abs(restante)} caracteres`;
+        } else {
+            contador.style.color = '#666';
+        }
+    }
+
+    // Inicializa contador si hay contenido
+    document.addEventListener('DOMContentLoaded', actualizarContador);
+</script>
+
+            
+
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -137,25 +221,31 @@
                
             ],
             
-            pageLength: 10,  // Fija la cantidad de registros a  mostrar
+            pageLength: 5,  // Fija la cantidad de registros a  mostrar
             lengthMenu: [5, 10, 25, 50, 100],
             responsive: true,
             language: {
-                url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
                 search: "Buscar:",
-                lengthMenu: "Mostrar _MENU_ registros",
-                info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                paginate: {
-                    previous: "Anterior",
-                    next: "Siguiente"
-                },
+                lengthMenu: "Mostrar _MENU_ registros por página",
                 zeroRecords: "No se encontraron resultados",
+                info: "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                infoEmpty: "Mostrando 0 a 0 de 0 entradas",
+                infoFiltered: "(filtrado de _MAX_ registros totales)",
+                paginate: {
+                    first: "Primero",
+                    previous: "Anterior",
+                    next: "Siguiente",
+                    last: "Último"
+                },
                 buttons: {
                     copyTitle: 'Copiado al portapapeles',
                     copySuccess: {
                         _: '%d filas copiadas',
                         1: '1 fila copiada'
-                    }
+                    },
+                    copy: 'Copiar',
+                    excel: 'Exportar a Excel',
+                    pdf: 'Exportar a PDF'
                 }
             }
            
@@ -163,6 +253,7 @@
                   
             });
     </script>
+    
 
 
 

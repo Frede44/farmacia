@@ -26,8 +26,11 @@ class DatabaseSeeder extends Seeder
             CategoriaSeeder::class,
             // Add other seeders here
         ]);
-
         $this->call([
+            ProductoSeeder::class,
+            // Add other seeders here
+        ]);
+          $this->call([
             personasSeeder::class,
             // Add other seeders here
         ]);
