@@ -89,18 +89,31 @@ input[type="number"]:focus {
   box-shadow: 0 0 5px rgba(52, 202, 202, 0.5);
 }
 textarea {
-  width: 80%;
-  height: 100px;
+  width: 400px !important;
+  height: 120px;
   padding: 8px 12px;
   margin-bottom: 15px;
   border: 2px solid #ccc;
   border-radius: 8px;
   font-size: 14px;
   font-family: inherit;
-  transition: border-color 0.3s, box-shadow 0.3s;
- 
-  resize: none; /* <-- esto evita que se pueda estirar */
+  line-height: 1.5;
+  overflow-y: auto;
+  resize: none;
+  text-align: justify;
 }
+.justificado-editable {
+  width: 400px;
+  height: 120px;
+  padding: 8px 12px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: inherit;
+  text-align: justify;
+  overflow-y: auto;
+}
+
 
 textarea:focus {
   border-color: #3575c9;

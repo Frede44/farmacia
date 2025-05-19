@@ -42,19 +42,10 @@
 
                 <!-- Nombre -->
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" value="{{ old('nombre', $producto->nombre) }}">
+                <input type="text" id="nombre" name="nombre"  value="{{ old('nombre', $producto->nombre) }}" maxlength="50">
                 @error('nombre')
                 <div class="error-message">
                      <i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}
-                </div>
-                @enderror
-
-                <!-- Precio -->
-                <label for="precio_venta">Precio Venta</label>
-                <input type="number" id="precio_venta" step="0.01" min="0.01" name="precio_venta" value="{{ old('precio_venta', $producto->precio_venta) }}">
-                @error('precio_venta')
-                <div class="error-message">
-                    <i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}
                 </div>
                 @enderror
 
@@ -75,7 +66,7 @@
                 @enderror
                <!-- Imagen actual -->
                 <div class="imagen-actual">
-                    <label class="imagen-label">Imagen actual</label>
+                    <label class="imagen-label" style="color: green;">Producto actual</label>
                     @if($producto->imagen)
                         <img src="{{ asset('imagenes/' . $producto->imagen) }}" 
                             alt="Imagen actual" 
@@ -90,8 +81,8 @@
             <div class="form-group">
                 <!-- Descripción -->
                 <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion">{{ old('descripcion', $producto->descripcion) }}</textarea>
-
+                <textarea id="descripcion" name="descripcion" maxlength="250">{{ old('descripcion', $producto->descripcion) }}</textarea>
+               
             <div class="imagen-contenedor">
                
                 

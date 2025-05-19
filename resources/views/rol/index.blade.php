@@ -47,14 +47,27 @@
             <td>{{ $rol->id }}</td>
             <td>{{ $rol->name }}</td>
             
-            <td class="acciones">
-                <a href="{{ route('rol.edit', $rol->id) }}" class="btnEditar"><i class="fas fa-edit"></i></a>
-                <form action="{{ route('rol.destroy', $rol) }}" method="POST" style="display:inline;">
+            {{-- Acciones --}}
+         <td>
+                         <!-- Botón Editar -->
+                <div class="flex flex-col justify-center items-center gap-2">
+                <form  method="GET">
+                        @csrf
+                        <a  class="btnEditar" href="{{route('rol.edit', $rol->id) }}" >
+                            <i class="fa-regular fa-pen-to-square fa-lg" style="color:rgb(255, 255, 255);"></i>
+                        </a>
+                    </form>
+
+                    <!-- Botón Eliminar -->
+                    <form action="{{route('rol.destroy', $rol->id)}}" method="POST" style="display:inline;">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btnEliminar"><i class="fas fa-trash"></i></button>
+                    <a href="#" class="btnEliminar" onclick="confirmarEliminacion(event, this)">
+                        <i class="fa-regular fa-trash-can fa-xl" style="color:rgb(255, 255, 255);"></i>
+                    </a>
                 </form>
-            </td>
+                </div>
+        </td>
         @endforeach
     
         

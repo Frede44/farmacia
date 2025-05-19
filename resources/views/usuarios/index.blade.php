@@ -25,7 +25,7 @@
     <h2>USUARIOS</h2>
 
     <a href="{{ route('register.index') }}">
-        <button class="btnAgregar">Agregar Usuario</button>
+        <button class="btnAgregar">+Usuario</button>
     </a>
 
     <div class="table-container">
@@ -36,9 +36,9 @@
             <thead>
                 <tr>
                     <th>Codigo</th>
-                    <th>nombre</th>
-                    <th>correo</th>
-                    <th>roles</th>
+                    <th class="nombre">Nombre</th>
+                    <th>Correo-Electonico</th>
+                    <th>Roles</th>
 
 
                 </tr>

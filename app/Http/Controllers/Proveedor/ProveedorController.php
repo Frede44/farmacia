@@ -24,10 +24,10 @@ class ProveedorController extends Controller
     {
         $request->validate([
            
-            'nombre' => 'required|string|max:35',
+            'nombre' => 'required|string|max:50',
             'numero_telefono' => ['required', 'regex:/^\d{4}-\d{4}$/', 'unique:proveedor,numero_telefono'],
-            'correo' => ['nullable', 'string', 'email', 'max:500', 'unique:proveedor,correo'],
-            'descripcion' => 'nullable|string|max:500',
+            'correo' => ['nullable', 'string', 'email', 'max:200', 'unique:proveedor,correo'],
+            'descripcion' => 'nullable|string|max:250',
             
         ]);
         Proveedor::create(
@@ -50,10 +50,10 @@ class ProveedorController extends Controller
             {
                 $request->validate([
                     
-                    'nombre' => 'required|string|max:35',
+                    'nombre' => 'required|string|max:50',
                     'numero_telefono' => ['required', 'regex:/^\d{4}-\d{4}$/', 'unique:proveedor,numero_telefono,'.$proveedor->id],
-                    'correo' => ['nullable', 'string', 'email', 'max:500', 'unique:proveedor,correo,'.$proveedor->id],
-                    'descripcion' => 'nullable|string|max:500',
+                    'correo' => ['nullable', 'string', 'email', 'max:200', 'unique:proveedor,correo,'.$proveedor->id],
+                    'descripcion' => 'nullable|string|max:250',
                     
                 ]);
 

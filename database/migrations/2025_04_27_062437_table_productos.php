@@ -16,10 +16,9 @@ class TableProductos extends Migration
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
             $table->string('codigo', 35)->unique();
-            $table->string('nombre');
+            $table->string('nombre',50);
           
-            $table->string('descripcion');
-            $table->decimal('precio_venta', 8, 2); //8 dígitos en total, 2 después del punto decimal
+            $table->string('descripcion',250);
             $table->string('imagen')->nullable(); // Campo para la imagen, puede ser nulo
             $table->unsignedBigInteger('categoria_id'); // Relación con la tabla categorias
             $table->timestamps();

@@ -56,7 +56,14 @@
                     @foreach($inventarios as $inventario)
                     <tr>
                         
-                        <td>{{ $inventario->producto->nombre }}</td>
+                    <td>
+    <span class="nombre-corto">
+        {{ \Illuminate\Support\Str::limit($inventario->producto->nombre, 25, '...') }}
+        @if(strlen($inventario->producto->nombre) > 25)
+            <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-texto="{{ $inventario->producto->nombre }}"></i>
+        @endif
+    </span>
+</td>
                         <td>{{ $inventario->xunidad }}</td>
                         <td>{{ $inventario->xcaja }}</td>
                         <td>{{ $inventario->cantidad_caja }}</td>
@@ -83,10 +90,19 @@
                         <i class="fa-regular fa-trash-can fa-xl" style="color:rgb(255, 255, 255);"></i>
                     </a>
                 </form>
+                
                 </div>
         </td>
                     
                     </tr>
+                    <!-- Modal para mostrar la descripción completa (se reutiliza para nombre también) -->
+<div id="modalDescripcion" class="modal-descripcion" style="display:none;">
+    <div class="modal-contenido">
+        <span class="cerrar-modal" onclick="cerrarDescripcion()">&times;</span>
+        <p id="descripcionCompleta"></p>
+    </div>
+</div>
+
                     @endforeach
             
                     

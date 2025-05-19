@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 <label for="nombre">Nombre de la categoría</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre de la categoría" value="{{ old('nombre', $categoria->nombre) }}">
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre de la categoría" maxlength="50" value="{{ old('nombre', $categoria->nombre) }}" >
                 @error('nombre')
                     <div class="error-message">
                         <i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}
@@ -39,7 +39,7 @@
 
             <div class="form-group">
                 <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion">{{ old('descripcion', $categoria->descripcion) }}</textarea>
+                <textarea id="descripcion" name="descripcion" maxlength="250">{{ old('descripcion', $categoria->descripcion) }}</textarea>
             </div>
 
             <div class="grupoBotones">

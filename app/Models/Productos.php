@@ -14,7 +14,6 @@ class Productos extends Model
         'codigo',
         'nombre',
         'descripcion',
-        'precio_venta',
         'imagen',
         'categoria_id',
 

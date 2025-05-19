@@ -9,8 +9,7 @@
     
 
     
-<!-- Select2 -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 </head>
 
@@ -31,13 +30,24 @@
                                 <select name="id_producto" id="id_producto" class="form-control">
                                     <option value="">Selecciona un producto</option>
                                     @foreach ($productos as $producto)
-                                        <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
-                                    @endforeach
+                                    <option value="{{ $producto->id }}" data-imagen="{{ $producto->imagen }}">{{ $producto->nombre }}</option>
+                                @endforeach
                                 </select>
                                 @error('id_producto')
                                     <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
                                 @enderror
-                                
+
+                                                 
+                                   <!-- Imagen dinámica -->
+                            <div class="imagen-actual" id="imagenActualContainer" style="display: none;">
+                                <label class="imagen-label">Producto seleccionado</label>
+                                <img id="imagenActual" 
+                                    src="" 
+                                    alt="Imagen actual" 
+                                    class="imagen-preview" 
+                                    onclick="openModal(this.src)">
+                            </div>
+                                      
                                
 
                                 <!-- Precio Compra -->
@@ -110,10 +120,17 @@
                                
                                
                             </div>
+
+                          
+               
                         </div>
 
 
-
+                        <!-- Modal para mostrar imagen en grande -->
+                        <div id="imageModal" class="modal-imagen" onclick="closeModal()">
+                            <span class="cerrar-modal">&times;</span>
+                            <img class="modal-contenido" id="modalImg">
+                        </div>
 
                         <div class="grupoBotones">
                             <button type="submit" class="btn-guardar">Guardar</button>
@@ -130,7 +147,7 @@
 <!-- Select2 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-@section('scripts')
+
 
 
 <script>
@@ -140,7 +157,42 @@
         locale: "es"
     });
 </script>
-@endsection
+
+<!--Mostrar imagen del producto-->
+<script>
+    const selectProducto = document.getElementById('id_producto');
+    const imagenActual = document.getElementById('imagenActual');
+    const imagenActualContainer = document.getElementById('imagenActualContainer');
+
+    selectProducto.addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const imagen = selectedOption.getAttribute('data-imagen');
+
+        if (imagen) {
+            imagenActual.src = `/imagenes/${imagen}`;
+            imagenActualContainer.style.display = 'block';
+        } else {
+            imagenActual.src = '';
+            imagenActualContainer.style.display = 'none';
+        }
+    }
+);
+
+    // Modal script
+    function openModal(src) {
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImg");
+        modal.style.display = "block";
+        modalImg.src = src;
+    }
+
+    function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+    }
+</script>
+
+
+
 
     
    

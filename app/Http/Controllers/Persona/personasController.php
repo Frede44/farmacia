@@ -36,10 +36,10 @@ class personasController extends Controller
     {
         // Verifica si el usuario tiene el permiso para almacenar una nueva persona
         $request->validate([
-            'nombre' => 'required|string|max:255',
+            'nombre' => 'required|string|max:100',
             'dpi' => 'required|string|max:20',
             'telefono' => 'required|string|max:20',
-            'direccion' => 'required|string|max:255',
+            'direccion' => 'required|string|max:250',
             'correo' => 'required|email|max:255',
         ]);
 
