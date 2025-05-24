@@ -58,9 +58,9 @@
             @endcan
             <li class="opciones"><a href="{{route('ventas.index')}}"><i class="fas fa-shopping-bag"></i>Venta</a></li>
 
-            <li class="opciones"><a href="#"><i class="fas fa-chart-line"></i>Reporte de ventas</a></li>
+            <li class="opciones"><a href="{{route('reportes.index')}}"><i class="fas fa-chart-line"></i>Reporte de ventas</a></li>
 
-            <li class="opciones"><a href="#"><i class="fas fa-shopping-cart"></i>Compra</a></li>
+            <li class="opciones"><a href="{{route('compras.index')}}"><i class="fas fa-shopping-cart"></i>Compra</a></li>
 
             @can('proveedor.index')
             <li class="opciones"><a href="{{ route('proveedor.index')}}" class="{{ request()->routeIs('proveedor.*') ? 'active' : '' }}">

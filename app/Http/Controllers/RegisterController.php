@@ -11,8 +11,9 @@ class RegisterController extends Controller
     public function index()
     {
         // Verifica si el usuario ya está autenticado
-        $roles = Role::all();
-        return view("Auth.Register", compact('roles'));
+         $roles = Role::all();
+        return view('Auth.Register', compact('roles'));
+      
     }
 
    

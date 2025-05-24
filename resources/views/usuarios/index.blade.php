@@ -7,7 +7,7 @@
     @extends('dashboard.index')
     <title>Usuarios</title>
     <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
-  
+
 
 
     <link rel="stylesheet" href="styles.css" />
@@ -39,6 +39,7 @@
                     <th>nombre</th>
                     <th>correo</th>
                     <th>roles</th>
+                    <th>Acciones</th>
 
 
                 </tr>
@@ -55,6 +56,26 @@
                         {{ $role->name }}
                         @endforeach
                     </td>
+                    <td>
+                        <!-- Botón Editar -->
+                        <div class="flex flex-col justify-center items-center gap-2">
+                            <form method="GET">
+                                @csrf
+                                <a href="{{ route('usuarios.edit', $user->id) }}" class="btnEditar">
+                                    <i class="fa-regular fa-pen-to-square fa-lg" style="color:rgb(255, 255, 255);"></i>
+                                </a>
+                            </form>
+
+                            <!-- Botón Eliminar -->
+                            <form action="{{route('usuarios.destroy',$user->id)}}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <a href="#" class="btnEliminar" onclick="confirmarEliminacion(event, this)">
+                                    <i class="fa-regular fa-trash-can fa-xl" style="color:rgb(255, 255, 255);"></i>
+                                </a>
+                            </form>
+                        </div>
+                    </td>
 
 
                     @endforeach
@@ -68,7 +89,7 @@
     </div>
 
 
- 
+
 </body>
 
 @endsection

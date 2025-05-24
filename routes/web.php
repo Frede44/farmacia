@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Categoria\categoriaController;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\Compras\comprasController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\Inventario\inventarioController as InventarioInventarioController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Procutos\productosController as ProcutosProductosContro
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\Proveedor\ProveedorController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\reportes\reporteController;
 use App\Http\Controllers\Rol\rolController;
 use App\Http\Controllers\Usuarios\usuariosController;
 use App\Http\Controllers\Ventas\ventasController;
@@ -49,10 +51,10 @@ Route::get("/logout", [loginController::class, "destroy"])->name("logout.store")
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('/productos', ProcutosProductosController::class)->parameters(['productos '=> 'producto' ]);
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard', [PanelController::class, 'index'])->name('dashboard.index');
 
 
-    Route::resource('/usuarios', usuariosController::class)->parameters(['usuarios '=> 'usuario' ]);
+    Route::resource('/usuarios', usuariosController::class)->parameters(['usuarios'=> 'usuario']);
 
     Route::resource('/categorias', categoriaController::class)->parameters(['categorias '=> 'categoria' ]);
 
@@ -66,10 +68,11 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/ventas', ventasController::class)->parameters(['ventas'=> 'venta' ]);
 
+    Route::resource('/reportes', reporteController::class)->parameters(['reportes'=> 'reporte' ]);
+
     Route::get('/panel_de_control', [PanelController::class, 'index'])->name('panel.index');
 
-
-
+    Route::resource('/compras', comprasController::class)->parameters(['compras'=> 'compra']);
 
 
 });

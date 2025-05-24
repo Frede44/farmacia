@@ -12,8 +12,10 @@
             <i class="fa-solid fa-money-bill-wave"></i>
         </div>
         <div class="card-content">
-            <p>$45,231.89</p>
-            <small>+20.1% del mes pasado</small>
+            
+            <p>Q{{$ventaActual}}</p>
+        
+            <small>+{{$porcentaje}}% del mes pasado</small>
         </div>
     </div>
     <div class="card">
@@ -99,65 +101,43 @@
 
 <script>
     window.onload = function() {
+        var ventasData = @json($ventasPorMes);
+
+        // Opcional: convertir "2025-05" a "Mayo 2025"
+        function formatPeriodo(periodo) {
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+                           'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            const [year, month] = periodo.split('-');
+            return `${meses[parseInt(month) - 1]} ${year}`;
+        }
+
+        var dataPoints = ventasData.map(function(item) {
+            return {
+                label: formatPeriodo(item.periodo),
+                y: parseFloat(item.total)
+            };
+        });
 
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             theme: "light2",
             title: {
-                text: "Resumen de Ventas"
+                text: "Resumen de Ventas por Mes"
+            },
+            axisX: {
+                labelAngle: -45
             },
             data: [{
-                type: "line",
-                indexLabelFontSize: 16,
-                dataPoints: [{
-                        y: 450
-                    },
-                    {
-                        y: 414
-                    },
-                    {
-                        y: 520,
-                        indexLabel: "\u2191 highest",
-                        markerColor: "red",
-                        markerType: "triangle"
-                    },
-                    {
-                        y: 460
-                    },
-                    {
-                        y: 450
-                    },
-                    {
-                        y: 500
-                    },
-                    {
-                        y: 480
-                    },
-                    {
-                        y: 480
-                    },
-                    {
-                        y: 410,
-                        indexLabel: "\u2193 lowest",
-                        markerColor: "DarkSlateGrey",
-                        markerType: "cross"
-                    },
-                    {
-                        y: 500
-                    },
-                    {
-                        y: 480
-                    },
-                    {
-                        y: 510
-                    }
-                ]
+                type: "column", // Puedes cambiar a "line"
+                indexLabelFontSize: 14,
+                dataPoints: dataPoints
             }]
         });
-        chart.render();
 
+        chart.render();
     }
 </script>
+
 
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
 @endsection

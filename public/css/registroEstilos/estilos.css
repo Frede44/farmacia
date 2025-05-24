@@ -1,0 +1,90 @@
+
+        .container {
+            display: flex; /* Enables flexbox layout */
+            justify-content: center; /* Centers items horizontally */
+            align-items: center; /* Centers items vertically */
+            height: 100vh; /* Full viewport height */
+            background-color: #f0f0f0; /* Light gray background */
+        }
+        form {
+            background-color: #ffffff; /* White background for the form */
+            padding: 25px; /* Adds space inside the form */
+            border-radius: 8px; /* Rounds the corners of the form */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+            width: 100%; /* Makes the form responsive */
+            max-width: 400px; /* Sets a maximum width for the form */
+            box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+        }
+
+        label {
+            display: block; /* Makes labels take up the full width */
+            margin-bottom: 8px; /* Adds space below labels */
+            font-weight: bold; /* Makes label text bold */
+            color: #333333; /* Dark gray color for label text */
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        select {
+            width: 100%; /* Makes input fields and select take up the full width */
+            padding: 10px; /* Adds space inside input fields and select */
+            margin-bottom: 20px; /* Adds space below input fields and select */
+            border: 1px solid #cccccc; /* Adds a light gray border */
+            border-radius: 4px; /* Rounds the corners of input fields and select */
+            box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+            font-size: 16px; /* Sets the font size for input text */
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus,
+        select:focus {
+            border-color: #007bff; /* Changes border color on focus (e.g., when clicked) */
+            outline: none; /* Removes the default browser outline */
+        }
+
+        select {
+            appearance: none; /* Removes default system appearance for select on some browsers */
+            background-color: white; /* Ensures select background is white */
+            cursor: pointer; /* Changes cursor to a pointer on hover */
+        }
+
+        button[type="submit"] {
+            background-color: #007bff; /* Blue background for the button */
+            color: white; /* White text for the button */
+            padding: 12px 20px; /* Adds space inside the button */
+            border: none; /* Removes the default button border */
+            border-radius: 4px; /* Rounds the corners of the button */
+            cursor: pointer; /* Changes cursor to a pointer on hover */
+            font-size: 16px; /* Sets the font size for button text */
+            font-weight: bold; /* Makes button text bold */
+            width: 100%; /* Makes the button take up the full width */
+            transition: background-color 0.3s ease; /* Smooth transition for background color change */
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3; /* Darker blue background on hover */
+        }
+
+        /* Adds a little space above the button if it's directly after a select */
+        select + button[type="submit"] {
+            margin-top: 10px;
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media (max-width: 480px) {
+            form {
+                padding: 20px;
+            }
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            select,
+            button[type="submit"] {
+                font-size: 15px;
+            }
+            button[type="submit"] {
+                padding: 10px 15px;
+            }
+        }
