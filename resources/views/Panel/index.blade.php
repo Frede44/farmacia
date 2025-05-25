@@ -3,139 +3,266 @@
 <link rel="stylesheet" href="{{ asset('css/panelEstilos/indexPanel.css') }}">
 
 @section('contenido')
-<h1>Panel de control</h1>
+<div class="titulo">
+    <h1>Panel de Control</h1>
+    <p>Bienvenido de vuelta, aquí tienes un resumen de tu negocio</p>
+</div>
 
-<div class="card-container">
-    <div class="card">
-        <div class="card-title">
-            <h3>Ventas Totales</h3>
-            <i class="fa-solid fa-money-bill-wave"></i>
-        </div>
-        <div class="card-content">
-            
-            <p>Q{{$ventaActual}}</p>
-        
-            <small>+{{$porcentaje}}% del mes pasado</small>
-        </div>
+<div class="acciones_rapidas">
+    <div class="acciones_titulo">
+        <h3>Acciones rapidas</h3>
+        <p>Accede rápidamente a las funciones más utilizadas</p>
     </div>
-    <div class="card">
-        <div class="card-title">
-            <h3>Productos</h3>
-            <i class="fa-solid fa-box"></i>
-        </div>
-        <div class="card-content">
-            <p>2,345</p>
-            <small>+180 nuevos productos</small>
-        </div>
+
+    <div class="conteiner-card">
+        <a href="{{ route('ventas.create') }}" style="text-decoration: none;">
+            <div class="card venta">
+                <div class="card-icon">
+                    <i class="fa-solid fa-cart-shopping" style="color: rgb(50, 131, 245);"></i>
+                </div>
+                <div class="card-text">
+                    <p>Nuevas Ventas</p>
+
+                </div>
+
+            </div>
+        </a>
+
+        <a href="{{ route('productos.index') }}" style="text-decoration: none;">
+            <div class="card producto">
+                <div class="card-icon">
+                    <i class="fa-solid fa-box" style="color: rgb(82, 174, 48);"></i>
+                </div>
+                <div class="card-text">
+                    <p>Productos</p>
+
+                </div>
+
+            </div>
+        </a>
+
+        <a href="{{ route('inventario.index') }}" style="text-decoration: none;">
+            <div class="card inventario">
+                <div class="card-icon">
+                    <i class="fa-solid fa-warehouse" style="color: rgb(245, 131, 50);"></i>
+                </div>
+                <div class="card-text">
+                    <p>Inventario</p>
+
+                </div>
+
+            </div>
+        </a>
+
+        <a href="{{ route('reportes.index') }}" style="text-decoration: none;">
+            <div class="card reporte">
+                <div class="card-icon">
+                    <i class="fa-solid fa-chart-pie" style="color: rgb(138, 50, 245);"></i>
+                </div>
+                <div class="card-text">
+                    <p>Reportes</p>
+
+                </div>
+
+            </div>
+        </a>
+
+        <a href="{{ route('usuarios.index') }}" style="text-decoration: none;">
+            <div class="card usuario">
+
+                <div class="card-icon">
+                    <i class="fa-solid fa-user" style="color: rgb(39, 92, 240);"></i>
+                </div>
+                <div class="card-text">
+                    <p>Usuarios</p>
+                </div>
+
+
+            </div>
+        </a>
+        <a href="{{ route('compras.index') }}" style="text-decoration: none;">
+            <div class="card compra">
+                <div class="card-icon">
+                    <i class="fa-solid fa-plus" style="color: rgb(31, 178, 134);"></i>
+                </div>
+                <div class="card-text">
+                    <p>Compras</p>
+
+                </div>
+
+            </div>
+        </a>
+
+
     </div>
-    <div class="card">
-        <div class="card-title">
-            <h3>Clientes</h3>
-            <i class="fa-solid fa-users"></i>
-        </div>
-        <div class="card-content">
-            <p>+573</p>
-            <small>+201 esta semana</small>
-        </div>
+</div>
+
+<div class="resumen">
+    <div class="ventas-graficas">
+        <div id="chartContainer" style="height: 100%; width: 100%;"></div>
     </div>
-    <div class="card">
-        <div class="card-title">
-            <h3>Ventas Activas</h3>
-            <i class="fa-solid fa-chart-line"></i>
+    <div class="ventas-recientes">
+        <h3>ventas recientes </h3>
+        <p>Ultimas ventas realizadas</p>
+
+        @foreach ($ventasRecientes as $venta)
+        <div class="ventas-recientes-contenido">
+            <div class="ventas-datos">
+                <div class="ventas-datos-imagen">
+                    {{
+        collect(explode(' ', $venta->cliente->nombre))
+            ->take(2)
+            ->map(fn($n) => strtoupper(substr($n, 0, 1)))
+            ->implode('')
+            }}
+                </div>
+                <div class="ventas-datos-nombre">
+                    <p>{{ $venta->cliente->nombre }}</p>
+                    <span>Hace {{ $venta->created_at->diffInMinutes() }} min</span>
+                </div>
+            </div>
+
+            <div class="ventas-datos-precio">
+                <span>Q.{{ $venta->total }}</span>
+                <p>Completada</p>
+            </div>
         </div>
-        <div class="card-content">
-            <p>+12,234</p>
-            <small>+19% del mes pasado</small>
+        @endforeach
+
+        <div class="ventas-recientes-vermas">
+            <a href="{{ route('ventas.index') }}">Ver todas las ventas <i class="fa-solid fa-arrow-right"></i></a>
         </div>
     </div>
 </div>
 
-<div class="conteiner-grafica">
-    <div class="grafica">
+<div class="productos">
+    <div class="productos-destacados">
+        <h3>Productos Destacados</h3>
+        <p>Los productos con mejor rendimiento</p>
 
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        <div class="productos-destacados-contenedor">
+            @foreach ($productosVentas as $producto)
+            <div class="productos-destacados-contenido">
+                <div class="productos-destacados-numero">
+                    {{ $loop->iteration }}
+                </div>
+                <div class="productos-destacados-nombre">
+                    <p>{{ $producto->nombre }}</p>
+                    <span>{{ $producto->total_vendido }} Ventas</span>
+                </div>
+
+            </div>
+            @endforeach
+        </div>
     </div>
-<div class="inventario">
-    <h2>Inventario Bajo</h2>
-    <p>Productos que necesitan reabastecimiento</p>
-    <ul>
-        <li>
-            <div class="producto">
-                <strong class="low">Paracetamol 500mg</strong>
-                <span class="cantidad">Quedan 5 unidades</span>
+    <div class="productos-inventario">
+        <h3>Alerta de inventario</h3>
+        <p>Productos con bajo stock</p>
+        <div class="conteiner-invetario">
+
+            <div class="datos">
+                <div class="datos-producto">
+                    <p>Producto 1</p>
+                    <span>Stock actual: 5</span>
+                </div>
+                <div class="datos-categoria">
+                    <p>Jarabe</p>
+                    <span>Minimo 100</span>
+                </div>
             </div>
-        </li>
-        <li>
-            <div class="producto">
-                <strong class="low">Ibuprofeno 400mg</strong>
-                <span class="cantidad">Quedan 8 unidades</span>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
             </div>
-        </li>
-        <li>
-            <div class="producto">
-                <strong class="medium">Amoxicilina 500mg</strong>
-                <span class="cantidad">Quedan 12 unidades</span>
-            </div>
-        </li>
-        <li>
-            <div class="producto">
-                <strong class="medium">Loratadina 10mg</strong>
-                <span class="cantidad">Quedan 15 unidades</span>
-            </div>
-        </li>
-    </ul>
+
+        </div>
+        <div class="inventario-gestionar">
+            <a href="{{ route('inventario.index') }}">Gestionar inventario<i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </div>
 </div>
 
-
-
-<div class="recordatorios">
-    <h2>Recordatorio</h2>
-
-    <div>
-
-        <p>Hay 3 medicamentos que vencen en los próximos 30 días. Revise la sección de inventario.</p>
-    </div>
-</div>
 
 
 
 <script>
     window.onload = function() {
-        var ventasData = @json($ventasPorMes);
+        // Recibes los datos directamente formateados desde Laravel
+        // Asegúrate que la variable $ventasPorDiaSemana esté disponible y sea un JSON válido
+        var dataPointsSemana = @json($ventasParaGrafico ?? []); // Usa '?? []' para evitar error si la variable no está definida
 
-        // Opcional: convertir "2025-05" a "Mayo 2025"
-        function formatPeriodo(periodo) {
-            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-                           'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-            const [year, month] = periodo.split('-');
-            return `${meses[parseInt(month) - 1]} ${year}`;
+        console.log("Data Points Semana:", dataPointsSemana); // Verifica los datos que estás recibiendo
+        if (dataPointsSemana.length === 0) {
+            console.log("No hay datos de ventas para la semana actual para mostrar en el gráfico.");
+            // Opcionalmente, puedes mostrar un mensaje en el contenedor del gráfico
+            document.getElementById("chartContainerVentasSemana").innerHTML = "<p style='text-align:center;padding-top:50px;'>No hay datos de ventas para mostrar para la semana actual.</p>";
+            return; // No renderizar el gráfico si no hay datos
         }
-
-        var dataPoints = ventasData.map(function(item) {
-            return {
-                label: formatPeriodo(item.periodo),
-                y: parseFloat(item.total)
-            };
-        });
 
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
-            theme: "light2",
+            theme: "light2", // Puedes cambiar el tema (ej: "light1", "dark1", "dark2")
             title: {
-                text: "Resumen de Ventas por Mes"
+                text: "Ventas de la Semana Actual"
             },
             axisX: {
-                labelAngle: -45
+                title: "Día de la Semana",
+                // Las etiquetas (labels) ya vienen como "Lunes", "Martes", etc.
+                // No es necesario `labelAngle` a menos que los nombres sean muy largos o se solapen
+                interval: 1, // Para asegurar que se muestren todas las etiquetas de los días
+                gridThickness: 0 // Esto elimina las líneas verticales
+            },
+            axisY: {
+
+
+                includeZero: true,
+                gridThickness: 0,
+                lineThickness: 0,
+                labelFormatter: function() {
+                    return ""; // Oculta los valores del eje Y
+                }
             },
             data: [{
-                type: "column", // Puedes cambiar a "line"
-                indexLabelFontSize: 14,
-                dataPoints: dataPoints
+                type: "column", // Tipo de gráfico: "column", "bar", "line", "area", etc.
+                indexLabel: "Q{y}", // Muestra el valor 'y' sobre cada columna
+                indexLabelFontSize: 12,
+                indexLabelPlacement: "outside", // Posición del valor ("inside" o "outside")
+                indexLabelFontColor: "#333333", // Color del texto del valor
+                toolTipContent: "<strong>{label}</strong>: ${y}", // Contenido del tooltip al pasar el mouse
+                dataPoints: dataPointsSemana
+                // dataPointsSemana ya tiene el formato:
+                // [
+                //   { label: "Lunes", y: 150.50 },
+                //   { label: "Martes", y: 0 },
+                //   ...
+                // ]
             }]
         });
 
         chart.render();
+
+
+
+
+        ///
+
+        // Valores que puedes cambiar dinámicamente
+        const stockActual = 5;
+        const stockMinimo = 100;
+
+        // Actualiza el texto
+        document.getElementById("stock-actual").innerText = `Stock actual: ${stockActual}`;
+        document.getElementById("stock-minimo").innerText = `Mínimo: ${stockMinimo}`;
+
+        // Calcula el porcentaje (con tope al 100%)
+        const porcentaje = Math.min((stockActual / stockMinimo) * 100, 100);
+        console.log("Porcentaje de stock:", porcentaje);
+
+        // Aplica el ancho a la barra
+        document.getElementById("progress-bar").style.width = porcentaje + "%";
     }
+</script>
+
+
 </script>
 
 

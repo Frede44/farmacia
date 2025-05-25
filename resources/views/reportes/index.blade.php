@@ -6,17 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
     <title>Reporte</title>
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/reportesEstilos/estilos.css') }}">
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
 </head>
 
 @section('contenido')
-
-<div style="display: flex;">
-    <div id="chartContainerProductos" style="height: 370px; width: 100%;"></div>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-</div>
 
 <script>
     window.onload = function() {
