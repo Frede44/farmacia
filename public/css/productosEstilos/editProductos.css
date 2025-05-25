@@ -311,3 +311,75 @@ body {
 .close:hover {
   color: #ccc;
 }
+
+
+/* Adaptación para móviles */
+@media (max-width: 768px) {
+
+  .container {
+    max-width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .form-columns {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  textarea
+   {
+    width: 90%;
+    font-size: 16px;
+  }
+  select{
+    width: 50%;
+    height: 30%;
+    font-size: 14px; /* reduce el tamaño del texto */
+    padding: 6px 10px; /* reduce el espacio interno */
+  }
+
+  .fondoimagen {
+    max-width: 100%;
+  }
+
+  .error-message {
+    width: 100%;
+  }
+
+  .btn-guardar,
+  .btn-cancelar {
+    width: 30%;
+    font-size: 18px;
+    padding: 12px;
+    margin-top: 10px;
+  }
+
+  .imagen-contenedor {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .imagen-actual,
+  .imagen-nueva {
+    max-width: 50%;
+  }
+
+  .imagen-preview {
+    width: 100%;
+    height: auto;
+  }
+
+  .modal-content {
+    max-width: 95%;
+    max-height: 95%;
+  }
+
+  .close {
+    font-size: 30px;
+    top: 20px;
+    right: 20px;
+  }
+}

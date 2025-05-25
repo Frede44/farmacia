@@ -13,7 +13,7 @@
     <title>Proveedor</title>
 
     <!-- Enlaces a los archivos CSS -->
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/proveedorEstilos/indexProveedor.css') }}">
     <link rel="stylesheet" href="styles.css" />
 
     <!-- Enlace al archivo JavaScript -->
@@ -29,8 +29,8 @@
         <h2>PROVEEDOR</h2>
 
         <!-- Botón para agregar una nueva categoría -->
-        <a href="{{ route('proveedor.create') }}">
-            <button class="btnAgregar">+Producto</button>
+        <a href="{{ route('proveedor.create') }}" style="text-decoration:none;">
+            <button class="btnAgregar">+Proveedor</button>
         </a>
 
         <!-- Contenedor de la tabla de inventario -->
@@ -42,9 +42,9 @@
                       
                         
                         <th class="nombre">Nombre</th>
-                        <th>Numero de Telefono</th>
+                        <th>Numero de Teléfono</th>
                         <th>Correo Electronico</th>
-                        <th>Descripcion</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
 
                     </tr>
@@ -56,7 +56,7 @@
                         
                     <td>
             <span class="nombre-corto">
-                {{ \Illuminate\Support\Str::limit($producto->nombre, 25, '...') }}
+                {{ \Illuminate\Support\Str::limit($proveedor->nombre, 25, '...') }}
                 @if(strlen($proveedor->nombre) > 25)
                     <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-texto="{{ $proveedor->nombre }}"></i>
                 @endif

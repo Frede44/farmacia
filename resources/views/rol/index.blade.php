@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     @extends('dashboard.index')
     <title>Productos</title>
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/rolesEstilos/indexRoles.css') }}"> 
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
 
@@ -21,7 +21,7 @@
 
     
   
-    <a href="{{ route('rol.create') }}">
+    <a href="{{ route('rol.create') }}" style="text-decoration:none;">
     <button class="btnAgregar">Crear roles</button>
     </a>
 
@@ -34,7 +34,7 @@
         <thead>
         <tr>
             <th>Codigo</th>
-            <th class="nombre">nombre</th>
+            <th class="nombre">Nombre</th>
             <th class="acciones">Acciones</th>
           
             

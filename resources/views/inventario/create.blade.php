@@ -103,11 +103,13 @@
                                                                 @php
                                     $today = date('Y-m-d');
                                 @endphp
-
+                                
+                                <!--min en fecha para solo se pueda seleccionar fechas de hoy para adelante-->
                                 <label for="caducidad">Fecha de caducidad</label>
                                 <input type="date" id="caducidad" name="caducidad"
                                     onfocus="this.type='date'"
                                     onblur="if(!this.value)this.type='text'"
+                                     min="{{ date('Y-m-d') }}" 
                                     placeholder="Selecciona la fecha"
                                     value="{{ old('caducidad') }}"
                                     class="form-control fecha-input">

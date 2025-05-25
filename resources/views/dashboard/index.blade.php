@@ -27,13 +27,17 @@
 </head>
 
 <body>
+    
 
+    <button id="btnToggleSidebar" class="btn-toggle-sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
 
     <!-- Sidebar (Menú de la izquierda) -->
     <div class="sidebar">
 
     
-        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="logo">
+        <img src="{{ asset('img/LocoFarmacia.png') }}" alt="Logo" class="logo">
 
         <ul>
             <li class="opciones"><a href="#"><i class="fas fa-home"></i><span>Inicio</span></a></li>
@@ -237,6 +241,33 @@
             cerrarDescripcion();
         }
     };
+</script>
+
+
+<!--Sidebar para movil-->
+<div id="overlay" class="overlay"></div>
+<script>
+    const btnToggle = document.getElementById('btnToggleSidebar');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('overlay');
+
+    btnToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+
+    // Ocultar o mostrar botón según estado del sidebar
+    if(sidebar.classList.contains('open')) {
+        btnToggle.style.display = 'none';
+    } else {
+        btnToggle.style.display = 'block';
+    }
+});
+
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+    btnToggle.style.display = 'block';  // Mostrar botón cuando sidebar se cierra al hacer click fuera
+});
 </script>
 
 

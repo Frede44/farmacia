@@ -255,3 +255,61 @@ textarea:focus {
   color: red;
   font-weight: bold;
 }
+
+/* ADAPTACIÓN PARA DISPOSITIVOS MÓVILES */
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  .form-columns {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  
+  textarea,
+  .justificado-editable,
+  .error-message {
+    width: 90% !important;
+  }
+
+  select{
+    width: 60%;
+    height: 30%;
+    font-size: 14px; /* reduce el tamaño del texto */
+    padding: 6px 10px; /* reduce el espacio interno */
+  }
+
+
+  textarea,
+  .justificado-editable {
+    height: auto;
+  }
+
+  .btn-guardar,
+  .btn-cancelar {
+    width: 30%;
+    margin-bottom: 10px;
+  }
+
+  .fondoimagen {
+    max-width: 100%;
+  }
+
+  .upload-text {
+    font-size: 14px;
+  }
+
+  #previewImg {
+    max-height: 250px;
+  }
+
+  h2 {
+    font-size: 1.5em;
+  }
+}

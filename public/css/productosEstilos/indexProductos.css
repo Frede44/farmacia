@@ -21,7 +21,7 @@
     }
     
     .nombre{
-      background-color: #1e55bb;
+      background-color: #22336d; 
     }
     button{
       background-color: rgb(37, 167, 25);
@@ -41,6 +41,12 @@
    
       
     }
+    .btnAgregar:hover{
+      background-color: #03c51d;
+      text-decoration: none;
+    }
+
+    
     /***/
     .flex {
       display: flex;
@@ -226,5 +232,111 @@ table.dataTable td {
   color: #2692eb;
 }
 
+/*Diseño de movil*/
+@media (max-width: 768px) {
+  table#tablaUsuarios,
+  table#tablaUsuarios thead,
+  table#tablaUsuarios tbody,
+  table#tablaUsuarios th,
+  table#tablaUsuarios td,
+  table#tablaUsuarios tr {
+    display: block;
+    width: 100%;
+  }
+
+  table#tablaUsuarios thead tr {
+    display: none; /* Ocultar encabezado en móvil */
+  }
+
+  table#tablaUsuarios tbody tr {
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    
+  }
+
+  table#tablaUsuarios tbody tr td {
+    /* Cambiar display a flex-column para que título y texto queden vertical */
+    display: flex;
+    flex-direction: column; /* vertical */
+    align-items: flex-start;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    white-space: normal;
+  }
+
+  table#tablaUsuarios tbody tr td:last-child {
+    border-bottom: none;
+  }
+
+  /* Etiquetas antes de cada celda (el "título") */
+  table#tablaUsuarios tbody tr td::before {
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  table#tablaUsuarios tbody tr td:nth-of-type(1)::before { content: "Codigo:"; }
+  table#tablaUsuarios tbody tr td:nth-of-type(2)::before { content: "Producto:"; }
+  table#tablaUsuarios tbody tr td:nth-of-type(3)::before { content: "Descripción:"; }
+
+  table#tablaUsuarios tbody tr td:nth-of-type(5)::before { content: "Imagen:"; }
+  table#tablaUsuarios tbody tr td:nth-of-type(6)::before { content: "Acciones:"; }
+
+  /* Ajuste imagen y acciones para que no se rompa layout */
+  table#tablaUsuarios tbody tr td:nth-of-type(5),
+  table#tablaUsuarios tbody tr td:nth-of-type(6) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  table#tablaUsuarios tbody tr td:nth-of-type(5) img {
+    margin-top: 5px;
+    max-width: 80px;
+    height: auto;
+    cursor: pointer;
+  }
+
+  table#tablaUsuarios tbody tr td:nth-of-type(6) .flex {
+    margin-top: 5px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  table#tablaUsuarios tbody tr td:nth-of-type(6) a.btnEditar,
+  table#tablaUsuarios tbody tr td:nth-of-type(6) a.btnEliminar {
+    margin-right: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
+   /* Modal imagen para móvil */
+   #modalImagen {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 10px; /* para que no toque bordes */
+    box-sizing: border-box;
+  }
+
+  #modalImagen img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.6);
+    object-fit: contain;
+  }
+
+}
 
 

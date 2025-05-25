@@ -22,7 +22,7 @@
     @section('contenido')
     <h2>PRODUCTOS</h2>
  
- <a href="{{ route('productos.create') }}">
+ <a href="{{ route('productos.create') }}"style="text-decoration:none;">
  <button class="btnAgregar">+Producto</button>
  </a>
  
@@ -51,8 +51,8 @@
          <td>{{ $producto->codigo }}</td>
          <td>
             <span class="nombre-corto">
-                {{ \Illuminate\Support\Str::limit($producto->nombre, 25, '...') }}
-                @if(strlen($producto->nombre) > 25)
+                {{ \Illuminate\Support\Str::limit($producto->nombre, 27, '...') }}
+                @if(strlen($producto->nombre) > 27)
                     <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-texto="{{ $producto->nombre }}"></i>
                 @endif
             </span>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     @extends('dashboard.index')
     <title>Categorías</title>
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/categoriasEstilos/indexCategorias.css') }}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
 
@@ -21,7 +21,7 @@
     @section('contenido')
     <h2>CATEGORÍAS</h2>
  
-    <a href="{{ route('categorias.create') }}">
+    <a href="{{ route('categorias.create') }}" style="text-decoration:none;">
     <button class="btnAgregar">+Categoría</button>
     </a>
     

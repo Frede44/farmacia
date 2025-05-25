@@ -105,6 +105,7 @@
                                     onfocus="this.type='date'"
                                     onblur="if(!this.value)this.type='text'"
                                     placeholder="Selecciona la fecha"
+                                    min="{{ date('Y-m-d') }}" 
                                     value="{{ old('caducidad', $inventario->caducidad) }}"
                                     class="form-control fecha-input">
                                 @error('caducidad')
