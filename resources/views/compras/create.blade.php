@@ -19,16 +19,28 @@
                     <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
                     @endforeach
                 </select>
+                @error('producto_id')
+                <div class="error">{{ $message }}</div>
+                @enderror
+
             </div>
 
             <div class="form-group">
                 <label for="cantidad">Cantidad</label>
                 <input type="number" id="cantidad" name="cantidad" required>
+                @error('cantidad')
+                <div class="error">{{ $message }}</div>
+                @enderror
+
             </div>
 
             <div class="form-group">
                 <label for="precio">Precio</label>
                 <input type="number" id="precio" name="precio" required>
+                @error('precio')
+                <div class="error">{{ $message }}</div>
+                @enderror
+
             </div>
 
 
@@ -42,6 +54,10 @@
                     <option value="{{ $proveedor->id }}">{{ $proveedor->nombre }}</option>
                     @endforeach
                 </select>
+                @error('proveedor_id')
+                <div class="error">{{ $message }}</div>
+                @enderror
+                
             </div>
         </div>
     </div>
@@ -53,7 +69,9 @@
 </div>
 
 <div>
-    <h3>Lista de Compras</h3>
+    <div class="titulo-lista">
+        <h3 class="text-list">Lista de Compras</h3>
+    </div>
     <table>
         <thead>
             <tr>
@@ -73,17 +91,18 @@
 </div>
 
 <!-- Formulario final para enviar los datos al controlador -->
-<form id="form-compras" action="{{ route('compras.store') }}" method="POST">
+<div style="display: flex; justify-content: center; align-items: center; margin-top: 20px;">
+    <form id="form-compras" action="{{ route('compras.store') }}" method="POST">
     @csrf
     <div id="inputs-ocultos"></div>
     <button type="submit" class="btnAgregarf">Agregar Compra</button>
 </form>
+</div>
 
 <script>
     const carritoHiddenInputs = document.getElementById('inputs-ocultos');
     const btnAgregar = document.getElementById('btn-agregar');
     const tablaBody = document.getElementById('tabla-compras-body');
-
     let index = 0;
 
     btnAgregar.addEventListener('click', function(e) {
@@ -93,52 +112,97 @@
         const producto = document.getElementById('producto');
         const cantidad = parseFloat(document.getElementById('cantidad').value);
         const precio = parseFloat(document.getElementById('precio').value);
-     
 
-        if (!proveedor.value || !producto.value || !cantidad || !precio ) {
+        if (!proveedor.value || !producto.value || !cantidad || !precio) {
             alert("Por favor, completa todos los campos.");
             return;
         }
 
-        const total = cantidad * precio;
-        const filaIndex = index++;
+        const proveedorID = proveedor.value;
+        const productoID = producto.value;
+        const proveedorTexto = proveedor.options[proveedor.selectedIndex].text;
+        const productoTexto = producto.options[producto.selectedIndex].text;
 
-        // Agregar fila a la tabla
-        const fila = document.createElement('tr');
-        fila.setAttribute('data-index', filaIndex);
-        fila.innerHTML = `
-        <td>${proveedor.options[proveedor.selectedIndex].text}</td>
-        <td>${producto.options[producto.selectedIndex].text}</td>
-        <td>${cantidad}</td>
-        <td>${precio}</td>
-        <td>${total}</td>
-        <td><button type="button" class="btn-eliminar">❌</button></td>
-    `;
-        tablaBody.appendChild(fila);
+        // Verificar si ya existe la fila con el mismo proveedor y producto
+        const filaExistente = [...tablaBody.querySelectorAll('tr')].find(fila =>
+            fila.getAttribute('data-id-proveedor') === proveedorID &&
+            fila.getAttribute('data-id-producto') === productoID
+        );
 
-        // Crear inputs ocultos con estructura tipo array asociativo
-        carritoHiddenInputs.innerHTML += `
-        <input type="hidden" name="productos[${filaIndex}][id_proveedor]" value="${proveedor.value}" data-index="${filaIndex}">
-        <input type="hidden" name="productos[${filaIndex}][id_producto]" value="${producto.value}" data-index="${filaIndex}">
-        <input type="hidden" name="productos[${filaIndex}][cantidad]" value="${cantidad}" data-index="${filaIndex}">
-        <input type="hidden" name="productos[${filaIndex}][precio]" value="${precio}" data-index="${filaIndex}">
-      
-    `;
+        if (filaExistente) {
+            // Actualizar cantidad y total en la fila existente
+            const celdaCantidad = filaExistente.querySelector('.celda-cantidad');
+            const celdaTotal = filaExistente.querySelector('.celda-total');
+            let cantidadActual = parseFloat(celdaCantidad.textContent);
+            let nuevaCantidad = cantidadActual + cantidad;
+            celdaCantidad.textContent = nuevaCantidad;
+            celdaTotal.textContent = (nuevaCantidad * precio).toFixed(2);
 
-        // Limpiar campos
+            // Actualizar input oculto correspondiente
+            const dataIndex = filaExistente.getAttribute('data-index');
+            const inputCantidad = carritoHiddenInputs.querySelector(`input[name="productos[${dataIndex}][cantidad]"]`);
+            const inputPrecio = carritoHiddenInputs.querySelector(`input[name="productos[${dataIndex}][precio]"]`);
+            inputCantidad.value = nuevaCantidad;
+            inputPrecio.value = precio; // en caso cambie el precio
+        } else {
+            const filaIndex = index++;
+
+            const fila = document.createElement('tr');
+            fila.setAttribute('data-index', filaIndex);
+            fila.setAttribute('data-id-proveedor', proveedorID);
+            fila.setAttribute('data-id-producto', productoID);
+            fila.innerHTML = `
+                <td>${proveedorTexto}</td>
+                <td>${productoTexto}</td>
+                <td class="celda-cantidad" contenteditable="true">${cantidad}</td>
+                <td>${precio}</td>
+                <td class="celda-total">${(cantidad * precio).toFixed(2)}</td>
+                <td><button type="button" class="btn-eliminar"><i class="fa-solid fa-trash"></i></button></td>
+            `;
+            tablaBody.appendChild(fila);
+
+            carritoHiddenInputs.innerHTML += `
+                <input type="hidden" name="productos[${filaIndex}][id_proveedor]" value="${proveedorID}" data-index="${filaIndex}">
+                <input type="hidden" name="productos[${filaIndex}][id_producto]" value="${productoID}" data-index="${filaIndex}">
+                <input type="hidden" name="productos[${filaIndex}][cantidad]" value="${cantidad}" data-index="${filaIndex}">
+                <input type="hidden" name="productos[${filaIndex}][precio]" value="${precio}" data-index="${filaIndex}">
+            `;
+        }
+
         document.getElementById('cantidad').value = '';
         document.getElementById('precio').value = '';
     });
 
+    // Eliminar fila
     tablaBody.addEventListener('click', function(e) {
         if (e.target.classList.contains('btn-eliminar')) {
             const fila = e.target.closest('tr');
             const index = fila.getAttribute('data-index');
             fila.remove();
-
-            // Eliminar inputs ocultos relacionados
             carritoHiddenInputs.querySelectorAll(`input[data-index="${index}"]`).forEach(input => input.remove());
         }
     });
+
+    // Actualizar cantidad y total cuando se edita desde la tabla
+    tablaBody.addEventListener('blur', function(e) {
+        if (e.target.classList.contains('celda-cantidad')) {
+            const fila = e.target.closest('tr');
+            const index = fila.getAttribute('data-index');
+            const nuevaCantidad = parseFloat(e.target.textContent);
+
+            if (isNaN(nuevaCantidad) || nuevaCantidad <= 0) {
+                alert('Cantidad inválida');
+                return;
+            }
+
+            const precio = parseFloat(fila.children[3].textContent);
+            const totalCelda = fila.querySelector('.celda-total');
+            totalCelda.textContent = (nuevaCantidad * precio).toFixed(2);
+
+            const inputCantidad = carritoHiddenInputs.querySelector(`input[name="productos[${index}][cantidad]"]`);
+            inputCantidad.value = nuevaCantidad;
+        }
+    }, true);
 </script>
+
 @endsection

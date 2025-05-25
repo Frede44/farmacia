@@ -69,6 +69,7 @@ input:hover{
 /* Estilo general de los campos de texto  */
 input[type="text"],
 input[type="number"],
+input[type="email"],
 image-box {
   width: 80%;
   height: 20px;

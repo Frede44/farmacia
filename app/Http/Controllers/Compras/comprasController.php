@@ -25,9 +25,9 @@ class comprasController extends Controller
 
     public function show($id)
     {
-        $compra = Compras::findOrFail($id);
-        $detalles = DetalleCompras::where('compra_id', $id)->get();
-        return view('compras.show', compact('compra'));
+        $compras = Compras::findOrFail($id);
+        $detalles = DetalleCompras::with('producto')->where('compra_id', $id)->get();
+        return view('compras.show', compact('compras', 'detalles'));
     }
 
     public function create()
@@ -40,7 +40,17 @@ class comprasController extends Controller
     public function store(Request $request)
     {
       
-        
+        // Validar la solicitud
+   $request->validate([
+            'productos' => 'required|array',
+            'productos.*.id_proveedor' => 'required|exists:proveedor,id',
+            'productos.*.id_producto' => 'required|exists:productos,id',
+            'productos.*.cantidad' => 'required|integer|min:1',
+            'productos.*.precio' => 'required|numeric|min:0',
+        ]);
+
+    
+
         $total = 0;
 
         // Calcular total

@@ -52,14 +52,25 @@
                     <td>{{ $persona->correo }}</td>
                     <td>{{ $persona->telefono }}</td>
                     <td>
-                        <a href="{{ route('persona.edit', $persona->id) }}" class="btnEditar"><i class="fas fa-edit"></i></a>
-                        <form action="{{ route('persona.destroy', $persona->id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btnEliminar"><i class="fas fa-trash-alt"></i></button>
-                        </form>
+                         <!-- Botón Editar -->
+                <div class="flex flex-col justify-center items-center gap-2">
+                <form  method="GET">
+                        @csrf
+                        <a href="{{ route('persona.edit', $persona->id) }}" class="btnEditar" >
+                            <i class="fa-regular fa-pen-to-square fa-lg" style="color:rgb(255, 255, 255);"></i>
+                        </a>
+                    </form>
 
-                    </td>
+                    <!-- Botón Eliminar -->
+                    <form action="{{route('persona.destroy',$persona->id)}}" method="POST" style="display:inline;">
+                        @csrf
+                        @method('DELETE')
+                        <a href="#" class="btnEliminar" onclick="confirmarEliminacion(event, this)">
+                            <i class="fa-regular fa-trash-can fa-xl" style="color:rgb(255, 255, 255);"></i>
+                        </a>
+                    </form>
+                </div>
+        </td>
                 </tr>
 
                 @endforeach
@@ -73,6 +84,26 @@
 
 </body>
 
+ <script>
+    function confirmarEliminacion(event, elemento) {
+        event.preventDefault();
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Esta acción no se puede deshacer!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                elemento.closest('form').submit();
+            }
+        });
+    }
+</script>
+     
 @endsection
 
 </html>

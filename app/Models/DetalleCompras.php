@@ -21,16 +21,16 @@ class DetalleCompras extends Model
 
     public function compra()
     {
-        return $this->belongsTo(Compras::class, 'id_compra');
+        return $this->belongsTo(Compras::class, 'compra_id');
     }
 
     public function producto()
     {
-        return $this->belongsTo(Productos::class, 'id_producto');
+        return $this->belongsTo(Productos::class, 'producto_id');
     }
 
     public function proveedor()
     {
-        return $this->belongsTo(Proveedor::class, 'id_proveedor');
+        return $this->belongsTo(Proveedor::class, 'proveedor_id');
     }
 }

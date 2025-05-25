@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Usuarios;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Spatie\Permission\Models\Role;
+use Illuminate\Validation\Rule;
+
+
 
 class usuariosController extends Controller
 {
@@ -48,13 +50,17 @@ class usuariosController extends Controller
         return view("usuarios.edit", compact("user", "roles")); // Pasar el usuario a la vista de edición
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
+
+        $user = User::findOrFail($id);
+
+       
         // Validación
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
-            'password' => ['nullable', 'string', 'confirmed'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'password' => ['nullable', 'string', 'min:8'],
             'rol' => 'required|exists:roles,id',
         ]);
 
@@ -68,10 +74,15 @@ class usuariosController extends Controller
             $dataToUpdate['password'] = Hash::make($validatedData['password']);
         }
 
-        // ✅ Aquí sí se actualiza correctamente
-        $user->update($dataToUpdate);
 
-        
+       
+        // Actualizamos el usuario
+        $user->fill($dataToUpdate);
+        $user->save();
+        // Sincronizamos los roles
+        $user->syncRoles([$validatedData['rol']]);
+        // Si se desea, se puede enviar un correo de notificación al usuario
+
 
         // Redirección con éxito
         return redirect()->route('usuarios.index')->with('success', 'Usuario actualizado correctamente.');

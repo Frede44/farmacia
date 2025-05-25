@@ -1,54 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    @extends('dashboard.index')
-    <title>Productos</title>
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}"> 
-   
-
-
-    <link rel="stylesheet" href="styles.css" />
-    <script src="script.js"></script>
-
-   
-
-
-    </head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  @extends('dashboard.index')
+  <title>Productos</title>
+  <link rel="stylesheet" href="{{ asset('css/personasEstilos/estilos.css') }}">
 
 
 
-    <body>
-    @section('contenido')
-    <h2>Crear productos</h2>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="script.js"></script>
 
-    <form action="{{ route('persona.update', $persona->id) }}" method="POST" class="formulario">
-        @csrf
 
-        @method('PUT')
-      <label for="nombre"></label>
-      <input type="text" name="nombre" id="nombre" placeholder="Nombre" required value="{{ $persona->nombre }}">
+
+
+</head>
+
+
+
+
+@section('contenido')
+<h2>Editar productos</h2>
+<div class="container">
+
+  <form action="{{ route('persona.update', $persona->id) }}" method="POST" class="formulario">
+    @csrf
+    @method('PUT')
+    <div class="form-columns">
+
+      <div class="form-group">
+
+        <label for="nombre"></label>
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre" required value="{{ $persona->nombre }}">
+        @error('nombre')
+        <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
+        @enderror
 
         <label for="dpi"></label>
         <input type="text" name="dpi" id="dpi" placeholder="DPI" required value="{{ $persona->dpi }}">
+        @error('dpi')
+        <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
+        @enderror
 
         <label for="correo"></label>
-        <input type="email" name="correo" id="correo" placeholder="Correo" required value="{{ $persona->correo }}">   >
+        <input type="email" name="correo" id="correo" placeholder="Correo" required value="{{ $persona->correo }}">
+        @error('correo')
+        <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
+        @enderror
 
         <label for="telefono"></label>
-        <input type="text" name="telefono" id="telefono" placeholder="Telefono" required value="{{ $persona->telefono }}">
+        <input type="text" name="telefono" id="telefono" placeholder="0000-0000" required value="{{ $persona->telefono }}">
+        @error('telefono')
+        <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
+        @enderror
 
         <label for="direccion"></label>
         <input type="text" name="direccion" id="direccion" placeholder="Direccion" required value="{{ $persona->direccion }}">
+        @error('direccion')
+        <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
+        @enderror
+      </div>
 
-        <button type="submit">Actualizar</button>
 
-    </form>
-    
+    </div>
 
-    
-    </body>
 
-    @endsection
-    </html>
+
+
+
+     <div class="grupoBotones">
+          <button type="submit" class="btn-guardar">crear</button>
+          <a href="{{ route('persona.index') }}?cancelado=1" class="btn-cancelar">Cancelar</a>
+        </div>
+   
+
+  </form>
+</div>
+
+
+<script>
+  document.getElementById('telefono').addEventListener('input', function(e) {
+    let value = e.target.value.replace(/\D/g, ''); // Eliminar caracteres no numéricos
+    if (value.length > 4) {
+      value = value.slice(0, 4) + '-' + value.slice(4);
+    }
+    e.target.value = value.slice(0, 9); // Limitar a 9 caracteres (8 números + 1 guion)
+  });
+</script>
+
+
+
+
+@endsection
+
+</html>

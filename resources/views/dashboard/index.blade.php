@@ -56,12 +56,19 @@
             <li class="opciones"><a href="{{ route('inventario.index')}}" class="{{ request()->routeIs('inventario.*') ? 'active' : '' }}">
                     <i class="fas fa-list"></i>Inventario</a></li>
             @endcan
+
+            @can('ventas.index')
             <li class="opciones"><a href="{{route('ventas.index')}}"><i class="fas fa-shopping-bag"></i>Venta</a></li>
+            @endcan
 
+            @can('reportes.index')
             <li class="opciones"><a href="{{route('reportes.index')}}"><i class="fas fa-chart-line"></i>Reporte de ventas</a></li>
+            @endcan
 
+            @can('compras.index')
             <li class="opciones"><a href="{{route('compras.index')}}"><i class="fas fa-shopping-cart"></i>Compra</a></li>
-
+            @endcan
+            
             @can('proveedor.index')
             <li class="opciones"><a href="{{ route('proveedor.index')}}" class="{{ request()->routeIs('proveedor.*') ? 'active' : '' }}">
                     <i class="fas fa-building"></i>Proveedor</a></li>
@@ -69,7 +76,6 @@
 
             
 
-            <li class="opciones"><a href="#"><i class="fas fa-box"></i>Inventario por lote</a></li>
 
             @can('persona.index')
             <li class="opciones"><a href="{{route('persona.index')}}"><i class="fas fa-users"></i>Personas</a></li>

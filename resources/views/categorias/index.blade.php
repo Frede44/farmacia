@@ -20,7 +20,7 @@
     @section('contenido')
     <h2>CATEGORÍAS</h2>
  
-    <a href="{{ route('categorias.create') }}">
+    <a href="{{ route('categorias.create') }}" style="text-decoration: none;">
     <button class="btnAgregar">+Categoría</button>
     </a>
     

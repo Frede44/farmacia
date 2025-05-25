@@ -14,7 +14,7 @@
 </a>
 
 <div class="table-container">
-      <table id="tablaUsuarios" class="display nowrap">
+    <table id="tablaUsuarios" class="display nowrap">
         <thead>
             <tr>
                 <th>ID</th>
@@ -25,23 +25,53 @@
         </thead>
         <tbody>
             @foreach ($compras as $compra)
-                <tr>
-                    <td>{{ $compra->id }}</td>
-                   
-                    <td>{{ $compra->fecha }}</td>
-                    <td>{{ $compra->total }}</td>
-                    <td>
-                        <a href="{{ route('compras.show', $compra) }}" class="btn btn-info">Ver</a>
-                        
-                        <form action="{{ route('compras.destroy', $compra) }}" method="POST" style="display:inline;">
+            <tr>
+                <td>{{ $compra->id }}</td>
+
+                <td>{{ $compra->fecha }}</td>
+                <td>{{ $compra->total }}</td>
+                <td>
+                    <div class="flex flex-col justify-center items-center gap-2">
+                        <form method="GET">
+                            @csrf
+                            <a href="{{ route('compras.show', $compra->id) }}" class="btnEditar">
+                                <i class="fa-solid fa-eye" style="color:rgb(255, 255, 255);"></i>
+                            </a>
+                        </form>
+
+                        <!-- Botón Eliminar -->
+                        <form action="{{route('compras.destroy',$compra->id)}}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <a href="#" class="btnEliminar" onclick="confirmarEliminacion(event, this)">
+                                <i class="fa-regular fa-trash-can fa-xl" style="color:rgb(255, 255, 255);"></i>
+                            </a>
                         </form>
-                    </td>
-                </tr>
+                    </div>
+            </tr>
             @endforeach
         </tbody>
     </table>
 </div>
+
+<script>
+    function confirmarEliminacion(event, elemento) {
+        event.preventDefault();
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: "¡Esta acción no se puede deshacer!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                elemento.closest('form').submit();
+            }
+        });
+    }
+</script>
+
 @endsection
