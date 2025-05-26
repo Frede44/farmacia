@@ -110,3 +110,18 @@
 .vista.activa {
     display: block;
 }
+.vista1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px;
+}
+
+.grafico_uno {
+    width: 45%;
+    height: 400px;
+}
+.grafico_dos {
+    width: 45%;
+    height: 400px;
+}
