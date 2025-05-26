@@ -22,7 +22,7 @@
     @section('contenido')
     <h2>PRODUCTOS</h2>
  
- <a href="{{ route('productos.create') }}">
+ <a href="{{ route('productos.create') }}"style="text-decoration:none;">
  <button class="btnAgregar">+Producto</button>
  </a>
  
@@ -37,7 +37,6 @@
          <th class="nombre">Producto</th>
          <th>Descripción</th>
          <th>Categoría</th>
-         <th>Precio Venta</th>
          <th>Imagen</th>
          <th>Acciones</th>
       
@@ -50,17 +49,32 @@
      @foreach($productos as $producto)
      <tr>
          <td>{{ $producto->codigo }}</td>
-         <td>{{ $producto->nombre }}</td>
-         <td>{{ $producto->descripcion }}</td>
-         <td>{{ $producto->categoria->nombre }}</td>
-         <td>{{ $producto->precio_venta }}</td>
          <td>
-             @if($producto->imagen)
-             <img src="{{ asset('imagenes/' . $producto->imagen) }}" width="50" height="50" alt="Imagen del producto">
-             @else
-             Sin Imagen
-             @endif
-         </td>
+            <span class="nombre-corto">
+                {{ \Illuminate\Support\Str::limit($producto->nombre, 27, '...') }}
+                @if(strlen($producto->nombre) > 27)
+                    <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-texto="{{ $producto->nombre }}"></i>
+                @endif
+            </span>
+        </td>
+
+        <td>
+            <span class="descripcion-corta">
+                {{ \Illuminate\Support\Str::limit($producto->descripcion, 15, '...') }}
+                @if(strlen($producto->descripcion) > 15)
+                    <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-texto="{{ $producto->descripcion }}"></i>
+                @endif
+            </span>
+        </td>
+
+         <td>{{ $producto->categoria->nombre }}</td>
+         <td>
+            @if($producto->imagen)
+                <img src="{{ asset('imagenes/' . $producto->imagen) }}" width="50" height="50" alt="Imagen del producto" onclick="mostrarModal(this)" style="cursor: pointer;">
+            @else
+                Sin Imagen
+            @endif
+        </td>
 
 
          {{-- Acciones --}}
@@ -84,8 +98,22 @@
                     </form>
                 </div>
         </td>
+
      </tr>
      @endforeach
+           
+<!-- Modal para mostrar la descripción completa (se reutiliza para nombre también) -->
+<div id="modalDescripcion" class="modal-descripcion" style="display:none;">
+    <div class="modal-contenido">
+        <span class="cerrar-modal" onclick="cerrarDescripcion()">&times;</span>
+        <p id="descripcionCompleta"></p>
+    </div>
+</div>
+
+<!-- Modal para mostrar imagen -->
+<div id="modalImagen" onclick="cerrarModal()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:1000;">
+    <img id="imagenModal" src="" style="max-width:90%; max-height:90%; border:4px solid white; border-radius:10px;">
+</div>
 
  
      <script>
@@ -107,7 +135,21 @@
         });
     }
 </script>
-     
+
+<script>
+    function mostrarModal(img) {
+        var modal = document.getElementById('modalImagen');
+        var imagenModal = document.getElementById('imagenModal');
+        imagenModal.src = img.src;
+        modal.style.display = 'flex';
+    }
+
+    function cerrarModal() {
+        document.getElementById('modalImagen').style.display = 'none';
+    }
+</script>
+
+
      </tbody>
  </table>
  </div>

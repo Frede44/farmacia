@@ -273,4 +273,139 @@ body {
     color: red;
     font-weight: bold;
   }
+
+  /* Imagen actual más grande */
+.imagen-preview {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  margin: 0 auto 20px auto; /* Centrado horizontal + margen inferior */
+  display: block;
+  transition: filter 0.3s ease; /* Suaviza el cambio de color */
+  cursor: pointer; /* Muestra que se puede hacer clic */
+
+ 
+}
+.imagen-preview:hover {
+  filter: grayscale(60%);
+}
+
+
+#previewImg {
+  display: none;
+  max-width: 100%;         /* No excede el tamaño del contenedor */
+  max-height: 300px;       /* Límite máximo de altura */
+  width: auto;             /* Ajusta la imagen sin distorsionar */
+  height: auto;            /* Mantiene las proporciones */
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  object-fit: contain;     /* Mantiene las proporciones sin distorsionar */
+}
+
+.modal-imagen {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.863);
+  text-align: center;
   
+  
+}
+
+.modal-contenido {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+  
+}
+
+.cerrar-modal {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: rgb(71, 71, 71);
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.cerrar-modal:hover {
+  color: #ccc;
+}
+.imagen-label{
+  color: green;
+  text-align: center;
+}
+  /*Vista para movil*/
+@media (max-width: 768px) {
+  .container {
+    width: 95%;
+    margin: 20px auto;
+    padding: 15px;
+    overflow-x: hidden;
+  }
+
+  .form-columns {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-group {
+    padding: 15px;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  .fecha-input,
+
+  textarea {
+    width: 70%;
+  }
+  
+  select {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .fondoimagen {
+    max-width: 100%;
+  }
+
+  .btn-guardar,
+  .btn-cancelar {
+    width: 30%;
+    margin-bottom: 10px;
+  }
+
+  .error-message {
+    width: 100%;
+  }
+
+  .imagen-preview {
+    width: 50%;
+    height: auto;
+  }
+
+  .modal-contenido {
+    max-width: 100%;
+    max-height: 80vh;
+  }
+
+  .cerrar-modal {
+    right: 20px;
+    top: 10px;
+    font-size: 30px;
+  }
+}

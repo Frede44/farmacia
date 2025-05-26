@@ -7,16 +7,24 @@ use App\Models\Inventario;
 use App\Models\Productos;
 use Illuminate\Http\Request;
 
+
 class InventarioController extends Controller
 {
     public function index()
-    {
-        $inventarios =Inventario::with('producto:id,nombre')
-        ->select('id','id_producto','xunidad','xcaja','caducidad','cantidad_caja','unidad_caja','total_unidad')
-        ->get();
-        return view('inventario.index', ['inventarios' => $inventarios]);
-      
-    }
+{
+    $inventarios = Inventario::with('producto:id,nombre')
+        ->select('id','id_producto','xunidad','xcaja','caducidad','cantidad_caja','unidad_caja')
+        ->get()
+        ->map(function($item) {
+            $item->fechaCaducidadObj = new \DateTime($item->caducidad);
+            $hoy = new \DateTime();
+            $diff = $hoy->diff($item->fechaCaducidadObj);
+            $item->diferenciaDias = (int)$diff->format('%r%a'); // días con signo (+/-)
+            return $item;
+        });
+
+    return view('inventario.index', ['inventarios' => $inventarios]);
+}
     public function create()
     {
         $productos = Productos::all();

@@ -13,7 +13,7 @@
     <title>Proveedor</title>
 
     <!-- Enlaces a los archivos CSS -->
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/proveedorEstilos/indexProveedor.css') }}">
     <link rel="stylesheet" href="styles.css" />
 
     <!-- Enlace al archivo JavaScript -->
@@ -29,8 +29,8 @@
         <h2>PROVEEDOR</h2>
 
         <!-- Botón para agregar una nueva categoría -->
-        <a href="{{ route('proveedor.create') }}">
-            <button class="btnAgregar">+Producto</button>
+        <a href="{{ route('proveedor.create') }}" style="text-decoration:none;">
+            <button class="btnAgregar">+Proveedor</button>
         </a>
 
         <!-- Contenedor de la tabla de inventario -->
@@ -42,9 +42,9 @@
                       
                         
                         <th class="nombre">Nombre</th>
-                        <th>Numero de Telefono</th>
+                        <th>Numero de Teléfono</th>
                         <th>Correo Electronico</th>
-                        <th>Descripcion</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
 
                     </tr>
@@ -54,10 +54,24 @@
                     @foreach($proveedores as $proveedor)
                     <tr>
                         
-                        <td>{{ $proveedor->nombre }}</td>
+                    <td>
+            <span class="nombre-corto">
+                {{ \Illuminate\Support\Str::limit($proveedor->nombre, 25, '...') }}
+                @if(strlen($proveedor->nombre) > 25)
+                    <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-texto="{{ $proveedor->nombre }}"></i>
+                @endif
+            </span>
+        </td>
                         <td>{{ $proveedor->numero_telefono }}</td>
                         <td>{{ $proveedor->correo }}</td>
-                        <td>{{ $proveedor->descripcion }}</td>
+                        <td><!-- Solo mostrara 30 carateres en la tabla -->
+                <span class="descripcion-corta">
+                {{ \Illuminate\Support\Str::limit($proveedor->descripcion, 15, '...') }}
+                <!-- depues de los 30 mostrara el ojo -->
+                    @if(strlen($proveedor->descripcion) > 15)
+                        <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-completa="{{ $proveedor->descripcion }}"></i>
+                    @endif
+                </span></td>
                 
 
 
@@ -85,6 +99,13 @@
                     
                     </tr>
                     @endforeach
+                                 <!-- Modal para mostrar descripción completa -->
+<div id="modalDescripcion" class="modal-descripcion" style="display:none;">
+    <div class="modal-contenido">
+        <span class="cerrar-modal" onclick="cerrarDescripcion()">&times;</span>
+        <p id="descripcionCompleta"></p>
+    </div>
+</div>
             
                     
                 </tbody>

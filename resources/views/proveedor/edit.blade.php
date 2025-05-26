@@ -32,7 +32,7 @@
 
              <!--Nombre del proveedor-->
              <label for="nombre">Nombre del Proveedor</label>
-             <input type="text" id="nombre" name="nombre" placeholder="Nombre del proveedor" value="{{ old('nombre', $proveedor->nombre) }}">
+             <input type="text" id="nombre" name="nombre" maxlength="45" placeholder="Nombre del proveedor" value="{{ old('nombre', $proveedor->nombre) }}">
              @error('nombre')
              <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
              @enderror
@@ -49,7 +49,7 @@
              @enderror
              <!--correo-->
              <label for="correo">Correo Electronico</label>
-             <input type="text" id="correo" name="correo" placeholder="Correo Electronico" value="{{ old('correo', $proveedor->correo) }}">
+             <input type="text" id="correo" name="correo" maxlength="50" placeholder="Correo Electronico" value="{{ old('correo', $proveedor->correo) }}">
              @error('correo')
              <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
              @enderror
@@ -63,7 +63,7 @@
                     <div class="form-group">
                     <label for="descripcion">Descripción</label>
                     <small id="contador" style="display: block; color: #666; font-size: 12px; margin-top: 4px;"></small>
-                        <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto..." maxlength="500" oninput="actualizarContador()">{{ old('descripcion', $proveedor->descripcion) }}</textarea>
+                        <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto..." maxlength="250" oninput="actualizarContador()">{{ old('descripcion', $proveedor->descripcion) }}</textarea>
             
 
 

@@ -13,7 +13,7 @@
     <title>Inventario</title>
 
     <!-- Enlaces a los archivos CSS -->
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/inventarioEstilos/indexInventario.css') }}">
     <link rel="stylesheet" href="styles.css" />
 
     <!-- Enlace al archivo JavaScript -->
@@ -29,7 +29,7 @@
         <h2>INVENTARIO</h2>
 
         <!-- Botón para agregar una nueva categoría -->
-        <a href="{{ route('inventario.create') }}">
+        <a href="{{ route('inventario.create') }}" style="text-decoration:none;">
             <button class="btnAgregar">+Producto</button>
         </a>
 
@@ -56,12 +56,37 @@
                     @foreach($inventarios as $inventario)
                     <tr>
                         
-                        <td>{{ $inventario->producto->nombre }}</td>
+                    <td>
+                        <span class="nombre-corto">
+                            {{ \Illuminate\Support\Str::limit($inventario->producto->nombre, 25, '...') }}
+                            @if(strlen($inventario->producto->nombre) > 25)
+                                <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-texto="{{ $inventario->producto->nombre }}"></i>
+                            @endif
+                        </span>
+                    </td>
                         <td>{{ $inventario->xunidad }}</td>
                         <td>{{ $inventario->xcaja }}</td>
                         <td>{{ $inventario->cantidad_caja }}</td>
-                        <td>{{ $inventario->total_unidad }}</td>
-                        <td>{{ $inventario->caducidad }}</td>
+                        <td>{{ $inventario->unidad_caja }}</td>
+                        
+                        <td>
+                        @if($inventario->diferenciaDias < 0)
+                            <span style="color:rgb(231, 25, 45); font-weight: bold;">
+                                {{ $inventario->fechaCaducidadObj->format('d/m/Y') }} (Caducado)
+                            </span>
+                        @elseif($inventario->diferenciaDias <= 150) <!--5 meses -->
+                            <span style="color:rgb(238, 127, 0); font-weight: bold;">
+                                {{ $inventario->fechaCaducidadObj->format('d/m/Y') }} (Próximo a caducar)
+                            </span>
+                        @else
+                            <span style="color:rgb(57, 206, 37); font-weight: bold;">
+                                {{ $inventario->fechaCaducidadObj->format('d/m/Y') }} (Vigente)
+                            </span>
+                        @endif
+                    </td>
+
+
+                        
 
 
                         {{-- Acciones --}}
@@ -83,13 +108,22 @@
                         <i class="fa-regular fa-trash-can fa-xl" style="color:rgb(255, 255, 255);"></i>
                     </a>
                 </form>
+                
                 </div>
         </td>
                     
                     </tr>
+                    <!-- Modal para mostrar la descripción completa (se reutiliza para nombre también) -->
+            <div id="modalDescripcion" class="modal-descripcion" style="display:none;">
+                <div class="modal-contenido">
+                    <span class="cerrar-modal" onclick="cerrarDescripcion()">&times;</span>
+                    <p id="descripcionCompleta"></p>
+                </div>
+            </div>
+
                     @endforeach
-            
                     
+               
                 </tbody>
             </table>
         </div>

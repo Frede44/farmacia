@@ -21,20 +21,23 @@
       <!--Diseño-->
       <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-      <!-- Select2 CSS + JS -->
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+ <!--datatable-->
+      <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css"/>
+      <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
 </head>
 
 <body>
+    
 
+    <button id="btnToggleSidebar" class="btn-toggle-sidebar">
+        <i class="fas fa-bars"></i>
+    </button>
 
     <!-- Sidebar (Menú de la izquierda) -->
     <div class="sidebar">
 
     
-        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="logo">
+        <img src="{{ asset('img/LocoFarmacia.png') }}" alt="Logo" class="logo">
 
         <ul>
             <li class="opciones"><a href="{{route('panel.index')}}"><i class="fas fa-home"></i><span>Inicio</span></a></li>
@@ -76,6 +79,7 @@
 
             
 
+         
 
             @can('persona.index')
             <li class="opciones"><a href="{{route('persona.index')}}"><i class="fas fa-users"></i>Personas</a></li>
@@ -169,26 +173,110 @@
     }
 </script>
 
-<!-- Contador de descripcion-->
+<!-- Contador de descripción -->
 <script>
-    function actualizarContador() {
+    function actualizarContadorDescripcion() {
         const textarea = document.getElementById('descripcion');
         const contador = document.getElementById('contador');
-        const restante = 150 - textarea.value.length;
+        if (!textarea || !contador) return; // Verificación por si los elementos no existen
 
-        contador.textContent = `Quedan ${restante} caracteres`;
+        const restante = 250 - textarea.value.length;
 
         if (restante < 0) {
             contador.style.color = 'red';
             contador.textContent = `Te has pasado por ${Math.abs(restante)} caracteres`;
         } else {
             contador.style.color = '#666';
+            contador.textContent = `Quedan ${restante} caracteres`;
         }
     }
+    // Inicializar al cargar
+    document.addEventListener('DOMContentLoaded', () => {
+        actualizarContadorDescripcion();
 
-    // Inicializa contador si hay contenido
-    document.addEventListener('DOMContentLoaded', actualizarContador);
+        const textarea = document.getElementById('descripcion');
+        if (textarea) {
+            textarea.addEventListener('input', actualizarContadorDescripcion);
+        }
+    });
 </script>
+
+<!-- Contador de nombre-->
+
+<script>
+  function actualizarContador(inputId, contadorId, maxLength) {
+    const input = document.getElementById(inputId);
+    const contador = document.getElementById(contadorId);
+    const restante = maxLength - input.value.length;
+
+    if (restante < 0) {
+      contador.style.color = 'red';
+      contador.textContent = `Te has pasado por ${Math.abs(restante)} caracteres`;
+    } else {
+      contador.style.color = '#666';
+      contador.textContent = `Quedan ${restante} caracteres`;
+    }
+  }
+
+  // Inicializar el contador al cargar la página
+  document.addEventListener('DOMContentLoaded', () => {
+    actualizarContador('nombre', 'contadorNombre', 45);
+  });
+</script>
+
+
+
+
+<!--Mostrar mas de descripcion-->
+<script>
+    // Mostrar contenido (nombre o descripción)
+    function mostrarDescripcion(elemento) {
+        const texto = elemento.getAttribute('data-texto');
+        document.getElementById('descripcionCompleta').innerText = texto;
+        document.getElementById('modalDescripcion').style.display = 'block';
+    }
+
+    // Cerrar el modal
+    function cerrarDescripcion() {
+        document.getElementById('modalDescripcion').style.display = 'none';
+    }
+
+    // Cierre al hacer clic fuera del modal
+    window.onclick = function(event) {
+        const modal = document.getElementById('modalDescripcion');
+        if (event.target === modal) {
+            cerrarDescripcion();
+        }
+    };
+</script>
+
+
+<!--Sidebar para movil-->
+<div id="overlay" class="overlay"></div>
+<script>
+    const btnToggle = document.getElementById('btnToggleSidebar');
+    const sidebar = document.querySelector('.sidebar');
+    const overlay = document.getElementById('overlay');
+
+    btnToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('active');
+
+    // Ocultar o mostrar botón según estado del sidebar
+    if(sidebar.classList.contains('open')) {
+        btnToggle.style.display = 'none';
+    } else {
+        btnToggle.style.display = 'block';
+    }
+});
+
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+    btnToggle.style.display = 'block';  // Mostrar botón cuando sidebar se cierra al hacer click fuera
+});
+</script>
+
 
             
 

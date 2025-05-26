@@ -31,7 +31,8 @@
 
                                 <!--Nombre del proveedor-->
                                 <label for="nombre">Nombre del Proveedor</label>
-                                <input type="text" id="nombre" name="nombre" placeholder="Nombre del proveedor" value="{{ old('nombre') }}">
+                                <small id="contadorNombre" style="display: block; color: #666; font-size: 12px; margin-top: 4px;"></small>
+                                <input type="text" id="nombre" name="nombre" placeholder="Nombre del proveedor" maxlength="45" value="{{ old('nombre') }}"oninput="actualizarContador('nombre', 'contadorNombre', 50)">
                                 @error('nombre')
                                 <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
                                 @enderror
@@ -44,7 +45,7 @@
                                 @enderror
                                 <!--Correo-->
                                 <label for="correo">Correo Electronico</label>
-                                <input type="text" id="correo" name="correo" placeholder="Correo Electronico" value="{{ old('correo') }}">
+                                <input type="text" id="correo" name="correo" maxlength="150" placeholder="Correo Electronico" value="{{ old('correo') }}">
                                 @error('correo')
                                 <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
                                 @enderror
@@ -58,7 +59,7 @@
                             <div class="form-group">
                             <label for="descripcion">Descripción</label>
                             <small id="contador" style="display: block; color: #666; font-size: 12px; margin-top: 4px;"></small>
-                                <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto..." maxlength="500" oninput="actualizarContador()">{{ old('descripcion') }}</textarea>
+                                <textarea id="descripcion" name="descripcion" placeholder="Descripción del proveedor..." maxlength="250" oninput="actualizarContador()">{{ old('descripcion') }}</textarea>
                                
 
 

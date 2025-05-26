@@ -13,62 +13,114 @@
 
 @section('contenido')
 
-<script>
-    window.onload = function() {
-        // Código para el gráfico de torta (productos más vendidos)
-        var productos = @json($productosMasVendidos);
-        var dataPointsProductos = productos.map(function(producto) {
-            return {
-                y: producto.total_vendido,
-                label: producto.nombre
-            };
-        });
+<section class="titulos">
+    <h3>Reporte de Ventas</h3>
+    <p>Análisis detallado del rendimiento de ventas</p>
+</section>
 
-        var chartProductos = new CanvasJS.Chart("chartContainerProductos", {
-            animationEnabled: true,
-            title: {
-                text: "Productos más vendidos"
-            },
-            data: [{
-                type: "pie",
-                startAngle: 240,
-                indexLabel: "{label} {y}",
-                dataPoints: dataPointsProductos
-            }]
-        });
-        chartProductos.render();
+<section class="section_card">
+    <div class="card">
+        <div class="card-title">
+            <p>Ventas Totales</p>
+            <i class="fa-solid fa-dollar-sign"></i>
+        </div>
+        <div class="card-content">
 
-        // Código para el gráfico de líneas
-        var limit = 1000;
-        var y = 0;
-        var dataLine = []; // Renombrar para evitar conflicto con la variable 'data' del gráfico de torta si estuviera en el mismo scope global.
-        var dataSeries = {
-            type: "line"
-        };
-        var dataPointsLine = []; // Renombrar para evitar conflicto
-        for (var i = 0; i < limit; i += 1) {
-            y += (Math.random() * 10 - 5);
-            dataPointsLine.push({
-                x: i - limit / 2,
-                y: y
-            });
-        }
-        dataSeries.dataPoints = dataPointsLine;
-        dataLine.push(dataSeries);
+            <p id="total-ventas">0</p>
+        </div>
+    </div>
 
-        var chartLine = new CanvasJS.Chart("chartContainer", { // Renombrar la variable del gráfico para evitar conflicto
-            animationEnabled: true,
-            zoomEnabled: true,
-            title: {
-                text: "Ventas por semana"
-            },
-            data: dataLine // Usar la variable renombrada
-        });
-        chartLine.render();
-    }
-</script>
+    <div class="card">
+        <div class="card-title">
+            <p>Productos Más Vendidos</p>
+            <i class="fa-solid fa-box"></i>
+        </div>
+        <div class="card-content">
+
+            <p id="productos-mas-vendidos">0</p>
+        </div>
+
+    </div>
+
+    <div class="card">
+        <div class="card-title">
+            <p>Clientes Más Activos</p>
+            <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="card-content">
+
+            <p id="clientes-mas-activos">0</p>
+        </div>
+
+    </div>
+
+    <div class="card">
+        <div class="card-title">
+            <p>Total de compras</p>
+            <i class="fa-solid fa-shopping-cart"></i>
+        </div>
+        <div class="card-content">
+            <p id="total-compras">0</p>
+        </div>
+    </div>
+</section>
+
+<section class="opciones1">
+    <div class="opcione active" id="opcion-resumen">
+        <i class="fa-solid fa-chart-line"></i>
+        <p>Resumen</p>
+    </div>
+    <div class="opcione" id="opcion-producto">
+        <i class="fa-solid fa-chart-pie"></i>
+        <p>Por Producto</p>
+    </div>
+    <div class="opcione" id="opcion-usuario">
+        <i class="fa-solid fa-user"></i>
+        <p>Por Usuario</p>
+    </div>
+</section>
+
+
+<section class="vista vista1 activa">
+    <div>Contenido de Resumen</div>
+</section>
+
+<section class="vista vista2">
+    <div>Contenido de Producto</div>
+</section>
+
+<section class="vista vista3">
+    <div>Contenido de Usuario</div>
+</section>
 
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
+
+<script>
+    const opciones = document.querySelectorAll('.opcione');
+
+    opciones.forEach(opcion => {
+        opcion.addEventListener('click', () => {
+            opciones.forEach(o => o.classList.remove('active'));
+            opcion.classList.add('active');
+        });
+    });
+</script>
+
+<script>
+    const optionResumen = document.getElementById('opcion-resumen');
+    const optionProducto = document.getElementById('opcion-producto');
+    const optionUsuario = document.getElementById('opcion-usuario');
+
+    function mostrarVista(nombreClase) {
+        document.querySelectorAll('.vista').forEach(v => v.classList.remove('activa'));
+        document.querySelector(`.${nombreClase}`).classList.add('activa');
+    }
+
+    optionResumen.addEventListener('click', () => mostrarVista('vista1'));
+    optionProducto.addEventListener('click', () => mostrarVista('vista2'));
+    optionUsuario.addEventListener('click', () => mostrarVista('vista3'));
+</script>
+
 
 @endsection
 

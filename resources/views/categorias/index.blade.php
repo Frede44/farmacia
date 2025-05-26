@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     @extends('dashboard.index')
     <title>Categorías</title>
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/categoriasEstilos/indexCategorias.css') }}"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
 
 
@@ -20,7 +21,7 @@
     @section('contenido')
     <h2>CATEGORÍAS</h2>
  
-    <a href="{{ route('categorias.create') }}" style="text-decoration: none;">
+    <a href="{{ route('categorias.create') }}" style="text-decoration:none;">
     <button class="btnAgregar">+Categoría</button>
     </a>
     
@@ -44,7 +45,19 @@
         <tr>
             <td>{{ $categoria->id }}</td>
             <td>{{ $categoria->nombre }}</td>
-            <td>{{ $categoria->descripcion }}</td>
+
+            <td>
+
+            <!-- Solo mostrara 30 carateres en la tabla -->
+
+            <span class="descripcion-corta">
+                {{ \Illuminate\Support\Str::limit($categoria->descripcion, 25, '...') }}
+                @if(strlen($categoria->descripcion) > 25)
+                    <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-texto="{{ $categoria->descripcion }}"></i>
+                @endif
+            </span>
+        </td>
+
             {{-- Acciones --}}
          <td>
                          <!-- Botón Editar -->
@@ -70,13 +83,42 @@
         @endforeach
        
        
-    
+    <!-- Modal para mostrar descripción completa -->
+<div id="modalDescripcion" class="modal-descripcion" style="display:none;">
+    <div class="modal-contenido">
+        <span class="cerrar-modal" onclick="cerrarDescripcion()">&times;</span>
+        <p id="descripcionCompleta"></p>
+    </div>
+</div>
         
         <!-- Puedes agregar más filas -->
         </tbody>
     </table>
     </div>
     
+
+<!--Mostrar mas de descripcion-->
+    <script>
+    function mostrarDescripcion(icon) {
+        const descripcion = icon.getAttribute('data-completa');
+        document.getElementById('descripcionCompleta').innerText = descripcion;
+        document.getElementById('modalDescripcion').style.display = 'block';
+    }
+
+    function cerrarDescripcion() {
+        document.getElementById('modalDescripcion').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        const modal = document.getElementById('modalDescripcion');
+        if (event.target === modal) {
+            cerrarDescripcion();
+        }
+    };
+</script>
+
+
+
 
     <!--Mensaje cuando se guarda correctamente-->
 @if (session('success'))

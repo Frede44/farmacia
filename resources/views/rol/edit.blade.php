@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
-    <title>Roles</title>
+    <title>Editar Roles</title>
     <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -27,7 +27,7 @@
 
 <body>
     @section('contenido')
-    <h2>Crear roles</h2>
+    <h2>Editar roles</h2>
 
     @if (session('success'))
     <div class="alert alert-success">

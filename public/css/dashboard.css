@@ -8,16 +8,12 @@ body {
     background-color: #ffffff; /* Fondo  */
 }
 .logo {
-    width: 115px;      
-    margin-left: 45px;
+    width: 115px;
     display: block;
-    
-    
+    margin-left: 0;
+    padding-left: 45px; /* mejor que margin-left si forma parte de una cabecera */
 }
-.contenedor {
-    display: flex;
-    height: 100%;
-}
+
 .vistas {
     margin-left: 0;
     flex-grow: 1;
@@ -35,18 +31,18 @@ body {
 /* Sidebar (Menú de la izquierda) */
 .sidebar {
     width: 270px;
-    background-color: #1a2325;
-    
+    background-color: #272627;
+
     height: 100vh;
     position: fixed;
     padding-left: 25px;
     padding-top: 20px;
     min-width: 250px;
-    overflow-y: auto; /*  scroll cuando el contenido es largo */
-    box-sizing: border-box; /* para que padding no exceda 100vh */
-    
+    overflow-y: auto;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(71, 71, 71, 0.726); /* <- sombra aquí */
 }
-
 
 /* Estilo del scrollbar  */
 .sidebar::-webkit-scrollbar {
@@ -79,28 +75,28 @@ body {
     font-size: 15px; /* Tamaño de la fuente para el título */
     margin-bottom: 20px; /* Espacio debajo del título */
     
+    
 }
 .opciones{
     margin-bottom: 15px; /* Espacio debajo de las opciones */
     
     
     
+    
  
 }
-.sidebar a {
-   
-
-    align-items: center;       /* Centra verticalmente ícono y texto */
-               /* Espacio uniforme entre el ícono y el texto */        /* Espacio uniforme entre el ícono y el texto */
-    color: #fdfdfd;
+/*Nombre de las opciones*/
+.sidebar a { 
+    align-items: center;
+    color: #ffffff;
     border-radius: 7px;
     text-decoration: none;
-    padding: 15px; /* Espaciado interno para mejor clicabilidad */
-    font-size: 14px; /* aumenta el texto para equilibrar con el icono */
+    padding: 15px;
+    font-size: 15px;
     width: 100%;
     text-align: left;
     transition: background-color 0.3s ease;
-             /* Alinea el contenido del texto a la izquierda */
+  
 }
 
 .sidebar a i {
@@ -119,7 +115,7 @@ body {
 }
 /*Seleccionar opcion y que se mantenga*/
 .sidebar a.active { 
-    background-color: #135ec0 !important;
+    background-color: #670ca3 !important;
     color: white;
     border-radius: 10px;
 }
@@ -162,35 +158,86 @@ h2 {
     color: #333; /* Color gris oscuro para el título */
 }
 
-/* Responsividad para pantallas pequeñas */
-@media (max-width: 768px) {
-    body {
-        flex-direction: column;
+
+
+
+
+/* Vista de móvil */
+.btn-toggle-sidebar {
+    position: fixed;
+    top: 5px;
+    left: -50px; /* Pegado al margen izquierdo */
+
+    background-color: #272627;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px; /* Fuente más pequeña */
+    cursor: pointer;
+    z-index: 1001; /* Superior al sidebar */
+    display: none; /* Oculto por defecto */
+}
+
+
+/* Solo mostrar botón en pantallas pequeñas */
+@media (max-width: 992px) {
+    .btn-toggle-sidebar {
+        display: block;
     }
+    .btnAgregar {
+        margin-left: 300px !important; /* Empuja el botón a la derecha */
+        display: block;
+        text-decoration: none !important;
+        border: none;
+        
+        
+      }
+    
+     
+
+    /* Sidebar inicialmente oculto y fuera de pantalla */
     .sidebar {
-        position: fixed;  /* Hacerlo fijo cuando se hace pequeño */
-        width: 100%; /* Ancho completo */
-        height: 100vh; /* Asegura que cubra toda la pantalla */
-        top: 0; /* No se mueva con el scroll */
+        transform: translateX(-100%);
+        position: fixed;
+        top: 0;
         left: 0;
-        transform: translateX(-100%); /* Empuja el sidebar fuera de la vista */
-        transition: transform 0.3s ease;
+        z-index: 1000;
     }
+
+    /* Cuando la sidebar tiene clase "open" se muestra */
     .sidebar.open {
-        transform: translateX(0); /* Al abrirlo, trae el sidebar a la vista */
+        transform: translateX(0);
     }
-    .content {
-        margin-left: 0; /* El contenido ocupa todo el ancho en pantallas pequeñas */
+        /* Ocultar botón cuando sidebar está abierto */
+    .sidebar.open ~ #btnToggleSidebar {
+        display: none;
     }
-    .sidebar-toggle {
-        display: block; /* Muestra el botón de abrir/cerrar el sidebar */
-    }
-    .dashboard-container {
-        margin-left: 0; /* El contenido ocupa todo el ancho disponible */
-        width: 100%; /* Ajusta el ancho al 100% */
-    }
+
+    /* Ajustar vistas para que ocupen todo el ancho cuando el sidebar está oculto */
     .vistas {
-        width: 100%;
-        margin: 10px ; /* Espacio alrededor del contenido */
+        margin-left: 0 !important;
+    }
+
+    /* Cuando el sidebar está abierto, se puede agregar un overlay opcional */
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+    }
+    .overlay.active {
+        display: block;
     }
 }
+
+/* En pantallas grandes el sidebar se mantiene fijo y visible */
+@media (min-width: 993px) {
+    .sidebar {
+        transform: translateX(0);
+        position: fixed;
+        z-index: auto;
+    }
+}
+/*Cierre de vista de mobil*/

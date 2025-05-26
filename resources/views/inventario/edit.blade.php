@@ -34,7 +34,7 @@
                                 <select name="id_producto" id="id_producto" class="form-control">
                                     <option value="">Selecciona un producto</option>
                                     @foreach ($productos as $producto)
-                                        <option value="{{ $producto->id }}" {{ (old('id_producto', $inventario->id_producto) == $producto->id) ? 'selected' : '' }}>
+                                        <option value="{{ $producto->id }}" data-imagen="{{ $producto->imagen }}" {{ (old('id_producto', $inventario->id_producto) == $producto->id) ? 'selected' : '' }}>
                                             {{ $producto->nombre }}
                                         </option>
                                     @endforeach
@@ -43,7 +43,15 @@
                                     <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
                                 @enderror
                                 
-                               
+                                 <!-- Imagen dinámica -->
+                            <div class="imagen-actual" id="imagenActualContainer" style="display: none;">
+                                <label class="imagen-label">Producto seleccionado</label>
+                                <img id="imagenActual" 
+                                    src="" 
+                                    alt="Imagen actual" 
+                                    class="imagen-preview" 
+                                    onclick="openModal(this.src)">
+                            </div>
 
                                 <!-- Precio Compra -->
                                
@@ -97,6 +105,7 @@
                                     onfocus="this.type='date'"
                                     onblur="if(!this.value)this.type='text'"
                                     placeholder="Selecciona la fecha"
+                                    min="{{ date('Y-m-d') }}" 
                                     value="{{ old('caducidad', $inventario->caducidad) }}"
                                     class="form-control fecha-input">
                                 @error('caducidad')
@@ -109,6 +118,13 @@
                                
                             </div>
                         </div>
+                        
+                         <!-- Modal para mostrar imagen en grande -->
+                         <div id="imageModal" class="modal-imagen" onclick="closeModal()">
+                            <span class="cerrar-modal">&times;</span>
+                            <img class="modal-contenido" id="modalImg">
+                        </div>
+
 
 
 
@@ -128,7 +144,7 @@
 <!-- Select2 -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-@section('scripts')
+
 
 
 <script>
@@ -138,13 +154,49 @@
         locale: "es"
     });
 </script>
-@endsection
 
+<!--Mostrar imagen del producto-->
+<script>
+    const selectProducto = document.getElementById('id_producto');
+    const imagenActual = document.getElementById('imagenActual');
+    const imagenActualContainer = document.getElementById('imagenActualContainer');
+
+    function mostrarImagenSeleccionada() {
+        const selectedOption = selectProducto.options[selectProducto.selectedIndex];
+        const imagen = selectedOption.getAttribute('data-imagen');
+
+        if (imagen) {
+            imagenActual.src = `/imagenes/${imagen}`; 
+            imagenActualContainer.style.display = 'block';
+        } else {
+            imagenActual.src = '';
+            imagenActualContainer.style.display = 'none';
+        }
+    }
+
+    // Ejecutar al cargar la página
+    document.addEventListener('DOMContentLoaded', function () {
+        mostrarImagenSeleccionada();
+    });
+
+    // Ejecutar al cambiar el producto
+    selectProducto.addEventListener('change', mostrarImagenSeleccionada);
+
+    // Modal script
+    function openModal(src) {
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("modalImg");
+        modal.style.display = "block";
+        modalImg.src = src;
+    }
+    function closeModal() {
+        document.getElementById("imageModal").style.display = "none";
+    }
+</script>
     
    
     
     @endsection
-
 
     </body>
 

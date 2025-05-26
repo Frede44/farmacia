@@ -1,40 +1,112 @@
-.container-grafico{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    margin: 20px;
+/*seccion de los titulis*/
+.titulos{
+    margin: 40px;
 }
 
-.container-card{
+.titulos h3{
+    font-size: 30px;
+  margin: 0;
+    color: #000;
+}
+
+.titulos p{
+    font-size: 20px;
+    margin: 0;
+    color: #878787;
+}
+
+/*seccion cards */
+
+.section_card{
     display: flex;
+    justify-content: space-between;
+    margin: 40px;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    margin: 20px;
 }
 
 .card{
-    width: 200px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;    
+    width: 250px;
     height: 100px;
+}
+
+.card-title{
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    margin: 20px 15px;
+
+
+}
+
+.card-title p{
+    font-size: 14px;
+    margin: 0;
+
+    color: #000;
+}
+
+.card-content{
+    display: flex;
     justify-content: center;
-    background-color: #f8f9fa;
+    align-items: center;
+ 
+}
+
+.card-content p{
+    font-size: 20px;
+    margin: 0;
+    color: #000;
+    font-weight: bold;
+}
+
+.opciones1 {
+    display: flex;
+    justify-content: space-between;
+    margin: 40px;
+    border: solid 1px #f2f2f2;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    padding: 5px;
+}
+
+.opcione {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+    height: 40px;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-    padding: 20px;
-    margin: 10px;
+    cursor: pointer;
+    color: #4a4a4a;
+    background-color: transparent;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.opcione i {
+    font-size: 16px;
+}
+
+.opcione p {
+    margin: 0;
+    font-weight: 500;
+}
+
+.opcione.active {
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 0 1px #d1d1d1 inset;
 }
 
 
-@media screen and (max-width: 768px) {
-    .container-grafico{
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-    
+/*vistas*/
+
+.vista {
+    display: none;
+}
+
+.vista.activa {
+    display: block;
 }

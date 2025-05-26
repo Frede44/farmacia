@@ -22,8 +22,8 @@ class categoriaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'required|string|max:35|unique:categoria,nombre',
-            'descripcion' => 'nullable|string|max:500',
+            'nombre' => 'required|string|max:50|unique:categoria,nombre',
+            'descripcion' => 'nullable|string|max:250',
         ]);
         Categoria::create(
             [
@@ -43,8 +43,8 @@ class categoriaController extends Controller
             {
                 $request->validate([
                     
-                    'nombre' => 'required|string|max:35|unique:productos,nombre,',
-                    'descripcion' => 'nullable|string|max:500',
+                    'nombre' => 'required|string|max:50|unique:productos,nombre,',
+                    'descripcion' => 'nullable|string|max:250',
                      
                 ]);
 

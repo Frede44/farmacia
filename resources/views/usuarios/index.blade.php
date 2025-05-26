@@ -24,8 +24,8 @@
     @section('contenido')
     <h2>USUARIOS</h2>
 
-    <a href="{{ route('register.index') }}">
-        <button class="btnAgregar">Agregar Usuario</button>
+    <a href="{{ route('register.index') }}" style="text-decoration:none;">
+        <button class="btnAgregar">+Usuario</button>
     </a>
 
     <div class="table-container">

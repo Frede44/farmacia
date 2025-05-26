@@ -19,46 +19,65 @@ class productosController extends Controller
     
     public function index(){
         $productos=Productos::with('categoria:id,nombre') // Cargar la relación con la categoría
-        ->select('id','codigo','nombre','descripcion','precio_venta','imagen','categoria_id')
+        ->select('id','codigo','nombre','descripcion','imagen','categoria_id')
         ->get();
 
         return view("productos.index",["productos"=>$productos]);
     }
 
-    public function create(){
-        // $categorias = Categoria::all(['id', 'nombre']);
+    public function create() {
         $categorias = Categoria::all(['id', 'nombre']);
-        return view('productos.create', compact('categorias'));
+    
+        // Obtener último código
+        $ultimoProducto = Productos::latest('id')->first();
+    
+        if ($ultimoProducto && preg_match('/MED(\d+)/', $ultimoProducto->codigo, $coincidencias)) {
+            $numero = intval($coincidencias[1]) + 1;
+            $nuevoCodigo = 'MED' . str_pad($numero, 4, '0', STR_PAD_LEFT);
+        } else {
+            $nuevoCodigo = 'MED0001'; // Primer código si no hay productos aún
+        }
+    
+        return view('productos.create', compact('categorias', 'nuevoCodigo'));
     }
+
+
     public function store(Request $request)
+    {
+        $request->validate([
+            
+            'nombre' => 'required|string|max:50',
+            'descripcion' => 'nullable|string|max:250',
+            'imagen' => 'required|image|mimes:png,jpg',
+            'categoria_id' => 'required|exists:categoria,id', 
+        ]);
 
-            {
-                
-                $request->validate([
-                    'codigo' => 'required|string|max:35|unique:productos,codigo',
-                    'nombre' => 'required|string|max:35|unique:productos,nombre',
-                    'descripcion' => 'nullable|string|max:500',
-                    'precio_venta' => 'required|numeric|gt:0',
-                    'imagen' => 'required|image|mimes:png,jpg',
-                    'categoria_id' => 'required|exists:categoria,id', 
-                ]);
-                //Donde se va guardar la imagen seleccionada
-                $file = $request->file('imagen');
-                $name = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('imagenes'), $name); // Guarda en public/imagenes
+        // Generar el código automáticamente aquí también por seguridad
+        $ultimoProducto = Productos::latest('id')->first();
+        if ($ultimoProducto && preg_match('/MED(\d+)/', $ultimoProducto->codigo, $coincidencias)) {
+            $numero = intval($coincidencias[1]) + 1;
+            $codigo = 'MED' . str_pad($numero, 4, '0', STR_PAD_LEFT);
+        } else {
+            $codigo = 'MED0001';
+        }
 
-                Productos::create([
-                    'codigo' => $request->codigo,
-                    'nombre' => $request->nombre,
-                    'descripcion' => $request->descripcion,
-                    'precio_venta' => $request->precio_venta,
-                    'imagen' => $name,
-                    'categoria_id' => $request->categoria_id,
-                ]);
-                
-                return redirect()->route('productos.index')->with('success', '¡Producto guardado correctamente!');
-            }
+        // Guardar imagen
+        $file = $request->file('imagen');
+        $name = time() . '_' . $file->getClientOriginalName();
+        $file->move(public_path('imagenes'), $name);
 
+        Productos::create([
+            'codigo' => $codigo,
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'imagen' => $name,
+            'categoria_id' => $request->categoria_id,
+        ]);
+
+        return redirect()->route('productos.index')->with('success', '¡Producto guardado correctamente!');
+    }
+
+    
             public function edit(Productos $producto)
             {
                 $categorias = Categoria::all(['id', 'nombre']);
@@ -70,9 +89,8 @@ class productosController extends Controller
             {
                 $request->validate([
                     'codigo' => 'required|string|max:35|unique:productos,codigo,' . $producto->id,
-                    'nombre' => 'required|string|max:35|unique:productos,nombre,' . $producto->id,
-                    'descripcion' => 'nullable|string|max:500',
-                    'precio_venta' => 'required|numeric|gt:0',
+                    'nombre' => 'required|string|max:50' . $producto->id,
+                    'descripcion' => 'nullable|string|max:250',
                     'imagen' => 'nullable|image|mimes:png,jpg',
                     'categoria_id' => 'required|exists:categoria,id', 
                 ]);
@@ -96,7 +114,6 @@ class productosController extends Controller
                     'codigo' => $request->codigo,
                     'nombre' => $request->nombre,
                     'descripcion' => $request->descripcion,
-                    'precio_venta' => $request->precio_venta,
                     'categoria_id' => $request->categoria_id,
                     'imagen' => $producto->imagen, // ya actualizada arriba si es necesario
                 ]);
