@@ -74,7 +74,7 @@ class PanelController extends Controller
         'productos.codigo',
         'productos.nombre',
         'productos.descripcion',
-        'productos.precio_venta',
+        
         'productos.imagen',
         'productos.categoria_id',
         DB::raw('SUM(ventas_detalles.cantidad) as total_vendido')
@@ -85,7 +85,7 @@ class PanelController extends Controller
         'productos.codigo',
         'productos.nombre',
         'productos.descripcion',
-        'productos.precio_venta',
+      
         'productos.imagen',
         'productos.categoria_id'
     )
