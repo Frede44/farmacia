@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
-    <title>Productos</title>
+    <title>Personas</title>
     <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
 
     <link rel="stylesheet" href="styles.css" />
@@ -20,11 +20,13 @@
 
 <body>
     @section('contenido')
-    <h2>PRODUCTOS</h2>
+    <h2>PERSONAS</h2>
 
-    <a href="{{ route('persona.create') }}">
-        <button class="btnAgregar">crear personas</button>
-    </a>
+    <div class="btn_div">
+        <a href="{{ route('persona.create') }}">
+            <button class="btnAgregar">crear personas</button>
+        </a>
+    </div>
 
     <div class="table-container">
 
@@ -38,6 +40,7 @@
                     <th>DPI</th>
                     <th>correo</th>
                     <th>telefono</th>
+                    <th>direccion</th>
                     <th>Acciones</th>
 
                 </tr>
@@ -51,26 +54,27 @@
                     <td>{{ $persona->dpi }}</td>
                     <td>{{ $persona->correo }}</td>
                     <td>{{ $persona->telefono }}</td>
+                    <td>{{ $persona->direccion }}</td>
                     <td>
-                         <!-- Botón Editar -->
-                <div class="flex flex-col justify-center items-center gap-2">
-                <form  method="GET">
-                        @csrf
-                        <a href="{{ route('persona.edit', $persona->id) }}" class="btnEditar" >
-                            <i class="fa-regular fa-pen-to-square fa-lg" style="color:rgb(255, 255, 255);"></i>
-                        </a>
-                    </form>
+                        <!-- Botón Editar -->
+                        <div class="flex flex-col justify-center items-center gap-2">
+                            <form method="GET">
+                                @csrf
+                                <a href="{{ route('persona.edit', $persona->id) }}" class="btnEditar">
+                                    <i class="fa-regular fa-pen-to-square fa-lg" style="color:rgb(255, 255, 255);"></i>
+                                </a>
+                            </form>
 
-                    <!-- Botón Eliminar -->
-                    <form action="{{route('persona.destroy',$persona->id)}}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <a href="#" class="btnEliminar" onclick="confirmarEliminacion(event, this)">
-                            <i class="fa-regular fa-trash-can fa-xl" style="color:rgb(255, 255, 255);"></i>
-                        </a>
-                    </form>
-                </div>
-        </td>
+                            <!-- Botón Eliminar -->
+                            <form action="{{route('persona.destroy',$persona->id)}}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <a href="#" class="btnEliminar" onclick="confirmarEliminacion(event, this)">
+                                    <i class="fa-regular fa-trash-can fa-xl" style="color:rgb(255, 255, 255);"></i>
+                                </a>
+                            </form>
+                        </div>
+                    </td>
                 </tr>
 
                 @endforeach
@@ -84,7 +88,7 @@
 
 </body>
 
- <script>
+<script>
     function confirmarEliminacion(event, elemento) {
         event.preventDefault();
         Swal.fire({
@@ -103,7 +107,7 @@
         });
     }
 </script>
-     
+
 @endsection
 
 </html>

@@ -46,52 +46,50 @@
 
 </section>
 
-<section class="section_card">
+<section class="section-card">
     <div class="card">
         <div class="card-title">
             <p>Ventas Totales</p>
             <i class="fa-solid fa-dollar-sign"></i>
         </div>
         <div class="card-content">
-
-            <p id="total-ventas">0</p>
+            @foreach ($cantidadVendida as $venta)
+            <p class="value">Q{{ $venta->total_vendido }}</p>
+            @endforeach
         </div>
     </div>
 
     <div class="card">
         <div class="card-title">
-            <p>Productos Más Vendidos</p>
+            <p>Número de Ventas</p>
             <i class="fa-solid fa-box"></i>
         </div>
         <div class="card-content">
-
-            <p id="productos-mas-vendidos">0</p>
+            <p class="value">{{ $numeroVentas }}</p>
         </div>
-
     </div>
 
     <div class="card">
         <div class="card-title">
-            <p>Clientes Más Activos</p>
-            <i class="fa-solid fa-user"></i>
+            <p>Ticket Promedio</p>
+            <i class="fa-solid fa-chart-line"></i>
         </div>
         <div class="card-content">
-
-            <p id="clientes-mas-activos">0</p>
+            <p class="value">Q{{ number_format($promedioVentas, 2) }}</p>
         </div>
-
     </div>
 
     <div class="card">
         <div class="card-title">
-            <p>Total de compras</p>
-            <i class="fa-solid fa-shopping-cart"></i>
+            <p>Clientes Únicos</p>
+            <i class="fa-solid fa-user-group"></i>
         </div>
         <div class="card-content">
-            <p id="total-compras">0</p>
+            <p class="value">{{ $numeroProductos }}</p>
         </div>
     </div>
 </section>
+
 
 <section class="opciones1">
     <div class="opcione active" id="opcion-resumen">
@@ -114,19 +112,23 @@
         <div id="grafico-ventas" style="height: 370px; width: 100%;"></div>
     </div>
     <div class="grafico_dos">
-        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+        <div id="grafico-ingresos" style="height: 370px; width: 100%;"></div>
     </div>
 
 </section>
 
 <section class="vista vista2">
-    <div class="grafico_productos">
-        <h3>📊 Productos Más Vendidos</h3>
-        <p>Distribución de ventas por producto</p>
+    <div class="grafico_productos" style="display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 20px;">
+        <div class="grafico_tituloP" style="width: 100%;">
+            <h3>📈 Ventas por Producto</h3>
+            <p>Rendimiento de ventas agrupado por productos</p>
+
+
+        </div>
         <div id="grafico-productos" style="height: 370px; width: 100%;"></div>
     </div>
 
-    <div class="grafico_contenido">
+    <!-- <div class="grafico_contenido">
         <h4>Detalle de Productos</h4>
         <p>Ranking de productos por ventas</p>
         <div>
@@ -174,6 +176,11 @@
                 <div class="porcentaje">14%</div>
             </div>
         </div>
+    </div>-->
+    <div class="grafico_contenido">
+        <h4>Detalle de Productos</h4>
+        <p>Ranking de productos por ventas</p>
+        <div id="detalle-productos"></div>
     </div>
 </section>
 
@@ -182,37 +189,28 @@
     <div class="categoria_conteiner">
         <h4>Ventas por categoria</h4>
         <p class="descripcion">Rendimiento de ventas agrupado por categorías de productos</p>
+    <div class="conteiner_categorias">
+          @foreach ($categoriasMasVendidas as $index => $categoria)
         <div class="categoria_contenido">
-
             <div class="categoria_item">
-                <p class="numero">1</p>
+                <p class="numero">{{ $index + 1 }}</p>
                 <div class="categoria_detalle">
-                    <p class="nombre">pastillas</p>
-                    <p class="cantidad">12 productos • 145 ventas</p>
+                    <p class="nombre">{{ $categoria->label }}</p>
+                    <p class="cantidad">{{ $categoria->y }} productos </p>
                 </div>
             </div>
             <div class="categoria_total">
-                <p class="total">Q14.00</p>
-                <p class="porcentaje">54% del total</p>
+                <p class="total">Q{{ number_format($categoria->total, 2) }}</p>
+                <p class="porcentaje">{{ $categoria->porcentaje }}% del total</p>
             </div>
-
         </div>
+        @endforeach
+    </div>
 
-        <div class="categoria_contenido">
 
-            <div class="categoria_item">
-                <p class="numero">1</p>
-                <div class="categoria_detalle">
-                    <p class="nombre">pastillas</p>
-                    <p class="cantidad">12 productos • 145 ventas</p>
-                </div>
-            </div>
-            <div class="categoria_total">
-                <p class="total">Q14.00</p>
-                <p class="porcentaje">54% del total</p>
-            </div>
 
-        </div>
+
+
     </div>
 
 </section>
@@ -248,161 +246,138 @@
 <script>
     window.onload = function() {
 
-        var chart = new CanvasJS.Chart("chartContainer", {
+        var ventasPorDia = @json($ventasPorDia);
+
+        var dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+        var ventasData = [];
+        var ingresosData = [];
+
+        ventasPorDia.forEach(function(item) {
+            let dia = new Date(item.created_at).getDay();
+            ventasData.push({
+                label: item.dia.substring(0, 3),
+                y: parseInt(item.ventas)
+            });
+            ingresosData.push({
+                label: item.dia.substring(0, 3),
+                y: parseFloat(item.ingresos)
+            });
+        });
+
+        // Gráfico de Ventas
+        var chartVentas = new CanvasJS.Chart("grafico-ventas", {
             animationEnabled: true,
-            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            theme: "light2",
             title: {
-                text: "Top Oil Reserves"
+                text: "Ventas por Día"
             },
             axisY: {
-                title: "Reserves(MMbbl)"
+                lineThickness: 0, // Oculta la línea del eje Y
+                tickLength: 0, // Elimina las marcas de las divisiones
+                labelFormatter: function() {
+                    return "";
+                }, // Elimina los números (etiquetas)
+                gridThickness: 0 // Elimina las líneas horizontales del grid
             },
             data: [{
                 type: "column",
-                showInLegend: true,
-                legendMarkerColor: "grey",
-                legendText: "MMbbl = one million barrels",
-                dataPoints: [{
-                        y: 300878,
-                        label: "Venezuela"
-                    },
-                    {
-                        y: 266455,
-                        label: "Saudi"
-                    },
-                    {
-                        y: 169709,
-                        label: "Canada"
-                    },
-                    {
-                        y: 158400,
-                        label: "Iran"
-                    },
-                    {
-                        y: 142503,
-                        label: "Iraq"
-                    },
-                    {
-                        y: 101500,
-                        label: "Kuwait"
-                    },
-                    {
-                        y: 97800,
-                        label: "UAE"
-                    },
-                    {
-                        y: 80000,
-                        label: "Russia"
-                    }
-                ]
+                color: "#4285F4", // azul
+                indexLabel: "{y}",
+                dataPoints: ventasData
             }]
         });
-        chart.render();
+        chartVentas.render();
 
-        var chart = new CanvasJS.Chart("grafico-ventas", {
+        // Gráfico de Ingresos
+        var chartIngresos = new CanvasJS.Chart("grafico-ingresos", {
             animationEnabled: true,
-            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            theme: "light2",
             title: {
-                text: "Top Oil Reserves"
+                text: "Ingresos por Día"
             },
             axisY: {
-                title: "Reserves(MMbbl)"
+                lineThickness: 0, // Oculta la línea del eje Y
+                tickLength: 0, // Elimina las marcas de las divisiones
+                labelFormatter: function() {
+                    return "";
+                }, // Elimina los números (etiquetas)
+                gridThickness: 0 // Elimina las líneas horizontales del grid
             },
             data: [{
                 type: "column",
-                showInLegend: true,
-                legendMarkerColor: "grey",
-                legendText: "MMbbl = one million barrels",
-                dataPoints: [{
-                        y: 300878,
-                        label: "Venezuela"
-                    },
-                    {
-                        y: 266455,
-                        label: "Saudi"
-                    },
-                    {
-                        y: 169709,
-                        label: "Canada"
-                    },
-                    {
-                        y: 158400,
-                        label: "Iran"
-                    },
-                    {
-                        y: 142503,
-                        label: "Iraq"
-                    },
-                    {
-                        y: 101500,
-                        label: "Kuwait"
-                    },
-                    {
-                        y: 97800,
-                        label: "UAE"
-                    },
-                    {
-                        y: 80000,
-                        label: "Russia"
-                    }
-                ]
+                color: "#34A853", // verde
+                indexLabel: "{y}",
+                dataPoints: ingresosData
             }]
         });
-        chart.render();
+        chartIngresos.render();
 
+        var productosMasVendidos = @json($productosMasVendidos);
+
+        // Colores que usaremos, en el mismo orden que los productos
+        var colores = ["#3b82f6", "#22c55e", "#a855f7", "#f97316"];
+
+        // Asignar color a cada producto
+        productosMasVendidos.forEach((producto, index) => {
+            producto.color = colores[index % colores.length]; // por si hay más productos que colores
+        });
+
+        // Crear la gráfica con los colores asignados
         var chart = new CanvasJS.Chart("grafico-productos", {
             animationEnabled: true,
-            title: {
-
-            },
+            title: {},
             data: [{
                 type: "pie",
                 startAngle: 240,
-                yValueFormatString: "##0.00\"%\"",
-                indexLabel: "{label} {y}",
-                dataPoints: [{
-                        y: 79.45,
-                        label: "Google"
-                    },
-                    {
-                        y: 7.31,
-                        label: "Bing"
-                    },
-                    {
-                        y: 7.06,
-                        label: "Baidu"
-                    },
-                    {
-                        y: 4.91,
-                        label: "Yahoo"
-                    },
-                    {
-                        y: 1.26,
-                        label: "Others"
-                    }
-                ]
+                yValueFormatString: "#,##0 unidades",
+                showInLegend: true,
+                dataPoints: productosMasVendidos
             }]
         });
         chart.render();
+
+        // Generar HTML dinámico con los mismos datos
+        var detalleContainer = document.getElementById("detalle-productos");
+
+        productosMasVendidos.forEach((producto) => {
+            let porcentaje = ((producto.y / productosMasVendidos.reduce((acc, p) => acc + p.y, 0)) * 100).toFixed(0);
+
+            let item = `
+        <div class="producto">
+            <div class="info">
+                <span class="color-dot" style="background-color: ${producto.color};"></span>
+                <div>
+                    <strong>${producto.label}</strong>
+                    <p>${producto.y} ventas</p>
+                </div>
+            </div>
+            <div class="porcentaje">${porcentaje}%</div>
+        </div>
+    `;
+            detalleContainer.innerHTML += item;
+        });
+
 
     }
 </script>
 
+
+
 <script>
-function abrirModal() {
-  document.getElementById("modal-exportar").style.display = "flex";
-}
+    function abrirModal() {
+        document.getElementById("modal-exportar").style.display = "flex";
+    }
 
-function cerrarModal() {
-  document.getElementById("modal-exportar").style.display = "none";
-}
+    function cerrarModal() {
+        document.getElementById("modal-exportar").style.display = "none";
+    }
 
-function exportarArchivo(tipo) {
-  const rango = document.getElementById("rango-fechas").value;
+    function exportarArchivo(tipo) {
+        const rango = document.getElementById("rango-fechas").value;
 
-  // Puedes redirigir al backend con los parámetros necesarios
-  window.location.href = `/exportar?tipo=${tipo}&rango=${rango}`;
-}
+        // Puedes redirigir al backend con los parámetros necesarios
+        window.location.href = `/exportar?tipo=${tipo}&rango=${rango}`;
+    }
 </script>
 
 

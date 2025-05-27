@@ -21,16 +21,15 @@
     @section('contenido')
     <h2>CATEGORÍAS</h2>
  
-    <a href="{{ route('categorias.create') }}" style="text-decoration:none;">
-    <button class="btnAgregar">+Categoría</button>
-    </a>
-    
+    <div class="btn_div">
+        <a href="{{ route('categorias.create') }}" style="text-decoration:none;">
+            <button class="btnAgregar">+Categoría</button>
+        </a>
+    </div>
+
     <div class="table-container">
-    
-    
-    
-    <table id="tablaUsuarios" class="display nowrap" >
-        <thead>
+        <table id="tablaUsuarios" class="display nowrap">
+            <thead>
         <tr>
             <th>Codigo</th>
             <th class="nombre">Nombre</th>

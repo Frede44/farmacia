@@ -29,9 +29,11 @@
         <h2>PROVEEDOR</h2>
 
         <!-- Botón para agregar una nueva categoría -->
-        <a href="{{ route('proveedor.create') }}" style="text-decoration:none;">
-            <button class="btnAgregar">+Proveedor</button>
-        </a>
+        <div class="btn_div">
+            <a href="{{ route('proveedor.create') }}" style="text-decoration:none;">
+                <button class="btnAgregar">+Proveedor</button>
+            </a>
+        </div>
 
         <!-- Contenedor de la tabla de inventario -->
         <div class="table-container">

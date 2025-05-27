@@ -29,9 +29,11 @@
         <h2>INVENTARIO</h2>
 
         <!-- Botón para agregar una nueva categoría -->
+        <div class="btn_div">
         <a href="{{ route('inventario.create') }}" style="text-decoration:none;">
             <button class="btnAgregar">+Producto</button>
         </a>
+        </div>
 
         <!-- Contenedor de la tabla de inventario -->
         <div class="table-container">

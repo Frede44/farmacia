@@ -21,10 +21,11 @@
     <h2>ROLES</h2>
 
     
-  
+    <div class="btn_div">
     <a href="{{ route('rol.create') }}" style="text-decoration:none;">
     <button class="btnAgregar">Crear roles</button>
     </a>
+    </div>
 
 
     <div class="table-container">

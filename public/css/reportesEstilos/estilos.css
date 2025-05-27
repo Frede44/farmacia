@@ -110,49 +110,40 @@
 
 /*seccion cards */
 
-.section_card{
+.section-card {
     display: flex;
-    justify-content: space-between;
-    margin: 40px;
-    flex-direction: row;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 20px;
 }
 
-.card{
+.card {
+    background-color: white;
     border: 1px solid #e0e0e0;
-    border-radius: 10px;    
-    width: 250px;
-    height: 100px;
+    border-radius: 10px;
+    padding: 16px;
+    flex: 1;
+    min-width: 200px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.card-title{
+.card-title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 20px 15px;
-
-
-}
-
-.card-title p{
-    font-size: 14px;
-    margin: 0;
-
-    color: #000;
-}
-
-.card-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
- 
-}
-
-.card-content p{
-    font-size: 20px;
-    margin: 0;
-    color: #000;
     font-weight: bold;
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
 }
+
+.card-content .value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #111;
+    margin: 0;
+}
+
 
 .opciones1 {
     display: flex;
@@ -412,3 +403,59 @@
     align-items: end;
     margin-top: 20px;
 }
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .titulos {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filtros-acciones {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .opciones1 {
+        flex-direction: column;
+    }
+
+    .opcione {
+        width: 100%;
+    }
+
+    .modal-contenido {
+        width: 90%;
+    }
+
+    .vista.vista{
+        flex-direction: column;
+        margin: 20px;
+    }
+    .grafico_uno, .grafico_dos {
+        width: 100%;
+        height: 400px;
+    }
+
+    .grafico_productos{
+        width: 100%;
+        flex-direction: column;
+    }
+
+   .categoria_conteiner{
+    padding: 0;
+   }
+
+   .categoria_contenido{
+    width: 90%;
+   }
+
+   .conteiner_categorias{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+   }
+}
+

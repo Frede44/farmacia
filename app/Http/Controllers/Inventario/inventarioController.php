@@ -89,6 +89,7 @@ class InventarioController extends Controller
             'xcaja' => $request->xcaja,
             'caducidad' => $request->caducidad,
             'cantidad_caja' => $request->cantidad_caja,
+            'total_unidad' => $request->cantidad_caja * $request->unidad_caja,
             'unidad_caja' => $request->unidad_caja,
         ]);
 

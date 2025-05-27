@@ -32,9 +32,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 |
 */
 
-Route::get('/', function () {
-    return view('dashboard.index');
-})->name("welcome")->middleware("auth");
+
 
 
 
@@ -50,6 +48,7 @@ Route::get("/logout", [loginController::class, "destroy"])->name("logout.store")
 
 
 Route::middleware(['auth'])->group(function () {
+     Route::get('/', [PanelController::class, 'index'])->name('welcome');
     Route::resource('/productos', ProcutosProductosController::class)->parameters(['productos '=> 'producto' ]);
     Route::get('/dashboard', [PanelController::class, 'index'])->name('dashboard.index');
 

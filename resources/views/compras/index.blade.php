@@ -9,9 +9,12 @@
 
 @section('contenido')
 <h2>Lista de Compras</h2>
-<a href="{{ route('compras.create') }}">
-    <button class="btnAgregar">Crear nueva compra</button>
-</a>
+
+<div class="btn_div">
+    <a href="{{ route('compras.create') }}">
+        <button class="btnAgregar">Crear nueva compra</button>
+    </a>
+</div>
 
 <div class="table-container">
     <table id="tablaUsuarios" class="display nowrap">

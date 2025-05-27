@@ -17,7 +17,8 @@ class Inventario extends Model
         'xcaja',
         'caducidad',
         'cantidad_caja',
-        'unidad_caja'
+        'unidad_caja',
+        'total_unidad' // Total de unidades calculado como cantidad_caja * unidad_caja
         ,'id_categoria' // Relación con la tabla categorias
 
     ];

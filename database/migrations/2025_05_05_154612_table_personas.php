@@ -16,10 +16,10 @@ class TablePersonas extends Migration
         Schema::create('personas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->string('dpi');
-            $table->string('telefono');
-            $table->string('direccion');
-            $table->string('correo');
+            $table->string('dpi')->nullable();
+            $table->string('telefono')->nullable();
+            $table->string('direccion')->nullable();
+            $table->string('correo')->nullable();
             $table->timestamps();
         });
     }

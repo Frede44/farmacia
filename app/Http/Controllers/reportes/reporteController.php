@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\reportes;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Ventas\ventasController;
 use App\Models\DetalleVentas;
+use App\Models\Productos;
 use App\Models\Ventas;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
@@ -19,42 +21,62 @@ class reporteController extends Controller
     public function index()
     {
         // 1) Consulta los 10 productos más vendidos
-        $productosMasVendidos = DB::table('ventas_detalles')
-            ->select(
-                'productos.id',
-                'productos.nombre',
-                DB::raw('SUM(ventas_detalles.cantidad) as ventas')
-            )
-            ->join('productos', 'ventas_detalles.producto_id', '=', 'productos.id')
-            ->groupBy('productos.id', 'productos.nombre')
-            ->orderBy('ventas', 'desc')
-            ->limit(10)
+        $cantidadVendida = Ventas::select(DB::raw('SUM(total) as total_vendido'))
             ->get();
 
-        // 2) Calcula el total de ventas para el porcentaje
-        $totalVentas = $productosMasVendidos->sum('ventas');
+        $numeroVentas = Ventas::count();
 
-        // 3) Define la paleta de colores (debe coincidir con tu CSS)
-        $colores = ['blue', 'green', 'purple', 'orange'];
+        $promedioVentas = $numeroVentas > 0 ? $cantidadVendida->sum('total_vendido') / $numeroVentas : 0;
 
-        // 4) Agrega a cada producto su porcentaje y su clase de color
-        $productosMasVendidos = $productosMasVendidos->map(function ($item, $index) use ($totalVentas, $colores) {
-            $item->porcentaje = $totalVentas > 0 ? round(($item->ventas / $totalVentas) * 100, 2) : 0;
-            $item->colorClass = $colores[$index % count($colores)];
-            return $item;
-        });
+        $numeroProductos = Productos::count();
 
-        // 5) Prepara los datos para CanvasJS
-        $dataPoints = $productosMasVendidos->map(function ($item) {
-            return [
-                'label' => $item->nombre,
-                'y' => $item->ventas
-            ];
-        });
+        $ventasPorDia = Ventas::selectRaw('DAYNAME(fecha) as dia, COUNT(*) as ventas, SUM(total) as ingresos')
+            ->whereBetween('fecha', [now()->subDays(6)->startOfDay(), now()->endOfDay()])
+            ->groupBy(DB::raw('DAYNAME(fecha)'))
+            ->orderBy(DB::raw('MIN(fecha)')) // opcional si necesitas orden
+            ->get();
+
+        $productosMasVendidos = DB::table('ventas_detalles')
+            ->join('productos', 'ventas_detalles.producto_id', '=', 'productos.id')
+            ->select('productos.nombre as label', DB::raw('SUM(ventas_detalles.cantidad) as y'))
+            ->groupBy('productos.nombre')
+            ->orderByDesc('y')
+            ->limit(10) // o los que quieras mostrar
+            ->get();
+
+        $totalGeneral = DB::table('ventas_detalles')
+            ->join('productos', 'ventas_detalles.producto_id', '=', 'productos.id')
+            ->select(DB::raw('SUM(ventas_detalles.cantidad * ventas_detalles.precio_unitario) as total'))
+            ->value('total');
+
+        $categoriasMasVendidas = DB::table('ventas_detalles')
+            ->join('productos', 'ventas_detalles.producto_id', '=', 'productos.id')
+            ->join('categoria', 'productos.categoria_id', '=', 'categoria.id')
+            ->select(
+                'categoria.nombre as label',
+                DB::raw('SUM(ventas_detalles.cantidad) as y'),
+                DB::raw('SUM(ventas_detalles.cantidad * ventas_detalles.precio_unitario) as total')
+            )
+            ->groupBy('categoria.nombre')
+            ->orderByDesc('y')
+            ->limit(10)
+            ->get()
+            ->map(function ($item) use ($totalGeneral) {
+                $item->porcentaje = $totalGeneral > 0 ? round(($item->total / $totalGeneral) * 100, 2) : 0;
+                return $item;
+            });
+
+
 
         return view('reportes.index', [
-            'productosMasVendidos' => $productosMasVendidos,
-            'dataPoints' => $dataPoints
+            'cantidadVendida' => $cantidadVendida,
+            'numeroVentas' => $numeroVentas,
+            'promedioVentas' => $promedioVentas,
+            "numeroProductos" => $numeroProductos,
+            "ventasPorDia" => $ventasPorDia,
+            "productosMasVendidos" => $productosMasVendidos,
+            "totalGeneral" => $totalGeneral,
+            "categoriasMasVendidas" => $categoriasMasVendidas
         ]);
     }
 
@@ -72,7 +94,7 @@ class reporteController extends Controller
             return $pdf->download('ventas.pdf');
         }
 
-    
+
 
         return back()->with('error', 'Tipo de exportación no válido.');
     }

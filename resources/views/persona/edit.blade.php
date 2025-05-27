@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @extends('dashboard.index')
-  <title>Productos</title>
+  <title>Personas</title>
   <link rel="stylesheet" href="{{ asset('css/personasEstilos/estilos.css') }}">
 
 
@@ -22,7 +22,7 @@
 
 
 @section('contenido')
-<h2>Editar productos</h2>
+<h2>Editar Personas</h2>
 <div class="container">
 
   <form action="{{ route('persona.update', $persona->id) }}" method="POST" class="formulario">
@@ -32,31 +32,31 @@
 
       <div class="form-group">
 
-        <label for="nombre"></label>
+        <label for="nombre">Nombre</label>
         <input type="text" name="nombre" id="nombre" placeholder="Nombre" required value="{{ $persona->nombre }}">
         @error('nombre')
         <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
         @enderror
 
-        <label for="dpi"></label>
+        <label for="dpi">DPI</label>
         <input type="text" name="dpi" id="dpi" placeholder="DPI" required value="{{ $persona->dpi }}">
         @error('dpi')
         <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
         @enderror
 
-        <label for="correo"></label>
+        <label for="correo">Correo</label>
         <input type="email" name="correo" id="correo" placeholder="Correo" required value="{{ $persona->correo }}">
         @error('correo')
         <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
         @enderror
 
-        <label for="telefono"></label>
+        <label for="telefono">Telefono</label>
         <input type="text" name="telefono" id="telefono" placeholder="0000-0000" required value="{{ $persona->telefono }}">
         @error('telefono')
         <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
         @enderror
 
-        <label for="direccion"></label>
+        <label for="direccion"> Direccion</label>
         <input type="text" name="direccion" id="direccion" placeholder="Direccion" required value="{{ $persona->direccion }}">
         @error('direccion')
         <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>

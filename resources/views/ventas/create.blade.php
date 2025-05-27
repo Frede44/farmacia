@@ -386,7 +386,7 @@
                 }
             });
             resumenInfo.style.display = 'none';
-            infoInputs.innerHTML = '';
+            
         });
 
 
