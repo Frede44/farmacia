@@ -71,6 +71,14 @@
  
 </body>
 
+@if(session('pdf'))
+    <script>
+        window.onload = () => {
+            window.open("{{ session('pdf') }}", "_blank");
+        }
+    </script>
+@endif
+
 @endsection
 
 </html>

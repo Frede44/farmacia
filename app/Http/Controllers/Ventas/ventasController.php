@@ -26,7 +26,7 @@ class ventasController extends Controller
 
     public function index()
     {
-        $ventas = Ventas::with(['cliente','usuario'])->get();
+        $ventas = Ventas::with(['cliente', 'usuario'])->get();
         return view('ventas.index', compact('ventas'));
     }
 
@@ -139,15 +139,28 @@ class ventasController extends Controller
             }
         }
 
+        // Obtener detalles de la venta
+        $ventasDetalles = DetalleVentas::where('venta_id', $venta->id)->with(['producto'])->get();
+
+        //generar ticket de venta en PDF
+
+        $pdf = app('dompdf.wrapper');
+        $pdf->loadView('exports.ticket_pdf', ['venta' => $venta, 'ventasDetalles' => $ventasDetalles]);
+        $nombreArchivo = 'ticket_venta_' . $venta->id . '.pdf';
+        $pdf->save(storage_path('app/public/PDF/' . $nombreArchivo));
 
 
-        return redirect()->route('ventas.index')->with('success', 'Venta creada con éxito.');
+
+        return redirect()->route('ventas.index')->with([
+            'success' => 'Venta creada con éxito.',
+            'pdf' => asset('storage/' . $nombreArchivo)
+        ]);
     }
 
     public function show($id)
     {
 
-        $detalles = DetalleVentas::where('venta_id', $id)->with(['producto'])->get();    
+        $detalles = DetalleVentas::where('venta_id', $id)->with(['producto'])->get();
         return view('ventas.show', compact('detalles'));
     }
 

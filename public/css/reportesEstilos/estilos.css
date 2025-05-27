@@ -1,6 +1,9 @@
 /*seccion de los titulis*/
 .titulos{
     margin: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 .titulos h3{
@@ -14,6 +17,96 @@
     margin: 0;
     color: #878787;
 }
+
+.filtros-acciones {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.filtros-acciones select {
+  padding: 12px 28px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 14px;
+  color: #111827;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg fill='none' stroke='black' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.filtros-acciones button.btn-exportar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 18px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background-color: white;
+  font-size: 14px;
+  font-weight: 500;
+  color: #111827;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.filtros-acciones button.btn-exportar:hover {
+  background-color: #f3f4f6;
+}
+
+.filtros-acciones i {
+  font-size: 14px;
+}
+
+
+/* Estilo del modal */
+.modal-exportar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-contenido {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 300px;
+  width: 90%;
+}
+
+.botones-modal button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background-color: #3b82f6;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cerrar {
+  margin-top: 15px;
+  background-color: #e5e7eb;
+  color: #111827;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
 
 /*seccion cards */
 
@@ -108,20 +201,214 @@
 }
 
 .vista.activa {
-    display: block;
-}
-.vista1 {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     margin: 40px;
+    gap: 20px; /* espacio entre columnas */
+    flex-direction: row; /* por defecto, pero puedes ser explícito */
 }
 
+
 .grafico_uno {
-    width: 45%;
+    width: 50%;
     height: 400px;
 }
 .grafico_dos {
-    width: 45%;
+    width: 50%;
     height: 400px;
+}
+
+/*productos */
+
+/* …existing code… */
+
+/* Detalle de Productos */
+.grafico_productos {
+    width: 60%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.grafico_productos h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.grafico_productos p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.grafico_contenido {
+    width: 40%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Estilo para el listado de productos (si aún no lo tenías) */
+.grafico_contenido > div {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.grafico_contenido h4 {
+    font-size: 1.25rem;
+    margin-bottom: 5px;
+}
+
+.grafico_contenido p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.producto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9fafb;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+.producto + .producto {
+    margin-top: 12px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.info div strong {
+    font-size: 14px;
+    display: block;
+}
+
+.info div p {
+    font-size: 13px;
+    color: #6b7280;
+    margin: 2px 0 0;
+}
+
+.porcentaje {
+    background-color: #f3f4f6;
+    border-radius: 12px;
+    padding: 4px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: #4b5563;
+}
+
+
+
+/*categoria */
+
+.categoria_conteiner{
+    width: 100%;
+    border-radius: 8px;
+    background-color: #f5f2f2;
+    padding: 20px;
+   
+    
+}
+
+.categoria_contenido{
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: solid 1px #f9f9f9;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #fff;
+
+}
+
+.descripcion{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    color: #8b8b8b;
+    margin: 0;
+}
+.categoria_conteiner h4{
+    font-size: 24px;
+    color: #000;
+    margin: 0;
+    
+}
+
+.categoria_item{
+    display: flex;
+    flex-direction: row;
+}
+
+
+
+.numero{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #92a6e5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    color: #343ce0;
+    margin-right: 10px;
+}
+
+.nombre{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    color: #000;
+   
+    margin: 0;
+}
+
+.categoria_item{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cantidad{
+    font-size: 15px;
+    color: #7b7b7b;
+
+    margin-left: 10px;
+    margin: 0;
+}
+
+.total{
+    font-size: 18px;
+    color: #199454;
+    margin: 0;
+    font-weight: bold;
+}
+.porcentaje{
+    font-size: 15px;
+    color: #7b7b7b;
+    margin: 0;
+}
+
+.categoria_total{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    margin-top: 20px;
 }

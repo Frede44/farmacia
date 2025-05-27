@@ -74,5 +74,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/compras', comprasController::class)->parameters(['compras'=> 'compra']);
 
+    Route::get('/exportar', [reporteController::class, 'exportar'])->name('exportar');
+
 
 });

@@ -7,9 +7,11 @@
     <title>Usuarios</title>
     <link rel="stylesheet" href="{{ asset('css/ventasEstilos/ventasEstilos.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        
         /* Estilos adicionales para la búsqueda de clientes */
         .cliente.seleccionado {
             background-color: #f0f0f0;
@@ -149,7 +151,7 @@
             {{-- El botón "Comprar" ahora es de tipo submit y está DENTRO del form --}}
             <button type="submit" id="comprar">Comprar</button>
         </form> {{-- Fin de ventaForm --}}
-        <button id="imprimir-ticket">Imprimir ticket</button>
+       
     </div>
 </div>
 
@@ -460,6 +462,9 @@
         // --- FIN: CÓDIGO PARA EL ORDENAMIENTO DE PRODUCTOS ---
     });
 </script>
+
+
+
 @endsection
 
 </html>
