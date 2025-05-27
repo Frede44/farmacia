@@ -82,15 +82,15 @@
          
 
             @can('persona.index')
-            <li class="opciones"><a href="{{route('persona.index')}}"><i class="fas fa-users"></i>Personas</a></li>
+            <li class="opciones"><a href="{{route('persona.index')}}" class="{{ request()->routeIs('persona.*') ? 'active' : '' }}"><i class="fas fa-users"></i>Personas</a></li>
             @endcan
 
             @can('usuarios.index')
-            <li class="opciones"><a href="{{ route('usuarios.index') }}"><i class="fas fa-user"></i>Usuarios</a></li>
+            <li class="opciones"><a href="{{ route('usuarios.index') }} "class="{{ request()->routeIs('usuarios.*') ? 'active' : '' }}"><i class="fas fa-user"></i>Usuarios</a></li>
             @endcan
 
             @can('rol.index')
-            <li class="opciones"><a href="{{ route('rol.index') }}"><i class="fa-solid fa-users-gear"></i>Roles</a></li>
+            <li class="opciones"><a href="{{ route('rol.index') }}" class="{{ request()->routeIs('rol.*') ? 'active' : '' }}"><i class="fa-solid fa-users-gear"></i>Roles</a></li>
             @endcan
             <li class="opciones"><a href="{{ route('logout.store') }}"><i class="fas fa-sign-out-alt"></i>Cerrar Sesión</a></li>
         </ul>
