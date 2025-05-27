@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
     <title>Ventas</title>
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/ventasEstilos/index.css') }}">
 
 
 
@@ -25,7 +25,7 @@
     <h2>Ventas</h2>
 
     <div class="btn_div">
-        <a href="{{ route('ventas.create') }}">
+        <a href="{{ route('ventas.create') }}" style="text-decoration: none;">
             <button class="btnAgregar">Crear venta</button>
         </a>
     </div>

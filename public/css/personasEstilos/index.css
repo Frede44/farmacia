@@ -1,0 +1,338 @@
+
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    table.dataTable thead { /*titulos de la tabla*/
+      background-color: #333333;
+      
+      
+    }
+    table{
+      background-color: rgb(235, 235, 235);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+      border-radius: 8px; /* Bordes redondeados */
+      overflow: hidden; /* Para que los bordes redondeados se vean bien */
+      
+      
+    }
+    
+    .nombre{
+      background-color: #22336d; 
+    }
+    button{
+      background-color: rgb(37, 167, 25);
+      border-radius: 8px !important;
+
+    
+      color: white;
+      border: none;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100px;
+      height: 50px;
+      margin-left: 25px;
+      font-size: 15px;
+      font-weight: bold;
+   
+      
+    }
+    .btnAgregar:hover{
+      background-color: #03c51d;
+      text-decoration: none;
+    }
+
+    
+    /***/
+    .flex {
+      display: flex;
+      justify-content: center; /* Alinea horizontalmente */
+      align-items: center; /* Alinea verticalmente */
+      gap: 10px; /* Espacio entre los botones */
+  }
+    .btnEditar {
+      background-color: #22336d; 
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+  }
+  
+  .btnEditar:hover {
+      background-color: #007ef3; /* Azul oscuro cuando pasas el cursor */
+  }
+  
+  /* Estilo para el botón de eliminar */
+  .btnEliminar {
+      background-color: #22336d; 
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+  }
+  
+  .btnEliminar:hover {
+      background-color: #c82333; /* Rojo oscuro cuando pasas el cursor */
+  }
+
+
+      /***/
+    .dataTables_wrapper .dataTables_filter input {
+      padding: 5px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+    th{
+      color: rgb(248, 248, 248);
+    }
+    td{
+      color: black;
+    }
+  
+      
+      /*Fondo de la tabla*/
+    .table-container {
+      background-color: rgb(245, 245, 245); 
+      padding: 10px; /* Separación interna de  en todos los lados */
+      overflow-x: auto;
+      width: 95%;
+      margin: 20px auto; /* Centra el contenedor horizontalmente */
+      border-radius: 8px;
+    
+  }
+      
+
+  
+
+  
+  
+  table.dataTable {
+      width: 100%;
+      max-width: 100%; /*maximo de la tabla pero queda segun los botones al 100%*/
+      border-collapse: collapse;
+     
+  }
+  
+ 
+table.dataTable td {
+    padding: 16px 24px !important; /* <- Forzar mayor espacio interno */
+    white-space: nowrap;
+    text-align: center;
+}
+
+  /* Cambiar el color, borde y tamaño */
+.dt-button {
+  background-color: #696969 !important;
+  color: white !important;
+  border: none !important;
+  padding: 4px 10px !important;
+  font-size: 13px !important;
+  border-radius: 2px !important;
+  margin-right: 1px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+  border-radius: 4px !important;
+  width: 90px !important;   
+  height: 40px !important; 
+  
+}
+
+/* Hover */
+.dt-button:hover {
+  background-color: #398b99;
+}
+
+
+
+
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0; /* El contenido ocupa todo el ancho en pantallas pequeñas */
+    }
+}
+
+.modal-descripcion {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+
+
+
+
+
+
+.modal-contenido {
+  background-color: #ffffff;
+  margin: 5% auto;
+  padding: 30px 40px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 480px;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.125rem; /* Aumenta el tamaño de fuente (18px aprox) */
+  line-height: 1.6; /* Mejora la legibilidad del texto */
+  color: #333; /* Color de texto más suave que el negro puro */
+  transition: all 0.3s ease-in-out;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Agrega una animación de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cerrar-modal {
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cerrar-modal:hover {
+  color: #000;
+}
+.icono-ojo {
+  margin-left: 5px;
+  cursor: pointer;
+  color: #949494;
+  width: 20px;
+}
+
+.icono-ojo:hover {
+  color: #2692eb;
+}
+
+/*Diseño de movil*/
+@media (max-width: 768px) {
+  table#tablaUsuarios,
+  table#tablaUsuarios thead,
+  table#tablaUsuarios tbody,
+  table#tablaUsuarios th,
+  table#tablaUsuarios td,
+  table#tablaUsuarios tr {
+    display: block;
+    width: 100%;
+  }
+
+  table#tablaUsuarios thead tr {
+    display: none; /* Ocultar encabezado en móvil */
+  }
+
+  table#tablaUsuarios tbody tr {
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    
+  }
+
+  table#tablaUsuarios tbody tr td {
+    /* Cambiar display a flex-column para que título y texto queden vertical */
+    display: flex;
+    flex-direction: column; /* vertical */
+    align-items: flex-start;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    white-space: normal;
+  }
+
+  table#tablaUsuarios tbody tr td:last-child {
+    border-bottom: none;
+  }
+
+  /* Etiquetas antes de cada celda (el "título") */
+  table#tablaUsuarios tbody tr td::before {
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  table#tablaUsuarios tbody tr td:nth-of-type(1)::before { content: "Codigo:"; }
+  table#tablaUsuarios tbody tr td:nth-of-type(2)::before { content: "Nombre:"; }
+  table#tablaUsuarios tbody tr td:nth-of-type(3)::before { content: "DPI:"; }
+
+  table#tablaUsuarios tbody tr td:nth-of-type(4)::before { content: "Correo:"; }
+  table#tablaUsuarios tbody tr td:nth-of-type(5)::before { content: "Telefono:"; }
+  table#tablaUsuarios tbody tr td:nth-of-type(6)::before { content: "Direccion:"; }
+  table#tablaUsuarios tbody tr td:nth-of-type(7)::before { content: "Acciones:"; }
+
+  /* Ajuste imagen y acciones para que no se rompa layout */
+  table#tablaUsuarios tbody tr td:nth-of-type(6),
+  table#tablaUsuarios tbody tr td:nth-of-type(7) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+
+
+  table#tablaUsuarios tbody tr td:nth-of-type(6) .flex {
+    margin-top: 5px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  table#tablaUsuarios tbody tr td:nth-of-type(7) a.btnEditar,
+  table#tablaUsuarios tbody tr td:nth-of-type(7) a.btnEliminar {
+    margin-right: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
+   /* Modal imagen para móvil */
+   #modalImagen {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    padding: 10px; /* para que no toque bordes */
+    box-sizing: border-box;
+  }
+
+  #modalImagen img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.6);
+    object-fit: contain;
+  }
+
+}
+

@@ -1,6 +1,6 @@
 @extends('dashboard.index')
 <title>compras</title>
-<link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
+<link rel="stylesheet" href="{{ asset('css/comprasEstilos/index.css') }}">
 
 <link rel="stylesheet" href="styles.css" />
 <script src="script.js"></script>

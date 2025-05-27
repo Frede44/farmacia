@@ -168,39 +168,32 @@
          });
      </script>
 
-       <script>
-       
-         const selectProducto = document.getElementById('id_producto');
-         const imagenActual = document.getElementById('imagenActual');
-         const imagenActualContainer = document.getElementById('imagenActualContainer');
 
-         selectProducto.addEventListener('change', function() {
-             const selectedOption = this.options[this.selectedIndex];
-             const imagen = selectedOption.getAttribute('data-imagen');
-              console.log(imagen);
 
-             if (imagen) {
-                 imagenActual.src = `/imagenes/${imagen}`;
-                 imagenActualContainer.style.display = 'block';
-             } else {
-                 imagenActual.src = '';
-                 imagenActualContainer.style.display = 'none';
-             }
-         });
+    <script>
+    $(document).ready(function () {
+        $('#id_producto').select2({
+            placeholder: 'Selecciona un producto',
+            allowClear: true
+        });
 
-       
+        
+        $('#id_producto').on('change', function () {
+            const selectedOption = $(this).find(':selected');
+            const imagen = selectedOption.data('imagen');
 
-    </script>
+            console.log(imagen); 
 
-     <script>
-         $(document).ready(function() {
-             $('#id_producto').select2({
-                 placeholder: 'Selecciona un producto',
-                 allowClear: true
-             });
-         });
-     </script>
-
+            if (imagen) {
+                $('#imagenActual').attr('src', `/imagenes/${imagen}`);
+                $('#imagenActualContainer').show();
+            } else {
+                $('#imagenActual').attr('src', '');
+                $('#imagenActualContainer').hide();
+            }
+        });
+    });
+</script>
      <!--Mostrar imagen del producto-->
      <script>
        

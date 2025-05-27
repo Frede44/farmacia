@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
     <title>Usuarios</title>
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/usuariosEstilos/estilos.css') }}">
 
 
 

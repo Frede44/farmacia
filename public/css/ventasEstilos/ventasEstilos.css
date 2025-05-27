@@ -366,7 +366,7 @@ h3,p,h4 {
 /* Contenedor principal de la sección cliente */
 .contenido-informacion {
     background-color: #f9f9f9;
-    padding: 15px;
+    
     margin-top: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -376,6 +376,7 @@ h3,p,h4 {
     margin-bottom: 10px;
     font-size: 1.2em;
     color: #333;
+    margin: 10px;
 }
 
 /* Bloques de clientes registrados */
@@ -390,6 +391,7 @@ h3,p,h4 {
     max-height: 200px;
     overflow-y: auto;
     border-radius: 8px;
+    margin: 10px;
 }
 
  /* Estilos adicionales para la búsqueda de clientes */

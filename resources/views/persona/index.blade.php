@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
     <title>Personas</title>
-    <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/personasEstilos/index.css') }}">
 
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
@@ -23,8 +23,8 @@
     <h2>PERSONAS</h2>
 
     <div class="btn_div">
-        <a href="{{ route('persona.create') }}">
-            <button class="btnAgregar">crear personas</button>
+        <a href="{{ route('persona.create') }}" style="text-decoration: none;">
+            <button class="btnAgregar">Crear personas</button>
         </a>
     </div>
 
@@ -35,12 +35,12 @@
         <table id="tablaUsuarios" class="display nowrap">
             <thead>
                 <tr>
-                    <th>Codigo</th>
-                    <th>nombre</th>
+                    <th>Código</th>
+                    <th>Nombre</th>
                     <th>DPI</th>
-                    <th>correo</th>
-                    <th>telefono</th>
-                    <th>direccion</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Dirección</th>
                     <th>Acciones</th>
 
                 </tr>

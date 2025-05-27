@@ -33,7 +33,7 @@
 
                 <!-- Código -->
                 <label for="codigo">Código</label>
-                <input type="text" id="codigo" name="codigo" value="{{ old('codigo', $producto->codigo) }}">
+                <input type="text" id="codigo" readonly name="codigo" value="{{ old('codigo', $producto->codigo) }}">
                 @error('codigo')
                 <div class="error-message">
                     <i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}
