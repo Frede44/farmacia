@@ -18,11 +18,17 @@ class Inventario extends Model
         'caducidad',
         'cantidad_caja',
         'unidad_caja'
+        ,'id_categoria' // Relación con la tabla categorias
 
     ];
     public function producto()
     {
         return $this->belongsTo(Productos::class,'id_producto');
+    }
+
+    public function categoria()
+    {
+    return $this->belongsTo(Categoria::class, 'id_categoria');
     }
 
 }

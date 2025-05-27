@@ -22,6 +22,7 @@ class CreateInventarioTable extends Migration
             $table->date('caducidad');                 
             $table->integer('cantidad_caja');  
             $table->integer('unidad_caja'); 
+            $table->unsignedBigInteger('id_categoria');
             $table->timestamps();       
         });
     }

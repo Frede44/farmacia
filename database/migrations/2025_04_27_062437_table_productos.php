@@ -18,7 +18,7 @@ class TableProductos extends Migration
             $table->string('codigo', 35)->unique();
             $table->string('nombre',50);
           
-            $table->string('descripcion',250);
+            $table->string('descripcion',250)->nullable();;
             $table->string('imagen')->nullable(); // Campo para la imagen, puede ser nulo
             $table->unsignedBigInteger('categoria_id'); // Relación con la tabla categorias
             $table->timestamps();

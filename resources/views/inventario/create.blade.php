@@ -28,11 +28,17 @@
                                 <!-- Producto -->
                                 <label for="id_producto">Producto</label>
                                 <select name="id_producto" id="id_producto" class="form-control">
-                                    <option value="">Selecciona un producto</option>
-                                    @foreach ($productos as $producto)
-                                    <option value="{{ $producto->id }}" data-imagen="{{ $producto->imagen }}">{{ $producto->nombre }}</option>
+                                <option value="">Selecciona un producto</option>
+                                @foreach ($productos as $producto)
+                                    <option 
+                                        value="{{ $producto->id }}" 
+                                        data-imagen="{{ $producto->imagen }}"
+                                        data-categoria="{{ $producto->categoria->nombre ?? 'Sin categoría' }}"
+                                    >
+                                        {{ $producto->nombre }} - {{ $producto->categoria->nombre ?? 'Sin categoría' }}
+                                    </option>
                                 @endforeach
-                                </select>
+                            </select>
                                 @error('id_producto')
                                     <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
                                 @enderror
@@ -62,7 +68,7 @@
                                 
                                  <!-- Precio por unidad -->
                                  <label for="xunidad">
-                                    <i class="fa-solid fa-tablets"  style="color:#335dd4 ; "style="margin-right: 5px;"></i> Precio por Unidad
+                                    <i class="fa-solid fa-tablets"  style="color:#335dd4 ; "style="margin-right: 5px;"></i> Precio de venta <span style="color: gray; font-style: italic;">(Por unidad)</span></i>
                                 </label>
                                 <input type="number" id="xunidad" step="0.01" min="0.01" name="xunidad" placeholder="Precio por unidad" value="{{ old('xunidad') }}">
                                 @error('xunidad')
@@ -71,7 +77,7 @@
                                  <!-- Precio por caja -->
                                
                                 <label for="xcaja">
-                                    <i class="fa-solid fa-box-open"  style="color: #335dd4 ; "style="margin-right: 5px;"></i> Precio por Caja
+                                    <i class="fa-solid fa-box-open"  style="color: #335dd4 ; "style="margin-right: 5px;"></i>Precio de venta <span style="color: gray; font-style: italic;">(Por caja)</span></i> 
                                 </label>
                                 <input type="number" id="xcaja" step="0.01" min="0.01" name="xcaja" placeholder="Precio por caja" value="{{ old('xcaja') }}">
                                 @error('xcaja')
