@@ -33,7 +33,8 @@ class InventarioController extends Controller
 
     public function store(Request $request)
     {
-        //dd($request->all());
+
+
         $request->validate([
             'id_producto' => 'required|exists:productos,id',
           //  'compra' => 'required|numeric',
@@ -46,6 +47,8 @@ class InventarioController extends Controller
 
         $total = $request->cantidad_caja *  $request->unidad_caja;
 
+        $categoria = Productos::findOrFail($request->id_producto)->categoria_id;
+
         Inventario::create([
             'id_producto' => $request->id_producto,
           //  'compra' => $request->compra,
@@ -54,7 +57,9 @@ class InventarioController extends Controller
             'caducidad' => $request->caducidad,
             'cantidad_caja' => $request->cantidad_caja,
             'unidad_caja' => $request->unidad_caja,
-            'total_unidad' => $total
+            'total_unidad' => $total,
+            'id_categoria' => $categoria,
+
                 ]);
         
         return redirect()->route('inventario.index')->with('success', '¡Producto guardado correctamente!');
