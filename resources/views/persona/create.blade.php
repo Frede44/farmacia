@@ -38,25 +38,25 @@
 
 
           <label for="dpi">DPI</label>
-          <input type="text" name="dpi" id="dpi" placeholder="DPI" required>
+          <input type="text" name="dpi" id="dpi" placeholder="DPI" >
           @error('dpi')
           <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
           @enderror
 
           <label for="correo">Correo</label>
-          <input type="email" name="correo" id="correo" placeholder="Correo" required>
+          <input type="email" name="correo" id="correo" placeholder="Correo" >
           @error('correo')
           <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
           @enderror
 
           <label for="telefono">Telefono</label>
-          <input type="text" name="telefono" id="telefono" placeholder="0000-0000" required>
+          <input type="text" name="telefono" id="telefono" placeholder="0000-0000" >
           @error('telefono')
           <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
           @enderror
 
           <label for="direccion">Direccion</label>
-          <input type="text" name="direccion" id="direccion" placeholder="Direccion" required>
+          <input type="text" name="direccion" id="direccion" placeholder="Direccion" >
           @error('direccion')
           <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
           @enderror

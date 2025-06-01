@@ -48,9 +48,9 @@ Route::get("/logout", [loginController::class, "destroy"])->name("logout.store")
 
 
 Route::middleware(['auth'])->group(function () {
-     Route::get('/', [PanelController::class, 'index'])->name('welcome');
+     Route::get('/', [PanelController::class, 'index'])->name('panel.index');
     Route::resource('/productos', ProcutosProductosController::class)->parameters(['productos '=> 'producto' ]);
-    Route::get('/dashboard', [PanelController::class, 'index'])->name('dashboard.index');
+    Route::get('/', [PanelController::class, 'index'])->name('panel.index');
 
 
     Route::resource('/usuarios', usuariosController::class)->parameters(['usuarios'=> 'usuario']);
@@ -69,7 +69,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/reportes', reporteController::class)->parameters(['reportes'=> 'reporte' ]);
 
-    Route::get('/panel_de_control', [PanelController::class, 'index'])->name('panel.index');
+    Route::get('/', [PanelController::class, 'index'])->name('panel.index');
 
     Route::resource('/compras', comprasController::class)->parameters(['compras'=> 'compra']);
 

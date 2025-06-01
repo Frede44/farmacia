@@ -10,13 +10,19 @@ use App\Models\Ventas;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SebastianBergmann\Exporter\Exporter;
 
 class reporteController extends Controller
 {
+      private $exporter;
 
-    public function __construct()
+ 
+    
+
+    public function __construct(Exporter $exporter)
     {
         $this->middleware('can:reportes.index')->only('index'); // Permiso para ver la lista de reportes
+         $this->exporter = $exporter;
     }
     public function index()
     {
@@ -92,6 +98,9 @@ class reporteController extends Controller
             $pdf = app('dompdf.wrapper');
             $pdf->loadView('exports.ventas_pdf', ['ventas' => $ventas]);
             return $pdf->download('ventas.pdf');
+        }
+        if ($tipo === 'excel') {
+          
         }
 
 

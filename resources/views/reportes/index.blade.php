@@ -38,7 +38,7 @@
             <h3>¿En qué formato deseas exportar?</h3>
             <div class="botones-modal">
                 <button onclick="exportarArchivo('pdf')">Exportar a PDF</button>
-                <button onclick="exportarArchivo('excel')">Exportar a Excel</button>
+            
             </div>
             <button class="cerrar" onclick="cerrarModal()">Cancelar</button>
         </div>

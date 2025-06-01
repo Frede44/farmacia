@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\Controller;
 use App\Models\DetalleVentas;
+use App\Models\Inventario;
 use App\Models\Ventas;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -67,35 +68,45 @@ class PanelController extends Controller
             ->get();
 
 
-      $productosVentas = DB::table('ventas_detalles')
-    ->join('productos', 'ventas_detalles.producto_id', '=', 'productos.id')
-    ->select(
-        'productos.id',
-        'productos.codigo',
-        'productos.nombre',
-        'productos.descripcion',
-        
-        'productos.imagen',
-        'productos.categoria_id',
-        DB::raw('SUM(ventas_detalles.cantidad) as total_vendido')
-    )
-    ->where('ventas_detalles.tipo_venta', '=', 'unidad')
-    ->groupBy(
-        'productos.id',
-        'productos.codigo',
-        'productos.nombre',
-        'productos.descripcion',
-      
-        'productos.imagen',
-        'productos.categoria_id'
-    )
-    ->orderByDesc('total_vendido')
-    ->take(5)
+        $productosVentas = DB::table('ventas_detalles')
+            ->join('productos', 'ventas_detalles.producto_id', '=', 'productos.id')
+            ->select(
+                'productos.id',
+                'productos.codigo',
+                'productos.nombre',
+                'productos.descripcion',
+
+                'productos.imagen',
+                'productos.categoria_id',
+                DB::raw('SUM(ventas_detalles.cantidad) as total_vendido')
+            )
+            ->where('ventas_detalles.tipo_venta', '=', 'unidad')
+            ->groupBy(
+                'productos.id',
+                'productos.codigo',
+                'productos.nombre',
+                'productos.descripcion',
+
+                'productos.imagen',
+                'productos.categoria_id'
+            )
+            ->orderByDesc('total_vendido')
+            ->take(5)
+            ->get();
+
+       $productosPorVencer = Inventario::with('producto')
+    ->where('caducidad', '<=', Carbon::now()->addDays(30))
+    ->orderBy('caducidad', 'asc')
     ->get();
 
+    foreach ($productosPorVencer as $producto) {
+    $producto->dias_restantes = Carbon::now()->diffInDays(Carbon::parse($producto->caducidad), false);
+}
 
+$productosBajoStock = Inventario::where('total_unidad', '<=', 50)
+    ->with('producto')
+    ->get();
 
-
-        return view('panel.index', compact('ventasParaGrafico', 'ventasRecientes', 'productosVentas'));
+        return view('Panel.index', compact('ventasParaGrafico', 'ventasRecientes', 'productosVentas', 'productosPorVencer', 'productosBajoStock'));
     }
 }

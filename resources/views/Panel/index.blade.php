@@ -18,7 +18,7 @@
         <a href="{{ route('ventas.create') }}" style="text-decoration: none;">
             <div class="card venta">
                 <div class="card-icon">
-                    <i class="fa-solid fa-cart-shopping" style="color: rgb(50, 131, 245);"></i>
+                    <i class="fa-solid fa-cart-shopping" style="color: rgb(50, 131, 245); "></i>
                 </div>
                 <div class="card-text">
                     <p>Nuevas Ventas</p>
@@ -31,7 +31,7 @@
         <a href="{{ route('productos.index') }}" style="text-decoration: none;">
             <div class="card producto">
                 <div class="card-icon">
-                    <i class="fa-solid fa-box" style="color: rgb(82, 174, 48);"></i>
+                    <i class="fa-solid fa-box" style="color: rgb(82, 174, 48); "></i>
                 </div>
                 <div class="card-text">
                     <p>Productos</p>
@@ -44,7 +44,7 @@
         <a href="{{ route('inventario.index') }}" style="text-decoration: none;">
             <div class="card inventario">
                 <div class="card-icon">
-                    <i class="fa-solid fa-warehouse" style="color: rgb(245, 131, 50);"></i>
+                    <i class="fa-solid fa-warehouse" style="color: rgb(245, 131, 50); "></i>
                 </div>
                 <div class="card-text">
                     <p>Inventario</p>
@@ -57,7 +57,7 @@
         <a href="{{ route('reportes.index') }}" style="text-decoration: none;">
             <div class="card reporte">
                 <div class="card-icon">
-                    <i class="fa-solid fa-chart-pie" style="color: rgb(138, 50, 245);"></i>
+                    <i class="fa-solid fa-chart-pie" style="color: rgb(138, 50, 245); "></i>
                 </div>
                 <div class="card-text">
                     <p>Reportes</p>
@@ -71,7 +71,7 @@
             <div class="card usuario">
 
                 <div class="card-icon">
-                    <i class="fa-solid fa-user" style="color: rgb(39, 92, 240);"></i>
+                    <i class="fa-solid fa-user" style="color: rgb(39, 92, 240); "></i>
                 </div>
                 <div class="card-text">
                     <p>Usuarios</p>
@@ -135,20 +135,29 @@
     </div>
 </div>
 
+@php
+function calcularColor($dias) {
+$dias = max(0, min($dias, 30)); // Limita a un rango de 0 a 30 días
+$rojo = 255;
+$verde_azul = intval(255 * ($dias / 30)); // Menos días => más rojo
+return "rgb($rojo, $verde_azul, $verde_azul)";
+}
+@endphp
+
 <div class="productos">
     <div class="productos-destacados">
-        <h3>Productos Destacados</h3>
-        <p>Los productos con mejor rendimiento</p>
+        <h3>Productos por vencer</h3>
+        <p>Los productos que están por vencer</p>
 
         <div class="productos-destacados-contenedor">
-            @foreach ($productosVentas as $producto)
+            @foreach ($productosPorVencer as $producto)
             <div class="productos-destacados-contenido">
-                <div class="productos-destacados-numero">
+                <div class="productos-destacados-numero" style="background-color: {{ calcularColor($producto->dias_restantes) }};">
                     {{ $loop->iteration }}
                 </div>
                 <div class="productos-destacados-nombre">
-                    <p>{{ $producto->nombre }}</p>
-                    <span>{{ $producto->total_vendido }} Ventas</span>
+                    <p>{{ $producto->producto->nombre }}</p>
+                    <span>{{ $producto->caducidad }} </span>
                 </div>
 
             </div>
@@ -158,12 +167,14 @@
     <div class="productos-inventario">
         <h3>Alerta de inventario</h3>
         <p>Productos con bajo stock</p>
+         
+        @foreach ($productosBajoStock as $producto)
         <div class="conteiner-invetario">
 
             <div class="datos">
                 <div class="datos-producto">
                     <p>Producto 1</p>
-                    <span>Stock actual: 5</span>
+                    <span>Stock actual: 21</span>
                 </div>
                 <div class="datos-categoria">
                     <p>Jarabe</p>
@@ -175,6 +186,7 @@
             </div>
 
         </div>
+        @endforeach
         <div class="inventario-gestionar">
             <a href="{{ route('inventario.index') }}">Gestionar inventario<i class="fa-solid fa-arrow-right"></i></a>
         </div>
@@ -246,7 +258,7 @@
         ///
 
         // Valores que puedes cambiar dinámicamente
-        const stockActual = 5;
+        const stockActual = 21;
         const stockMinimo = 100;
 
         // Actualiza el texto
@@ -263,7 +275,6 @@
 </script>
 
 
-</script>
 
 
 <script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>

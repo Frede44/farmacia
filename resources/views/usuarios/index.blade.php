@@ -37,10 +37,10 @@
         <table id="tablaUsuarios" class="display nowrap">
             <thead>
                 <tr>
-                    <th>Codigo</th>
-                    <th>nombre</th>
-                    <th>correo</th>
-                    <th>roles</th>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Roles</th>
                     <th>Acciones</th>
 
 
