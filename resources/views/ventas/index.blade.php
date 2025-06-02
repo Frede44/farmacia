@@ -71,7 +71,7 @@
                             <!-- Botón Eliminar -->
 
 
-                            <a href="{{ asset('storage/ticket_venta_'.$venta->id.'.pdf') }}" class="btnEliminar" target="_blank">
+                            <a href="{{ asset('tickets/ticket_venta_' .$venta->id.'.pdf') }}" class="btnEliminar" target="_blank">
                                 <i class="fa-solid fa-file-pdf" style="color:rgb(255, 255, 255);"></i>
                             </a>
 

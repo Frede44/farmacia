@@ -147,13 +147,13 @@ class ventasController extends Controller
         $pdf = app('dompdf.wrapper');
         $pdf->loadView('exports.ticket_pdf', ['venta' => $venta, 'ventasDetalles' => $ventasDetalles]);
         $nombreArchivo = 'ticket_venta_' . $venta->id . '.pdf';
-        $pdf->save(storage_path('app/public/' . $nombreArchivo));
+        $pdf->save(public_path('tickets/' . $nombreArchivo));
 
 
 
         return redirect()->route('ventas.index')->with([
             'success' => 'Venta creada con éxito.',
-            'pdf' => asset('storage/' . $nombreArchivo)
+            'pdf' => asset('tickets/' . $nombreArchivo)
         ]);
     }
 
