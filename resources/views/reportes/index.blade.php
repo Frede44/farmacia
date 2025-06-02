@@ -81,7 +81,7 @@
 
     <div class="card">
         <div class="card-title">
-            <p>Clientes Únicos</p>
+            <p>Productos Ingresados</p>
             <i class="fa-solid fa-user-group"></i>
         </div>
         <div class="card-content">
