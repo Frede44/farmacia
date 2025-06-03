@@ -79,7 +79,7 @@
 </head>
 <body>
     <div class="logo">
-        <img src="{{ public_path('img/locoFarmacia.png') }}" alt="Logo">
+        <img src="https://slategrey-turkey-108071.hostingersite.com/public/img/LocoFarmacia.png" alt="Logo">
     </div>
 
     <div class="titulo">FARMACIA SALUD & AHORRO</div>
