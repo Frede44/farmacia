@@ -9,11 +9,17 @@
 }
 
 /* estructura de dos columnas */
+/* estructura de columnas adaptables */
 .container > div {
     display: flex;
+    flex-wrap: wrap;
     gap: 20px;
 }
 
+.container > div > div {
+    flex: 1;
+    min-width: 300px; /* Asegura que se apilen en móviles */
+}
 /* columnas individuales */
 .container > div > div {
     flex: 1;
@@ -37,11 +43,38 @@ select {
     padding-top: 10px;
     padding-bottom: 10px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 8px;
     font-size: 14px;
     appearance: none;
+    outline: none; /* Elimina el contorno por defecto */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Animación suave */
 }
 
+select{
+     width: 100%;
+    padding: 10px; /* superior e inferior ya lo tienes, esto agrega a izquierda y derecha */
+    padding-left: 12px; /* o el valor que necesites */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    appearance: none;
+    outline: none;
+}
+
+/* Azul al pasar el mouse */
+input[type="number"]:hover,
+input[type="date"]:hover,
+select:hover {
+    border-color: #25588fc5; /* azul más vivo */
+}
+
+/* Azul al hacer clic (focus) */
+input[type="number"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #1a6dc5af;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.178); /* efecto de foco */
+}
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     margin: 0;
@@ -79,7 +112,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .btn-cancelar {
    
-    color: rgb(0, 0, 0);
+    color: rgb(37, 37, 37);
     text-decoration: none;
     display: inline-block;
     text-align: center;
@@ -98,7 +131,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .btnAgregarf:hover {
-    background-color: #696be5;
+    background-color: #3e40e6;
 }
 
 /* tabla */
@@ -145,3 +178,91 @@ thead {
 }
 
 
+  /* Imagen actual más grande */
+.imagen-preview {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  margin: 0 auto 20px auto; /* Centrado horizontal + margen inferior */
+  display: block;
+  transition: filter 0.3s ease; /* Suaviza el cambio de color */
+  cursor: pointer; /* Muestra que se puede hacer clic */
+
+ 
+}
+.imagen-preview:hover {
+  filter: grayscale(60%);
+}
+.modal-imagen {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.863);
+  text-align: center;
+  
+  
+}
+
+.modal-contenido {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80vh;
+  border-radius: 10px;
+  
+}
+
+.cerrar-modal {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: rgb(71, 71, 71);
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10000;
+}
+
+.cerrar-modal:hover {
+  color: #ccc;
+}
+.imagen-label{
+  color: green;
+  text-align: center;
+}
+
+/*Vista movil*/
+@media (max-width: 768px) {
+    
+    .container > div {
+        flex-direction: column;
+    }
+
+       
+    
+
+    .btn-guardar{
+        width: 100%;
+    }
+    .btn-cancelar {
+        width: 90%;
+    }
+    table {
+        font-size: 12px;
+        width: 100%;
+    }
+
+    .imagen-preview {
+        width: 60%;
+        height: auto;
+    }
+}

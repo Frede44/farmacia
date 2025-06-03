@@ -26,7 +26,7 @@
 
     <div class="btn_div">
         <a href="{{ route('ventas.create') }}" style="text-decoration: none;">
-            <button class="btnAgregar">Crear venta</button>
+            <button class="btnAgregar">+Venta</button>
         </a>
     </div>
 
@@ -37,10 +37,10 @@
         <table id="tablaUsuarios" class="display nowrap">
             <thead>
                 <tr>
-                    <th>Numero de venta </th>
-                    <th>cliente</th>
+                    <th>Número de venta </th>
+                    <th>Cliente</th>
                     <th>Usuario </th>
-                    <th>total</th>
+                    <th>Total</th>
                     <th>Estado</th>
                     <th>Fecha</th>
                     <th>Acciones</th>

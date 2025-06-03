@@ -1,5 +1,5 @@
 @extends('dashboard.index')
-<title>compras</title>
+<title>Compras</title>
 <link rel="stylesheet" href="{{ asset('css/comprasEstilos/index.css') }}">
 
 <link rel="stylesheet" href="styles.css" />
@@ -11,8 +11,8 @@
 <h2>Lista de Compras</h2>
 
 <div class="btn_div">
-    <a href="{{ route('compras.create') }}">
-        <button class="btnAgregar">Crear nueva compra</button>
+    <a href="{{ route('compras.create') }}" style="text-decoration:none;">
+        <button class="btnAgregar">+Compra</button>
     </a>
 </div>
 

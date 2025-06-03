@@ -209,11 +209,11 @@ h2 {
     position: fixed;
     top: 5px;
     margin: 0;
-    width: 100px;
+    width: 75px;
     height: 50px;
-
-    background-color: #272627;
-    color: white;
+    margin-left: 5px;
+     background-color: #021929;
+    color: rgb(255, 255, 255);
     border: none;
     border-radius: 5px;
     font-size: 20px;
@@ -226,10 +226,12 @@ h2 {
 }
 
 
+
 /* Solo mostrar botón en pantallas pequeñas */
 @media (max-width: 992px) {
     .btn-toggle-sidebar {
         display: block;
+        
     }
 
     .btn_div{

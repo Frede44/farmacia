@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
-    <title>Productos</title>
+    <title>Roles</title>
     <link rel="stylesheet" href="{{ asset('css/rolesEstilos/indexRoles.css') }}"> 
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
@@ -23,7 +23,7 @@
     
     <div class="btn_div">
     <a href="{{ route('rol.create') }}" style="text-decoration:none;">
-    <button class="btnAgregar">Crear roles</button>
+    <button class="btnAgregar">+Rol</button>
     </a>
     </div>
 

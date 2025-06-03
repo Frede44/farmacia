@@ -158,6 +158,9 @@ table.dataTable td {
     .content {
         margin-left: 0; /* El contenido ocupa todo el ancho en pantallas pequeñas */
     }
+     .btnAgregar {
+    transform: translateX(-5px);
+  }
 }
 
 .modal-descripcion {

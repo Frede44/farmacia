@@ -234,6 +234,10 @@ table.dataTable td {
 
 /*Diseño de movil*/
 @media (max-width: 768px) {
+ .btnAgregar {
+    transform: translateX(-5px);
+  }
+
   table#tablaUsuarios,
   table#tablaUsuarios thead,
   table#tablaUsuarios tbody,
@@ -256,6 +260,7 @@ table.dataTable td {
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     
   }
+  
 
   table#tablaUsuarios tbody tr td {
     /* Cambiar display a flex-column para que título y texto queden vertical */

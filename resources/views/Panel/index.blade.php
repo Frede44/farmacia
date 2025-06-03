@@ -102,7 +102,7 @@
         <div id="chartContainer" style="height: 100%; width: 100%;"></div>
     </div>
     <div class="ventas-recientes">
-        <h3>ventas recientes </h3>
+        <h3>Ventas recientes </h3>
         <p>Ultimas ventas realizadas</p>
 
         @foreach ($ventasRecientes as $venta)

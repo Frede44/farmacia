@@ -4,7 +4,7 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     @extends('dashboard.index')
-    <title>Crear Categoría</title>
+    <title>Crear Presentación</title>
     <link rel="stylesheet" href="{{ asset('css/categoriasEstilos/createCategorias.css') }}"> 
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -20,16 +20,16 @@
     <body>
     @section('contenido')
 
-    <h2> CREAR CATEGORÍA</h2>
+    <h2> CREAR PRESENTACIÓN</h2>
  
             <div class="container">
             <form action="{{ route('categorias.store') }}" method="POST">
             @csrf
                 <div class="form-group">
                 
-                    <label for="nombre">Nombre de la categoría</label>
+                    <label for="nombre">Nombre de la presentación</label>
                     <small id="contadorNombre" style="display: block; color: #666; font-size: 12px; margin-top: 4px;"></small>
-                    <input type="text" id="nombre" name="nombre" placeholder="Nombre de la categoría" maxlength="50"  oninput="actualizarContador('nombre', 'contadorNombre', 50)">
+                    <input type="text" id="nombre" name="nombre" placeholder="Nombre de la presentación" maxlength="50"  oninput="actualizarContador('nombre', 'contadorNombre', 50)">
                     @error('nombre')
                 <div class="error-message">
                     <i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}
@@ -39,7 +39,7 @@
 
                 <div class="form-group">
                     <small id="contador" style="display: block; color: #666; font-size: 12px; margin-top: 4px;"></small>
-                 <textarea id="descripcion" name="descripcion" placeholder="Descripción del producto..." maxlength="250"  oninput="actualizarContador()">{{ old('descripcion') }}</textarea>
+                 <textarea id="descripcion" name="descripcion" placeholder="Descripción de la presentación..." maxlength="250"  oninput="actualizarContador()">{{ old('descripcion') }}</textarea>
                  @error('descripcion')
                 <div class="error-message">
                     <i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}

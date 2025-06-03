@@ -4,7 +4,7 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     @extends('dashboard.index')
-    <title>Categorías</title>
+    <title>Presentaciones</title>
     <link rel="stylesheet" href="{{ asset('css/categoriasEstilos/indexCategorias.css') }}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
@@ -19,11 +19,11 @@
 
     <body>
     @section('contenido')
-    <h2>CATEGORÍAS</h2>
+    <h2>PRESENTACIONES</h2>
  
     <div class="btn_div">
         <a href="{{ route('categorias.create') }}" style="text-decoration:none;">
-            <button class="btnAgregar">+Categoría</button>
+            <button class="btnAgregar">+Crear</button>
         </a>
     </div>
 
@@ -33,7 +33,7 @@
         <tr>
             <th>Codigo</th>
             <th class="nombre">Nombre</th>
-            <th>Descripcion</th>
+            <th>Descripción</th>
             <th>Acciones</th>
           
             

@@ -36,7 +36,7 @@ body {
     width: 100px;
     height: 50px;
     margin-left: 25px;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: bold;
  
     
@@ -231,6 +231,9 @@ color: #2692eb;
 
 /*Diseño de movil*/
 @media (max-width: 768px) {
+   .btnAgregar {
+    transform: translateX(-5px);
+  }
 table#tablaUsuarios,
 table#tablaUsuarios thead,
 table#tablaUsuarios tbody,

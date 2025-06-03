@@ -4,7 +4,7 @@
     <meta charset="UTF-8"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     @extends('dashboard.index')
-    <title>Editar Categoría</title>
+    <title>Editar Presentación</title>
     <link rel="stylesheet" href="{{ asset('css/categoriasEstilos/createCategorias.css') }}"> 
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
 <body>
     @section('contenido')
 
-    <h2> EDITAR CATEGORÍA</h2>
+    <h2> EDITAR PRESENTACIÓN</h2>
 
     <div class="container">
         <form action="{{ route('categorias.update', $categoria->id) }}" method="POST" enctype="multipart/form-data">
@@ -28,8 +28,8 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="nombre">Nombre de la categoría</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre de la categoría" maxlength="50" value="{{ old('nombre', $categoria->nombre) }}" >
+                <label for="nombre">Nombre de la presentación</label>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre de la presentación" maxlength="50" value="{{ old('nombre', $categoria->nombre) }}" >
                 @error('nombre')
                     <div class="error-message">
                         <i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}

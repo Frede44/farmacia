@@ -4,9 +4,13 @@
 <link rel="stylesheet" href="{{ asset('css/comprasEstilos/estilos.css') }}">
 <link rel="stylesheet" href="styles.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
 
 <h2>CREAR COMPRA</h2>
-
+<!-- JS de jQuery y Select2 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <div class="container">
 
     <div style="display: flex;">
@@ -16,7 +20,8 @@
                 <select id="producto" name="producto_id">
                     <option value="">Seleccione un producto</option>
                     @foreach ($productos as $producto)
-                    <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+                    <option  value="{{ $producto->id }}"
+                    data-imagen="{{ $producto->imagen }}">{{ $producto->nombre }}</option>
                     @endforeach
                 </select>
                 @error('producto_id')
@@ -59,9 +64,23 @@
                 @enderror
                 
             </div>
+              <div class="imagen-actual" id="imagenActualContainer" style="display: none;">
+                         <label class="imagen-label">Producto seleccionado</label>
+                         <img id="imagenActual"
+                             src=""
+                             alt="Imagen actual"
+                             class="imagen-preview"
+                             onclick="openModal(this.src)">
+            </div>
+             <!-- Modal para mostrar imagen en grande -->
+             <div id="imageModal" class="modal-imagen" onclick="closeModal()">
+                 <span class="cerrar-modal">&times;</span>
+                 <img class="modal-contenido" id="modalImg">
+             </div>
         </div>
     </div>
 
+             
     <div class="grupoBotones">
         <button id="btn-agregar" type="button" class="btn-guardar">Agregar</button>
         <a href="{{ route('compras.index') }}?cancelado=1" class="btn-cancelar">Cancelar</a>
@@ -204,5 +223,45 @@
         }
     }, true);
 </script>
+ <script>
+    $(document).ready(function () {
+        $('#producto').select2({
+            placeholder: 'Selecciona un producto',
+            allowClear: true
+        });
+
+        
+        $('#producto').on('change', function () {
+            const selectedOption = $(this).find(':selected');
+            const imagen = selectedOption.data('imagen');
+
+            console.log(imagen); 
+
+            if (imagen) {
+                $('#imagenActual').attr('src', `/imagenes/${imagen}`);
+                $('#imagenActualContainer').show();
+            } else {
+                $('#imagenActual').attr('src', '');
+                $('#imagenActualContainer').hide();
+            }
+        });
+    });
+</script>
+     <!--Mostrar imagen del producto-->
+     <script>
+       
+
+         // Modal script
+         function openModal(src) {
+             const modal = document.getElementById("imageModal");
+             const modalImg = document.getElementById("modalImg");
+             modal.style.display = "block";
+             modalImg.src = src;
+         }
+
+         function closeModal() {
+             document.getElementById("imageModal").style.display = "none";
+         }
+     </script>
 
 @endsection

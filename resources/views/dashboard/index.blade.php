@@ -63,7 +63,7 @@
 
             @can('categorias.index')
             <li class="opciones"><a href="{{ route('categorias.index')}}" class="{{ request()->routeIs('categorias.*') ? 'active' : '' }}">
-                    <i class="fas fa-box"></i>Categorías</a></li>
+                    <i class="fas fa-box"></i>Presentaciones</a></li>
             @endcan
 
             @can('inventario.index')
@@ -72,15 +72,15 @@
             @endcan
 
             @can('ventas.index')
-            <li class="opciones"><a href="{{route('ventas.index')}}"><i class="fas fa-shopping-bag"></i>Venta</a></li>
+            <li class="opciones"><a href="{{route('ventas.index')}}" class="{{ request()->routeIs('ventas.*') ? 'active' : '' }}"><i class="fas fa-shopping-bag"></i>Venta</a></li>
             @endcan
 
             @can('reportes.index')
-            <li class="opciones"><a href="{{route('reportes.index')}}"><i class="fas fa-chart-line"></i>Reporte de ventas</a></li>
+            <li class="opciones"><a href="{{route('reportes.index')}}" class="{{ request()->routeIs('reportes.*') ? 'active' : '' }}"><i class="fas fa-chart-line"></i>Reporte de ventas</a></li>
             @endcan
 
             @can('compras.index')
-            <li class="opciones"><a href="{{route('compras.index')}}"><i class="fas fa-shopping-cart"></i>Compra</a></li>
+            <li class="opciones"><a href="{{route('compras.index')}}" class="{{ request()->routeIs('compras.*') ? 'active' : '' }}"><i class="fas fa-shopping-cart"></i>Compra</a></li>
             @endcan
 
             @can('proveedor.index')

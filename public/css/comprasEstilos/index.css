@@ -92,7 +92,7 @@
       color: rgb(248, 248, 248);
     }
     td{
-      color: black;
+      color: rgb(32, 32, 32);
     }
   
       
@@ -158,6 +158,9 @@ table.dataTable td {
     .content {
         margin-left: 0; /* El contenido ocupa todo el ancho en pantallas pequeñas */
     }
+     .btnAgregar {
+    transform: translateX(-5px);
+  }
 }
 
 .modal-descripcion {
@@ -277,35 +280,29 @@ table.dataTable td {
     font-weight: bold;
     margin-bottom: 4px;
   }
-  table#tablaUsuarios tbody tr td:nth-of-type(1)::before { content: "Codigo:"; }
+  table#tablaUsuarios tbody tr td:nth-of-type(1)::before { content: "ID:"; }
   table#tablaUsuarios tbody tr td:nth-of-type(2)::before { content: "Fecha:"; }
   table#tablaUsuarios tbody tr td:nth-of-type(3)::before { content: "Total:"; }
-
-  table#tablaUsuarios tbody tr td:nth-of-type(5)::before { content: "Acciones:"; }
+  table#tablaUsuarios tbody tr td:nth-of-type(4)::before { content: "Acciones:"; }
  
 
   /* Ajuste imagen y acciones para que no se rompa layout */
-  table#tablaUsuarios tbody tr td:nth-of-type(4),
-  table#tablaUsuarios tbody tr td:nth-of-type(5) {
+  table#tablaUsuarios tbody tr td:nth-of-type(3),
+  table#tablaUsuarios tbody tr td:nth-of-type(4) {
     flex-direction: column;
     align-items: flex-start;
   }
 
-  table#tablaUsuarios tbody tr td:nth-of-type(4) img {
-    margin-top: 5px;
-    max-width: 80px;
-    height: auto;
-    cursor: pointer;
-  }
+ 
 
-  table#tablaUsuarios tbody tr td:nth-of-type(5) .flex {
+  table#tablaUsuarios tbody tr td:nth-of-type(4) .flex {
     margin-top: 5px;
     gap: 8px;
     flex-wrap: wrap;
   }
 
-  table#tablaUsuarios tbody tr td:nth-of-type(5) a.btnEditar,
-  table#tablaUsuarios tbody tr td:nth-of-type(5) a.btnEliminar {
+  table#tablaUsuarios tbody tr td:nth-of-type(4) a.btnEditar,
+  table#tablaUsuarios tbody tr td:nth-of-type(4) a.btnEliminar {
     margin-right: 8px;
     display: inline-flex;
     align-items: center;

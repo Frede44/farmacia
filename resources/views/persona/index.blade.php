@@ -24,7 +24,7 @@
 
     <div class="btn_div">
         <a href="{{ route('persona.create') }}" style="text-decoration: none;">
-            <button class="btnAgregar">Crear personas</button>
+            <button class="btnAgregar">+Persona</button>
         </a>
     </div>
 

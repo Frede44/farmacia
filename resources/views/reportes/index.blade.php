@@ -50,7 +50,7 @@
     <div class="card">
         <div class="card-title">
             <p>Ventas Totales</p>
-            <i class="fa-solid fa-dollar-sign"></i>
+            <i class="fa-solid fa-money-bill"></i>
         </div>
         <div class="card-content">
             @foreach ($cantidadVendida as $venta)
