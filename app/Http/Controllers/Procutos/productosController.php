@@ -48,7 +48,7 @@ class productosController extends Controller
             
             'nombre' => 'required|string|max:50',
             'descripcion' => 'nullable|string|max:250',
-            'imagen' => 'required|image|mimes:png,jpg',
+           'imagen' => 'required|image|mimes:png,jpg,jpeg,webp',
             'categoria_id' => 'required|exists:categoria,id', 
         ]);
 
@@ -91,7 +91,7 @@ class productosController extends Controller
                     'codigo' => 'required|string|max:35|unique:productos,codigo,' . $producto->id,
                     'nombre' => 'required|string|max:50' . $producto->id,
                     'descripcion' => 'nullable|string|max:250',
-                    'imagen' => 'nullable|image|mimes:png,jpg',
+                    'imagen' => 'required|image|mimes:png,jpg,jpeg,webp',
                     'categoria_id' => 'required|exists:categoria,id', 
                 ]);
             

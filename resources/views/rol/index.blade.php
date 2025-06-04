@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
     <title>Roles</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/rolesEstilos/indexRoles.css') }}"> 
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
@@ -35,7 +36,7 @@
     <table id="tablaUsuarios" class="display nowrap" >
         <thead>
         <tr>
-            <th>Codigo</th>
+            <th>Código</th>
             <th class="nombre">Nombre</th>
             <th class="acciones">Acciones</th>
           

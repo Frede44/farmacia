@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
     <title>Reporte</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/reportesEstilos/estilos.css') }}">
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>

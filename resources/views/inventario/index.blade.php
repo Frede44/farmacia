@@ -11,7 +11,7 @@
 
     <!-- Título de la página -->
     <title>Inventario</title>
-
+<link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <!-- Enlaces a los archivos CSS -->
     <link rel="stylesheet" href="{{ asset('css/inventarioEstilos/indexInventario.css') }}">
     <link rel="stylesheet" href="styles.css" />

@@ -240,29 +240,59 @@ thead {
   text-align: center;
 }
 
-/*Vista movil*/
+
+
+/* Scroll horizontal en pantallas pequeñas */
 @media (max-width: 768px) {
-    
-    .container > div {
+    .container {
+        
+    }
+
+    .grupoBotones {
         flex-direction: column;
+        gap: 10px;
     }
 
-       
+    .btn-guardar,
     
+    .btnAgregarf {
+        margin-bottom: 10px;
+        width: 100%;
+    }
 
-    .btn-guardar{
-        width: 100%;
-    }
-    .btn-cancelar {
-        width: 90%;
-    }
-    table {
-        font-size: 12px;
-        width: 100%;
-    }
+    .titulo-lista {
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed; /* Importante para que todas las celdas tengan el mismo ancho */
+}
+
+table thead,
+table tbody {
+    display: table;
+    width: 100%;
+    table-layout: fixed; /* Igual que en la tabla principal */
+}
+
+table tr {
+    display: table-row;
+}
+
+table th,
+table td {
+    font-size: 12px;
+    word-break: break-word;
+    padding: 8px;
+    vertical-align: top; /* Para que el contenido largo se expanda hacia abajo */
+    text-align: left;
+}
+    
 
     .imagen-preview {
-        width: 60%;
+        width: 100%;
         height: auto;
     }
 }

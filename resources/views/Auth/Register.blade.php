@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
     <title>Document</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/registroEstilos/estilos.css') }}">
 </head>
 @section('contenido')

@@ -64,6 +64,7 @@ h3,p,h4 {
     max-width: 900px;
 }
 
+
 /* Grid de productos */
 .container-productos {
     display: grid;
@@ -177,6 +178,7 @@ h3,p,h4 {
 }
 
 
+
 .carrito-productos h3 {
     text-align: left;
     margin: 0;
@@ -206,15 +208,21 @@ h3,p,h4 {
     text-align: center;
     padding: 10px;
     margin: 0 5px;
-    background-color: #787575;
+    background-color: #afafaf;
     border: 1px solid #ddd;
     border-radius: 5px;
     transition: background-color 0.3s, border 0.3s;
+     cursor: pointer; /* Esto cambia el puntero al pasar encima */
+}
+.carito-titulo h3:hover {
+    background-color: #e2e2e2;
+    border-color: #0227f800;
 }
 
 .carito-titulo h3.activo {
-    background-color: #f0f0f0;
-    border-color: #aaa;
+    background-color: #174eb4;
+    border-color: #0227f800;
+    color: white; /* Cambia el color del texto a blanco */
 }
 
 .carrito-productos {
@@ -328,7 +336,7 @@ h3,p,h4 {
 }
 
 #comprar {
-    background-color: #626262;
+    background-color: #1eaa48;
     color: white;
     border: none;
     border-radius: 5px;
@@ -337,6 +345,7 @@ h3,p,h4 {
     width: 100%;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    font-size: 20px;
 }
 
 #imprimir-ticket {
@@ -351,8 +360,8 @@ h3,p,h4 {
 }
 
 #comprar:hover {
-    background-color: #cdcdcd;
-    color: #000;
+    background-color: #1a7526;
+    color: #ffffff;
 }
 
 #imprimir-ticket:hover {

@@ -1,7 +1,7 @@
 @extends('dashboard.index')
 
 <link rel="stylesheet" href="{{ asset('css/panelEstilos/indexPanel.css') }}">
-
+<link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
 @section('contenido')
 <div class="titulo">
     <h1>Panel de Control</h1>

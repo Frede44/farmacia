@@ -3,6 +3,7 @@
 @section('contenido')
 <link rel="stylesheet" href="{{ asset('css/comprasEstilos/estilos.css') }}">
 <link rel="stylesheet" href="styles.css" />
+<link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 

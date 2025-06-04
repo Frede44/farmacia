@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
     <title>Ventas</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/ventasEstilos/show.css') }}">
   
 
@@ -36,9 +37,9 @@
                     <th>Venta</th>
                     <th>Producto </th>
                     <th>Tipo</th>
-                    <th>cantidad</th>
+                    <th>Cantidad</th>
                     <th>Precio unitario</th>
-                    <th>total</th>
+                    <th>Total</th>
 
 
                 </tr>

@@ -1,7 +1,7 @@
 @extends('dashboard.index')
-<title>compras</title>
+<title>Compras</title>
 <link rel="stylesheet" href="{{ asset('css/comprasEstilos/show.css') }}">
-
+<link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
 <link rel="stylesheet" href="styles.css" />
 <script src="script.js"></script>
 
@@ -9,8 +9,8 @@
 
 @section('contenido')
 <h2>Lista de Compras</h2>
-<a href="{{ route('compras.create') }}">
-    <button class="btnAgregar">Crear nueva compra</button>
+<a href="{{ route('compras.create') }}"style="text-decoration:none;">
+    <button class="btnAgregar">+Nueva compra</button>
 </a>
 
 <div class="table-container">
@@ -18,10 +18,10 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>producto</th>
-                <th>cantidad</th>
-                <th>precio</th> 
-                <th>subtotal</th>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th> 
+                <th>Subtotal</th>
             </tr>
         </thead>
         <tbody>

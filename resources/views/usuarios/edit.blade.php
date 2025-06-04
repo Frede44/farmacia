@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index') {{-- Asegúrate que esta ruta sea correcta para tu layout --}}
     <title>Editar Usuario</title>
+    <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/registroEstilos/estilos.css') }}"> {{-- Reutilizamos los mismos estilos --}}
 </head>
 

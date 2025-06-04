@@ -11,7 +11,7 @@
 
     <!-- Título de la página -->
     <title>Proveedor</title>
-
+<link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <!-- Enlaces a los archivos CSS -->
     <link rel="stylesheet" href="{{ asset('css/proveedorEstilos/indexProveedor.css') }}">
     <link rel="stylesheet" href="styles.css" />
@@ -44,7 +44,7 @@
                       
                         
                         <th class="nombre">Nombre</th>
-                        <th>Numero de Teléfono</th>
+                        <th>Número de Teléfono</th>
                         <th>Correo Electronico</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
