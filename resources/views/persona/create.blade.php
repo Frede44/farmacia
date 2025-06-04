@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   @extends('dashboard.index')
-  <title>personas</title>
+  <title>Personas</title>
   <link rel="stylesheet" href="{{ asset('css/personasEstilos/estilos.css') }}">
 
 
@@ -43,20 +43,20 @@
           <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
           @enderror
 
-          <label for="correo">Correo</label>
-          <input type="email" name="correo" id="correo" placeholder="Correo" >
+          <label for="correo">Correo-Electronico</label>
+          <input type="email" name="correo" id="correo" placeholder="Correo-Electronico" >
           @error('correo')
           <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
           @enderror
 
-          <label for="telefono">Telefono</label>
+          <label for="telefono">Teléfono</label>
           <input type="text" name="telefono" id="telefono" placeholder="0000-0000" >
           @error('telefono')
           <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
           @enderror
 
-          <label for="direccion">Direccion</label>
-          <input type="text" name="direccion" id="direccion" placeholder="Direccion" >
+          <label for="direccion">Dirección</label>
+          <input type="text" name="direccion" id="direccion" placeholder="Dirección" >
           @error('direccion')
           <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
           @enderror
@@ -67,7 +67,7 @@
       </div>
 
       <div class="grupoBotones">
-        <button type="submit" class="btn-guardar">crear</button>
+        <button type="submit" class="btn-guardar">Crear</button>
         <a href="{{ route('persona.index') }}?cancelado=1" class="btn-cancelar">Cancelar</a>
       </div>
     </form>

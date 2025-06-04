@@ -44,20 +44,20 @@
         <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
         @enderror
 
-        <label for="correo">Correo</label>
-        <input type="email" name="correo" id="correo" placeholder="Correo" required value="{{ $persona->correo }}">
+        <label for="correo">Correo-Electronico</label>
+        <input type="email" name="correo" id="correo" placeholder="Correo-Electronico" required value="{{ $persona->correo }}">
         @error('correo')
         <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
         @enderror
 
-        <label for="telefono">Telefono</label>
+        <label for="telefono">Teléfono</label>
         <input type="text" name="telefono" id="telefono" placeholder="0000-0000" required value="{{ $persona->telefono }}">
         @error('telefono')
         <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
         @enderror
 
-        <label for="direccion"> Direccion</label>
-        <input type="text" name="direccion" id="direccion" placeholder="Direccion" required value="{{ $persona->direccion }}">
+        <label for="direccion"> Dirección</label>
+        <input type="text" name="direccion" id="direccion" placeholder="Dirección" required value="{{ $persona->direccion }}">
         @error('direccion')
         <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
         @enderror
@@ -71,7 +71,7 @@
 
 
      <div class="grupoBotones">
-          <button type="submit" class="btn-guardar">crear</button>
+          <button type="submit" class="btn-guardar">Guardar</button>
           <a href="{{ route('persona.index') }}?cancelado=1" class="btn-cancelar">Cancelar</a>
         </div>
    
