@@ -8,6 +8,7 @@
     <title>Editar Usuario</title>
     <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/registroEstilos/estilos.css') }}"> {{-- Reutilizamos los mismos estilos --}}
+     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
 </head>
 
 @section('contenido')

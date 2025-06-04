@@ -7,7 +7,7 @@
     <title>Crear Inventario</title>
     <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/inventarioEstilos/createInventario.css') }}"> 
-    
+     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
 
     
 <!-- Select2 -->

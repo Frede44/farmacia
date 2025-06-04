@@ -8,6 +8,7 @@
     <title>Roles</title>
     <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/rolesEstilos/indexRoles.css') }}"> 
+     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
 

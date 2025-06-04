@@ -7,6 +7,7 @@
     <title>Usuarios</title>
     <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/ventasEstilos/ventasEstilos.css') }}">
+     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
@@ -23,6 +24,13 @@
 </head>
 @extends('dashboard.index')
 @section('contenido')
+
+@if ($errors->has('error'))
+    <div class="custom-alert alert alert-danger">
+        {{ $errors->first('error') }}
+    </div>
+@endif
+
 <div class="container">
     <div class="productos">
         <div class="search">
@@ -246,6 +254,10 @@
                 return;
             }
 
+            //comprobar si no agrega mas producto del que hay en stock
+
+          
+
             const existenteIndex = carrito.findIndex(item => item.idProducto === idProducto && item.tipo === tipo);
 
             if (existenteIndex !== -1) {
@@ -462,6 +474,17 @@
         });
         // --- FIN: CÓDIGO PARA EL ORDENAMIENTO DE PRODUCTOS ---
     });
+</script>
+
+<script>
+    setTimeout(() => {
+        const alert = document.querySelector('.custom-alert');
+        if (alert) {
+            alert.style.transition = 'opacity 0.5s ease';
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 500);
+        }
+    }, 4000); // 4 segundos
 </script>
 
 

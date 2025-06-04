@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/categoriasEstilos/indexCategorias.css') }}"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+   <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
 
 
     <link rel="stylesheet" href="styles.css" />

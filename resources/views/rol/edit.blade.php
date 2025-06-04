@@ -8,6 +8,7 @@
     <title>Editar Roles</title>
     <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
+     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
