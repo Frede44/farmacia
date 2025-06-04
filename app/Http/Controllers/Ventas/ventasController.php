@@ -56,6 +56,21 @@ class ventasController extends Controller
 
         $total = 0;
 
+        //validar si la cantidad de producto es mayor a la cantidad en inventario
+
+        foreach ($request->productos as $producto) {
+            $inventario = Inventario::where('id_producto', $producto['id_producto'])->first();
+
+            if (!$inventario) {
+                return redirect()->back()->withErrors(['error' => 'Producto no encontrado en inventario.']);
+            }
+
+            if ($producto['tipo'] === 'Unidad' && $inventario->total_unidad < $producto['cantidad']) {
+                return redirect()->back()->withErrors(['error' => 'Cantidad de unidades insuficientes en inventario para el producto: ' . $producto['nombre']]);
+            } elseif ($producto['tipo'] === 'Caja' && $inventario->cantidad_caja < $producto['cantidad']) {
+                return redirect()->back()->withErrors(['error' => 'Cantidad de cajas insuficientes en inventario para el producto: ' . $producto['nombre']]);
+            }
+        }
         // Calcular total
         foreach ($request->productos as $producto) {
             $total += $producto['precio'] * $producto['cantidad'];

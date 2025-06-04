@@ -4,6 +4,33 @@ h3,p,h4 {
     margin: 0;
 
 }
+
+  .custom-alert {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1050;
+        min-width: 250px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        background-color: #f44336;
+        color: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        animation: slideFadeInRight 0.5s ease-out;
+    }
+
+    @keyframes slideFadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+
 /* Clase para accesibilidad visual oculta */
 .visually-hidden {
     position: absolute;
