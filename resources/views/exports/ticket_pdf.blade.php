@@ -79,7 +79,7 @@
 </head>
 <body>
     <div class="logo">
-        <img src="https://slategrey-turkey-108071.hostingersite.com/public/img/LocoFarmacia.png" alt="Logo">
+        <img src="farmaciasaludyahorro.com.gt/public/img/LocoFarmacia.png" alt="Logo">
     </div>
 
     <div class="titulo">FARMACIA SALUD & AHORRO</div>
@@ -107,8 +107,8 @@
                             <span class="item-descripcion">{{ $detalle->producto->descripcion }}</span>
                         @endif
                     </td>
-                    <td>${{ number_format($detalle->precio_unitario, 2) }}</td>
-                    <td>${{ number_format($detalle->subtotal, 2) }}</td>
+                    <td>Q{{ number_format($detalle->precio_unitario, 2) }}</td>
+                    <td>Q{{ number_format($detalle->subtotal, 2) }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -119,7 +119,7 @@
     </div>
 
     <div class="total">
-        <strong>Total: ${{ number_format($venta->total, 2) }}</strong>
+        <strong>Total: Q{{ number_format($venta->total, 2) }}</strong>
     </div>
 
     <div class="datos-ticket">
