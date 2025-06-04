@@ -5,8 +5,17 @@
 
 @section('contenido')
 <div class="titulo">
-    <h1>Panel de Control</h1>
-    <p>Bienvenido de vuelta, aquí tienes un resumen de tu negocio</p>
+   <div>
+        <h1>Panel de Control</h1>
+        <p>Bienvenido de vuelta, aquí tienes un resumen de tu negocio</p>
+   </div>
+   <div class="manual">
+        <a href="{{ asset('manual/manual.pdf') }}" target="_blank" class="btn-manual">
+            <i class="fa-solid fa-book"></i>
+            Manual de usuario
+        </a>
+
+   </div>
 </div>
 
 <div class="acciones_rapidas">
