@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @extends('dashboard.index')
     <title>Ventas</title>
+     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
     <link rel="stylesheet" href="{{ asset('css/ventasEstilos/index.css') }}">
 
 
