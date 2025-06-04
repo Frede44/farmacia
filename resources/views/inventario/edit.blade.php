@@ -6,7 +6,7 @@
     @extends('dashboard.index')
     <title>Crear Inventario</title>
     <link rel="stylesheet" href="{{ asset('css/inventarioEstilos/createInventario.css') }}"> 
-    
+     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
 
     
 <!-- Select2 -->

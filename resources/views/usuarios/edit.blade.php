@@ -7,6 +7,7 @@
     @extends('dashboard.index') {{-- Asegúrate que esta ruta sea correcta para tu layout --}}
     <title>Editar Usuario</title>
     <link rel="stylesheet" href="{{ asset('css/registroEstilos/estilos.css') }}"> {{-- Reutilizamos los mismos estilos --}}
+     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
 </head>
 
 @section('contenido')

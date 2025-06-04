@@ -15,6 +15,7 @@
     <!-- Enlaces a los archivos CSS -->
     <link rel="stylesheet" href="{{ asset('css/inventarioEstilos/indexInventario.css') }}">
     <link rel="stylesheet" href="styles.css" />
+     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
 
     <!-- Enlace al archivo JavaScript -->
     <script src="script.js"></script>

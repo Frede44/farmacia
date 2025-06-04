@@ -7,7 +7,7 @@
     @extends('dashboard.index')
     <title>Productos</title>
     <link rel="stylesheet" href="{{ asset('css/productosEstilos/indexProductos.css') }}">
-
+ <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
 
 
     <link rel="stylesheet" href="styles.css" />

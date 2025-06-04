@@ -4,7 +4,7 @@
 
 <link rel="stylesheet" href="styles.css" />
 <script src="script.js"></script>
-
+ <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
 
 
 @section('contenido')

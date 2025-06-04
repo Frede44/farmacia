@@ -2,6 +2,7 @@
 
 <link rel="stylesheet" href="{{ asset('css/panelEstilos/indexPanel.css') }}">
 
+
 @section('contenido')
 <div class="titulo">
     <h1>Panel de Control</h1>
