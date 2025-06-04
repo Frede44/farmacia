@@ -97,7 +97,7 @@
             @endcan
 
             @can('usuarios.index')
-            <li class="opciones"><a href="{{ route('usuarios.index') }} " class="{{ request()->routeIs('usuarios.*') ? 'active' : '' }}"><i class="fas fa-user"></i>Usuarios</a></li>
+            <li class="opciones"><a href="{{ route('usuarios.index') }} " class="{{ request()->is('usuarios*') || request()->is('register') ? 'active' : '' }}"><i class="fas fa-user"></i>Usuarios</a></li>
             @endcan
 
             @can('rol.index')

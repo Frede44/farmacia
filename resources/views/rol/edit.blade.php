@@ -89,7 +89,7 @@
 
             </div>
 
-            <button type="submit">Crear</button>
+            <button type="submit">Guardar</button>
 
         </form>
 
