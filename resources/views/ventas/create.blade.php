@@ -7,13 +7,12 @@
     <title>Usuarios</title>
     <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/ventasEstilos/ventasEstilos.css') }}">
-     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    
+
         integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        
         /* Estilos adicionales para la búsqueda de clientes */
         .cliente.seleccionado {
             background-color: #f0f0f0;
@@ -26,9 +25,9 @@
 @section('contenido')
 
 @if ($errors->has('error'))
-    <div class="custom-alert alert alert-danger">
-        {{ $errors->first('error') }}
-    </div>
+<div class="custom-alert alert alert-danger">
+    {{ $errors->first('error') }}
+</div>
 @endif
 
 <div class="container">
@@ -57,8 +56,20 @@
                 data-stock="{{ $inventario->total_unidad }}"> {{-- <--- AÑADIDO PARA CLARIDAD, aunque ya lo usas para estilo --}}
                 <img src="{{ asset('imagenes/' . $inventario->producto->imagen) }}"
                     alt="{{$inventario->producto->nombre}}">
-                <h4 class="categoria">Medicina</h4> {{-- Considera hacerlo dinámico si tienes categorías: $inventario->producto->categoria->nombre ?? 'Medicina' --}}
-                <h3>{{$inventario->producto->nombre}}</h3>
+                <div class="producto-info" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                    {{-- Usar data attributes para almacenar información del producto --}}
+                    {{-- Usar el operador de fusión null para evitar errores si la categoría no existe --}}
+                    <div>
+                        <h4 class="categoria">{{ $inventario->producto->categoria->nombre ?? 'Medicina' }}</h4>
+                        <h3>{{ $inventario->producto->nombre }}</h3>
+                    </div>
+                    <div class="fecha-caducidad" style="display: flex; flex-direction: column; align-items: flex-end; width: 100%; justify-content: flex-end; margin-right: 10px;">
+                        {{-- Mostrar la fecha de ingreso --}}
+                        {{-- Mostrar la fecha de caducidad y los días restantes --}}
+                        <span style="font-weight: bold;">Caducidad: </span>
+                        <span>{{ $inventario->fechaCaducidadObj->format('d/m/Y') }}</span>
+                    </div>
+                </div>
                 <p>{{$inventario->producto->descripcion}}</p>
                 <div class="precio-stock">
                     {{-- Mostrar ambos precios podría ser útil para el usuario --}}
@@ -160,7 +171,7 @@
             {{-- El botón "Comprar" ahora es de tipo submit y está DENTRO del form --}}
             <button type="submit" id="comprar">Comprar</button>
         </form> {{-- Fin de ventaForm --}}
-       
+
     </div>
 </div>
 
@@ -193,13 +204,13 @@
         thead.style.display = '';
         let total = 0;
 
-         carrito.forEach((item, index) => {
-        const subtotal = item.precio * item.cantidad;
-        total += subtotal;
+        carrito.forEach((item, index) => {
+            const subtotal = item.precio * item.cantidad;
+            total += subtotal;
 
-        const fila = document.createElement('tr');
-        // La visualización de la tabla no necesita cambiar drásticamente
-        fila.innerHTML = `
+            const fila = document.createElement('tr');
+            // La visualización de la tabla no necesita cambiar drásticamente
+            fila.innerHTML = `
             <td>${item.nombre}</td>
             <td>${item.tipo}</td>
             <td>Q${item.precio.toFixed(2)}</td>
@@ -211,18 +222,18 @@
                 <button type="button" data-index="${index}" class="eliminar-producto"><i class="fa-regular fa-trash-can"></i></button>
             </td>
         `;
-        carritoTabla.appendChild(fila);
+            carritoTabla.appendChild(fila);
 
-        // Crear inputs ocultos para el formulario
-        // ASEGÚRATE DE QUE EL NOMBRE DEL CAMPO COINCIDA CON LO QUE ESPERA TU CONTROLADOR EN LARAVEL
-        carritoHiddenInputs.innerHTML += `
+            // Crear inputs ocultos para el formulario
+            // ASEGÚRATE DE QUE EL NOMBRE DEL CAMPO COINCIDA CON LO QUE ESPERA TU CONTROLADOR EN LARAVEL
+            carritoHiddenInputs.innerHTML += `
             <input type="hidden" name="productos[${index}][id_producto]" value="${item.idProducto}"> {{-- <--- NUEVO --}}
             <input type="hidden" name="productos[${index}][nombre]" value="${item.nombre}">
             <input type="hidden" name="productos[${index}][tipo]" value="${item.tipo}">
             <input type="hidden" name="productos[${index}][precio]" value="${item.precio}">
             <input type="hidden" name="productos[${index}][cantidad]" value="${item.cantidad}">
         `;
-    });
+        });
 
         totalDisplay.textContent = `Q${total.toFixed(2)}`;
         subtotalDisplay.textContent = `Q${total.toFixed(2)}`;
@@ -256,7 +267,7 @@
 
             //comprobar si no agrega mas producto del que hay en stock
 
-          
+
 
             const existenteIndex = carrito.findIndex(item => item.idProducto === idProducto && item.tipo === tipo);
 
@@ -399,7 +410,7 @@
                 }
             });
             resumenInfo.style.display = 'none';
-            
+
         });
 
 
@@ -426,13 +437,13 @@
         // --- FIN: CÓDIGO PARA EL BUSCADOR DE PRODUCTOS ---
 
         // --- INICIO: CÓDIGO PARA EL ORDENAMIENTO DE PRODUCTOS ---
-       const orderSelect = document.getElementById('ordenar');
+        const orderSelect = document.getElementById('ordenar');
 
-        orderSelect.addEventListener('change', function () {
+        orderSelect.addEventListener('change', function() {
             const orderType = this.value;
             let sortedProducts = [...allProducts];
 
-                  switch (orderType) {
+            switch (orderType) {
                 case 'precio-menor':
                     sortedProducts.sort((a, b) => {
                         const precioA = parseFloat(a.dataset.precioUnidad); // <--- CAMBIADO
