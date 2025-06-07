@@ -182,11 +182,11 @@ return "rgb($rojo, $verde_azul, $verde_azul)";
 
             <div class="datos">
                 <div class="datos-producto">
-                    <p>Producto 1</p>
-                    <span>Stock actual: 21</span>
+                    <p>{{ $producto->producto->nombre }}</p>
+                    <span>Stock actual: {{ $producto->total_unidad }}</span>
                 </div>
                 <div class="datos-categoria">
-                    <p>Jarabe</p>
+                    <p>{{ $producto->categoria->nombre }}</p>
                     <span>Minimo 100</span>
                 </div>
             </div>

@@ -13,7 +13,7 @@ class InventarioController extends Controller
     public function index()
 {
     $inventarios = Inventario::with('producto.categoria')
-        ->select('id','id_producto','xunidad','xcaja','caducidad','cantidad_caja','unidad_caja', 'id_categoria')
+        ->select('id','id_producto','xunidad','xcaja','caducidad','cantidad_caja','unidad_caja', 'total_unidad','id_categoria')
         ->get()
         ->map(function($item) {
             $item->fechaCaducidadObj = new \DateTime($item->caducidad);

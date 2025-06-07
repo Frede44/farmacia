@@ -104,7 +104,7 @@ class PanelController extends Controller
 }
 
 $productosBajoStock = Inventario::where('total_unidad', '<=', 50)
-    ->with('producto')
+    ->with('producto', 'categoria')
     ->get();
 
         return view('Panel.index', compact('ventasParaGrafico', 'ventasRecientes', 'productosVentas', 'productosPorVencer', 'productosBajoStock'));

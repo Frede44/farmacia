@@ -49,6 +49,7 @@
                         <th>Precio por caja</th>
                         <th>No. de cajas</th>
                         <th>No. de unidades</th>
+                        <th>Unidades totales</th>
                         <th>Fecha de caducidad</th>
                         <th>Acciones</th>
 
@@ -71,6 +72,7 @@
                         <td>{{ $inventario->xcaja }}</td>
                         <td>{{ $inventario->cantidad_caja }}</td>
                         <td>{{ $inventario->unidad_caja }}</td>
+                        <td>{{ $inventario->total_unidad }}</td>
                         
                         <td>
                         @if($inventario->diferenciaDias < 0)
