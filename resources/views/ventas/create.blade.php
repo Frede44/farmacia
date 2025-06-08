@@ -56,7 +56,7 @@
                 data-stock="{{ $inventario->total_unidad }}"> {{-- <--- AÑADIDO PARA CLARIDAD, aunque ya lo usas para estilo --}}
                 <img src="{{ asset('imagenes/' . $inventario->producto->imagen) }}"
                     alt="{{$inventario->producto->nombre}}">
-                <div class="producto-info" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%;">
+                <div class="producto-info" style="display: flex; flex-direction: row; justify-content: space-between; width: 100%; padding-bottom: 10px;">
                     {{-- Usar data attributes para almacenar información del producto --}}
                     {{-- Usar el operador de fusión null para evitar errores si la categoría no existe --}}
                     <div>

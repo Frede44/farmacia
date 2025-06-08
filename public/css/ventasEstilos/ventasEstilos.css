@@ -130,7 +130,7 @@ h3,p,h4 {
 .producto h3,
 .producto p {
     text-align: left;
-    width: 100%;
+    
     margin-bottom: 5px;
     padding-left: 10px;
 }
