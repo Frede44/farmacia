@@ -33,8 +33,19 @@ class ventasController extends Controller
     public function create()
     {
         $personas = Personas::all();
-        $productosInventario = Inventario::with(['producto'])->get();
-        return view('ventas.create', compact('personas', "productosInventario"));
+
+        $productosInventario = Inventario::with('producto.categoria')
+            ->select('id', 'id_producto', 'xunidad', 'xcaja', 'caducidad', 'cantidad_caja', 'unidad_caja', 'total_unidad', 'id_categoria')
+            ->get()
+            ->map(function ($item) {
+                $item->fechaCaducidadObj = new \DateTime($item->caducidad);
+                $hoy = new \DateTime();
+                $diff = $hoy->diff($item->fechaCaducidadObj);
+                $item->diferenciaDias = (int)$diff->format('%r%a'); // días con signo (+/-)
+                return $item;
+            });
+
+        return view('ventas.create', compact('personas', 'productosInventario'));
     }
 
     public function store(Request $request)
