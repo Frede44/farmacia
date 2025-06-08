@@ -334,7 +334,7 @@
 .productos-inventario{
     border: solid 1px #ccc;
     width: 46%;
-    height: 500px;
+    height: auto;
     border-radius: 10px;
     padding: 20px;
 }
@@ -364,6 +364,7 @@
     padding: 20px;
     border-radius: 20px;
     border: solid 1px #fc821f;
+    height: auto;
 }
 
 .datos{

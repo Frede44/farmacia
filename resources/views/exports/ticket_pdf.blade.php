@@ -79,7 +79,7 @@
 </head>
 <body>
     <div class="logo">
-        <img src="farmaciasaludyahorro.com.gt/public/img/LocoFarmacia.png" alt="Logo">
+        <img src="https://farmacia.farmaciasaludyahorro.com.gt/img/LocoFarmacia.png" alt="Logo">
     </div>
 
     <div class="titulo">FARMACIA SALUD & AHORRO</div>

@@ -103,7 +103,7 @@ class PanelController extends Controller
     $producto->dias_restantes = Carbon::now()->diffInDays(Carbon::parse($producto->caducidad), false);
 }
 
-$productosBajoStock = Inventario::where('total_unidad', '<=', 50)
+$productosBajoStock = Inventario::where('total_unidad', '<=', 25)
     ->with('producto', 'categoria')
     ->get();
 
