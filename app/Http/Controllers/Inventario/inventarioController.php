@@ -14,6 +14,7 @@ class InventarioController extends Controller
 {
     $inventarios = Inventario::with('producto.categoria')
         ->select('id','id_producto','xunidad','xcaja','caducidad','cantidad_caja','unidad_caja', 'total_unidad','id_categoria')
+        ->where('estado', true) // Filtrar solo inventarios activos
         ->get()
         ->map(function($item) {
             $item->fechaCaducidadObj = new \DateTime($item->caducidad);
@@ -27,7 +28,9 @@ class InventarioController extends Controller
 }
     public function create()
     {
-        $productos = Productos::all();
+        $productos = Productos::where('estado', true)
+        ->whereNotIn('id', Inventario::pluck('id_producto'))
+        ->get();
         return view('inventario.create',compact ('productos'));
     }
 
@@ -66,10 +69,18 @@ class InventarioController extends Controller
     }
     public function edit($id)
     {
-        $inventario = Inventario::findOrFail($id);
-        $productos = Productos::all();
-        return view('inventario.edit', ['inventario' => $inventario, 'productos' => $productos]);
-    }
+    $inventario = Inventario::findOrFail($id);
+
+    // IDs de productos usados en otros inventarios (excluyendo el actual)
+    $productosUsados = Inventario::where('id', '!=', $inventario->id)
+        ->pluck('id_producto');
+    // Solo productos activos y que no estén en otros inventarios
+    $productos = Productos::where('estado', true)
+        ->whereNotIn('id', $productosUsados)
+        ->get();
+
+    return view('inventario.edit', ['inventario' => $inventario, 'productos' => $productos]);
+}
     public function update(Request $request, Inventario $inventario)
     {
         $request->validate([
@@ -98,7 +109,8 @@ class InventarioController extends Controller
     public function destroy($id)
     {
         $inventario = Inventario::findOrFail($id);
-        $inventario->delete();
+        $inventario->estado = false;
+        $inventario->save();
         return redirect()->route('inventario.index')->with('success', '¡Producto eliminado correctamente!');
     }
 

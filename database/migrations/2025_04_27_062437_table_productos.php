@@ -22,6 +22,7 @@ class TableProductos extends Migration
             $table->string('imagen')->nullable(); // Campo para la imagen, puede ser nulo
             $table->unsignedBigInteger('categoria_id'); // Relación con la tabla categorias
             $table->timestamps();
+            $table->boolean('estado')->default(true);
         });
     }
 

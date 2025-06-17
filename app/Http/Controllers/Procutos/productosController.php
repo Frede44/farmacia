@@ -19,6 +19,7 @@ class productosController extends Controller
     
     public function index(){
         $productos=Productos::with('categoria:id,nombre') // Cargar la relación con la categoría
+        ->where('estado', true) // Filtrar solo productos activos
         ->select('id','codigo','nombre','descripcion','imagen','categoria_id')
         ->get();
 
@@ -120,6 +121,8 @@ class productosController extends Controller
             
                 return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
             }
+
+
             public function destroy(Productos $producto)
             {
                 // Eliminar imagen del producto si existe
@@ -127,23 +130,26 @@ class productosController extends Controller
                     unlink(public_path('imagenes/' . $producto->imagen));
                 }
                 //Eliminar el producto de la base de datos
-                $producto->delete();
+                $producto->estado = false;
+                $producto->save();
             
                 return redirect()->route('productos.index')->with('success', 'Producto eliminado correctamente.');
 
         
             }  
+
+
             public function buscar(Request $request)
-{
-    $termino = $request->input('q');
+            {
+                $termino = $request->input('q');
 
-    $producto = Productos::where('nombre', 'LIKE', "%{$termino}%")
-        ->select('id', 'nombre')
-        ->limit(10)
-        ->get();
+                $producto = Productos::where('nombre', 'LIKE', "%{$termino}%")
+                    ->select('id', 'nombre')
+                    ->limit(10)
+                    ->get();
 
-    return response()->json($producto);
-}
+                return response()->json($producto);
+            }
 
                 
 

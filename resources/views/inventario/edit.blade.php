@@ -35,11 +35,16 @@
                                 <select name="id_producto" id="id_producto" class="form-control">
                                     <option value="">Selecciona un producto</option>
                                     @foreach ($productos as $producto)
-                                        <option value="{{ $producto->id }}" data-imagen="{{ $producto->imagen }}" {{ (old('id_producto', $inventario->id_producto) == $producto->id) ? 'selected' : '' }}>
-                                            {{ $producto->nombre }}
+                                        <option
+                                 value="{{ $producto->id }}" data-imagen="{{ $producto->imagen }}" {{ (old('id_producto', $inventario->id_producto) == $producto->id) ? 'selected' : '' }}>
+                                 {{ $producto->nombre }} - {{ $producto->categoria->nombre ?? 'Sin categoría' }}
                                         </option>
                                     @endforeach
                                 </select>
+
+
+
+
                                 @error('id_producto')
                                     <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
                                 @enderror
