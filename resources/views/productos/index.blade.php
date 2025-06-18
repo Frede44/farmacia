@@ -38,7 +38,7 @@
                     <th>Codigo</th>
                     <th class="nombre">Producto</th>
                     <th>Descripción</th>
-                    <th>Categoría</th>
+                    <th>Presentación</th>
                     <th>Imagen</th>
                     <th>Acciones</th>
 

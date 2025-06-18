@@ -30,16 +30,25 @@
                             <!-- Columna 1: Producto, Precio Venta y Precio Compra -->
                             <div class="form-group">
                             <div class="form-header">Precios del Producto</div>
-                                <!-- Producto -->
-                                <label for="id_producto">Producto</label>
-                                <select name="id_producto" id="id_producto" class="form-control">
-                                    <option value="">Selecciona un producto</option>
-                                    @foreach ($productos as $producto)
-                                        <option value="{{ $producto->id }}" data-imagen="{{ $producto->imagen }}" {{ (old('id_producto', $inventario->id_producto) == $producto->id) ? 'selected' : '' }}>
-                                            {{ $producto->nombre }}
-                                        </option>
-                                    @endforeach
-                                </select>
+                           <div style="margin-bottom: 20px;">
+                         <label for="id_producto">Producto</label>
+                         <select name="id_producto" id="id_producto" class="form-control">
+                             <option value="">Selecciona un producto</option>
+                             @foreach ($productos as $producto)
+                             <option
+                                 value="{{ $producto->id }}" data-imagen="{{ $producto->imagen }}" {{ (old('id_producto', $inventario->id_producto) == $producto->id) ? 'selected' : '' }}>
+                                 {{ $producto->nombre }} - {{ $producto->categoria->nombre ?? 'Sin categoría' }}
+                             </option>
+                             @endforeach
+                         </select>
+                         @error('id_producto')
+                         <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
+                         @enderror
+                     </div>
+
+
+
+
                                 @error('id_producto')
                                     <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
                                 @enderror
@@ -193,6 +202,32 @@
     function closeModal() {
         document.getElementById("imageModal").style.display = "none";
     }
+</script>
+
+
+    <script>
+    $(document).ready(function () {
+        $('#id_producto').select2({
+            placeholder: 'Selecciona un producto',
+            allowClear: true
+        });
+
+        
+        $('#id_producto').on('change', function () {
+            const selectedOption = $(this).find(':selected');
+            const imagen = selectedOption.data('imagen');
+
+            console.log(imagen); 
+
+            if (imagen) {
+                $('#imagenActual').attr('src', `/imagenes/${imagen}`);
+                $('#imagenActualContainer').show();
+            } else {
+                $('#imagenActual').attr('src', '');
+                $('#imagenActualContainer').hide();
+            }
+        });
+    });
 </script>
     
    

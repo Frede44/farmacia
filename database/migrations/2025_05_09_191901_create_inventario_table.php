@@ -24,6 +24,7 @@ class CreateInventarioTable extends Migration
             $table->integer('unidad_caja'); 
             $table->integer('total_unidad'); 
             $table->unsignedBigInteger('id_categoria');
+            $table->boolean('estado')->default(true);
             $table->timestamps();       
         });
     }
