@@ -74,6 +74,7 @@ class productosController extends Controller
             'descripcion' => $request->descripcion,
             'imagen' => $name,
             'categoria_id' => $request->categoria_id,
+            'estado' => true, // Por defecto, el producto está activo
         ]);
 
         return redirect()->route('productos.index')->with('success', '¡Producto guardado correctamente!');

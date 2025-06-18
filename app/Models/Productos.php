@@ -16,6 +16,7 @@ class Productos extends Model
         'descripcion',
         'imagen',
         'categoria_id',
+        'estado', // Agregado para manejar el estado del producto
 
     ];
 

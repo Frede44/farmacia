@@ -65,6 +65,7 @@ class InventarioController extends Controller
             'unidad_caja' => $request->unidad_caja,
             'total_unidad' => $total,
             'id_categoria' => $categoria,
+            'estado' => true, // Por defecto, el inventario está activo
 
                 ]);
         
@@ -105,6 +106,7 @@ class InventarioController extends Controller
             'cantidad_caja' => $request->cantidad_caja,
             'total_unidad' => $request->cantidad_caja * $request->unidad_caja,
             'unidad_caja' => $request->unidad_caja,
+           // "estado" => true, // Por defecto, el inventario está activo
         ]);
 
         return redirect()->route('inventario.index')->with('success', '¡Producto actualizado correctamente!');

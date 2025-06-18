@@ -20,6 +20,7 @@ class Inventario extends Model
         'unidad_caja',
         'total_unidad' // Total de unidades calculado como cantidad_caja * unidad_caja
         ,'id_categoria' // Relación con la tabla categorias
+        ,'estado' // Agregado para manejar el estado del inventario
 
     ];
     public function producto()
