@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Procutos;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
+use App\Models\Inventario;
 use App\Models\Productos;
 use Illuminate\Http\Request;
 
