@@ -36,7 +36,8 @@ class ventasController extends Controller
 
         $productosInventario = Inventario::with('producto.categoria')
             ->select('id', 'id_producto', 'xunidad', 'xcaja', 'caducidad', 'cantidad_caja', 'unidad_caja', 'total_unidad', 'id_categoria')
-            ->get()
+            ->where('estado', true) // Filtrar solo productos activos
+            ->get()          
             ->map(function ($item) {
                 $item->fechaCaducidadObj = new \DateTime($item->caducidad);
                 $hoy = new \DateTime();
