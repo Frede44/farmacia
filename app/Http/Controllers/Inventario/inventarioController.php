@@ -28,9 +28,12 @@ class InventarioController extends Controller
 }
     public function create()
     {
-        $productos = Productos::where('estado', true)
-        ->whereNotIn('id', Inventario::pluck('id_producto'))
-        ->get();
+       
+
+        $productos = Productos::with('categoria')
+            ->select('id','codigo','nombre','descripcion','imagen','categoria_id')
+            ->where('estado', true) // Filtrar solo productos activos
+            ->get();
         return view('inventario.create',compact ('productos'));
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Procutos;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categoria;
+use App\Models\Inventario;
 use App\Models\Productos;
 use Illuminate\Http\Request;
 
@@ -129,6 +130,14 @@ class productosController extends Controller
                 if ($producto->imagen && file_exists(public_path('imagenes/' . $producto->imagen))) {
                     unlink(public_path('imagenes/' . $producto->imagen));
                 }
+
+                // Verificar si el producto está en uso en inventario
+                $enUso = Inventario::where('id_producto', $producto->id)->exists();
+                if ($enUso) {
+                    return redirect()->route('productos.index')->with('error', 'No se puede eliminar el producto porque está en uso en el inventario.');
+                }
+
+
                 //Eliminar el producto de la base de datos
                 $producto->estado = false;
                 $producto->save();

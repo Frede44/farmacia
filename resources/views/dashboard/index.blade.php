@@ -153,6 +153,20 @@
         });
     </script>
     @endif
+
+    @if (session('error'))
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            Swal.fire({
+                icon: 'error',
+                title: '¡Error!',
+                text: "{{ session('error') }}",
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Aceptar'
+            });
+        });
+    </script>
+    @endif
     <!--Mensaje cuando se cancela correctamente-->
     @if(request()->has('cancelado'))
     <script>

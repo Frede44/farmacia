@@ -57,23 +57,29 @@
                 </thead>
                 <tbody>
                     <!-- Iteración de los productos en el inventario -->
-                    @foreach($inventarios as $inventario)
+         @foreach($inventarios as $inventario)
                     <tr>
-                        
+                @if($inventario)
                     <td>
-                        <span class="nombre-corto">
-                            {{ \Illuminate\Support\Str::limit($inventario->producto->nombre, 25, '...') }}
+                        @if($inventario->producto)
+                             <span class="nombre-corto">
+                            {{ \Illuminate\Support\Str::limit($inventario->producto->nombre, 25, '...' ?? 'Sin nombre') }}
                             @if(strlen($inventario->producto->nombre) > 25)
                                 <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-texto="{{ $inventario->producto->nombre }}"></i>
                             @endif
-                        </span>
+                             </span>
+
+                         @else
+                            <span class="nombre-corto">Sin Producto</span>
+                        @endif
+
                     </td>
-                        <td>{{ $inventario->xunidad }}</td>
-                        <td>{{ $inventario->xcaja }}</td>
-                        <td>{{ $inventario->cantidad_caja }}</td>
-                        <td>{{ $inventario->unidad_caja }}</td>
-                        <td>{{ $inventario->total_unidad }}</td>
-                        
+                        <td>{{ $inventario->xunidad  ?? 'Sin Unidad' }}</td>
+                        <td>{{ $inventario->xcaja  ?? 'Sin Caja' }}</td>
+                        <td>{{ $inventario->cantidad_caja  ?? 'Sin Caja' }}</td>
+                        <td>{{ $inventario->unidad_caja  ?? 'Sin Unidad' }}</td>
+                        <td>{{ $inventario->total_unidad  ?? 'Sin Unidad' }}</td>
+
                         <td>
                         @if($inventario->diferenciaDias < 0)
                             <span style="color:rgb(231, 25, 45); font-weight: bold;">
@@ -89,13 +95,14 @@
                             </span>
                         @endif
                     </td>
+                @endif
 
 
                         
 
 
                         {{-- Acciones --}}
-         <td>
+             <td>
                          <!-- Botón Editar -->
                 <div class="flex flex-col justify-center items-center gap-2">
                 <form  method="GET">
@@ -115,7 +122,7 @@
                 </form>
                 
                 </div>
-        </td>
+         </td>
                     
                     </tr>
                     <!-- Modal para mostrar la descripción completa (se reutiliza para nombre también) -->
@@ -126,7 +133,7 @@
                 </div>
             </div>
 
-                    @endforeach
+        @endforeach
                     
                
                 </tbody>
