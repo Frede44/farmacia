@@ -341,16 +341,20 @@
         // Generar HTML dinámico con los mismos datos
         var detalleContainer = document.getElementById("detalle-productos");
 
-        productosMasVendidos.forEach((producto) => {
-            let porcentaje = ((producto.y / productosMasVendidos.reduce((acc, p) => acc + p.y, 0)) * 100).toFixed(0);
+        // Calcular el total de ventas primero
+        var totalVentas = productosMasVendidos.reduce((acc, p) => acc + parseInt(p.y), 0);
 
+        productosMasVendidos.forEach((producto) => {
+            let ventasProducto = parseInt(producto.y);
+            let porcentaje = ((ventasProducto / totalVentas) * 100).toFixed(0);
+            console.log(`Producto: ${producto.label}, Ventas: ${ventasProducto}, Porcentaje: ${porcentaje}%`);
             let item = `
         <div class="producto">
             <div class="info">
                 <span class="color-dot" style="background-color: ${producto.color};"></span>
                 <div>
                     <strong>${producto.label}</strong>
-                    <p>${producto.y} ventas</p>
+                    <p>${ventasProducto} ventas</p>
                 </div>
             </div>
             <div class="porcentaje">${porcentaje}%</div>
