@@ -72,7 +72,7 @@
                 {{ \Illuminate\Support\Str::limit($proveedor->descripcion, 15, '...') }}
                 <!-- depues de los 30 mostrara el ojo -->
                     @if(strlen($proveedor->descripcion) > 15)
-                        <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-completa="{{ $proveedor->descripcion }}"></i>
+                        <i class="fa-solid fa-eye icono-ojo" onclick="mostrarDescripcion(this)" data-texto="{{ $proveedor->descripcion }}"></i>
                     @endif
                 </span></td>
                 
@@ -116,7 +116,9 @@
         </div>
 
     </div>
+    
     @endsection
+    
 </body>
 
 </html>
