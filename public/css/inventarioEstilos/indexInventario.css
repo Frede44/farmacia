@@ -1,10 +1,8 @@
-
-
 body {
     font-family: 'Segoe UI', sans-serif;
     padding: 20px;
     background-color: #f5f5f5;
-      overflow-x: hidden; /* ❗Evita scroll horizontal global */
+    overflow-x: hidden; /* Vuelvo a hidden en body para evitar scroll global */
   }
 
   table.dataTable thead { /*titulos de la tabla*/
@@ -98,10 +96,13 @@ body {
   .table-container {
     background-color: rgb(245, 245, 245); 
     padding: 10px; /* Separación interna de  en todos los lados */
-    overflow-x: auto;
-    width: 95%;
+    overflow-x: auto; /* Permite scroll horizontal */
+    width: 100%; /* Utiliza todo el ancho disponible del contenedor padre */
+    max-width: calc(100vw - 320px); /* Máximo ancho considerando sidebar + padding */
     margin: 20px auto; /* Centra el contenedor horizontalmente */
     border-radius: 8px;
+    min-width: 0; /* Permite que el contenedor se reduzca */
+    box-sizing: border-box;
   
 }
     
@@ -112,16 +113,18 @@ body {
 
 table.dataTable {
     width: 100%;
-    max-width: 100%; /*maximo de la tabla pero queda segun los botones al 100%*/
+    max-width: none; /* Permite que la tabla sea más ancha que el contenedor */
     border-collapse: collapse;
+    min-width: 800px; /* Establece un ancho mínimo para la tabla */
    
 }
 
 
 table.dataTable td {
   padding: 16px 24px !important; /* <- Forzar mayor espacio interno */
-  white-space: nowrap;
+  white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
   text-align: center;
+  min-width: 100px; /* Establece un ancho mínimo para las celdas */
 }
 
 /* Cambiar el color, borde y tamaño */
@@ -147,15 +150,49 @@ height: 40px !important;
 background-color: #398b99;
 }
 
+/* Mejoras para el scroll horizontal de la tabla */
+.dataTables_wrapper {
+    overflow-x: auto;
+    width: 100%;
+    max-width: 100%; /* Asegura que no se desborde */
+}
 
+/* Estilo para la barra de scroll horizontal */
+.table-container::-webkit-scrollbar {
+    height: 12px;
+}
 
+.table-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 6px;
+}
 
+.table-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* Asegurar que las celdas de encabezado también tengan ancho mínimo */
+table.dataTable th {
+    min-width: 100px;
+    white-space: nowrap;
+}
 
 /* Responsividad para pantallas pequeñas */
 @media (max-width: 768px) {
-  .content {
+  .content, .vistas {
       margin-left: 0; /* El contenido ocupa todo el ancho en pantallas pequeñas */
+      width: 100vw; /* Ancho completo en móviles */
   }
+  
+  .table-container {
+      max-width: calc(100vw - 40px); /* Ajuste para móviles */
+  }
+  
    .btnAgregar {
     transform: translateX(-5px);
   }
@@ -185,7 +222,7 @@ margin: 5% auto;
 padding: 30px 40px;
 border-radius: 16px;
 width: 90%;
-max-width: 480px;
+max-width: 400px;
 position: relative;
 box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 word-wrap: break-word;
@@ -311,3 +348,12 @@ color: #2692eb;
       padding: 0;
     }
   }
+
+  /* Contenedor principal que respeta el sidebar */
+.content, .vistas {
+    margin-left: 270px; /* Respeta el ancho del sidebar */
+    padding: 20px;
+    overflow-x: auto; /* Permite scroll horizontal solo en el contenido */
+    width: calc(100vw - 270px); /* Ancho calculado sin el sidebar */
+    box-sizing: border-box;
+}
