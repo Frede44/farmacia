@@ -99,10 +99,15 @@
                                 
                                  <!-- Unidades por caja -->
                                  <label for="unidad_caja">Unidades por caja</label>
-                                <input type="number" id="unidad_caja" step="0.01" min="0.01" name="unidad_caja" placeholder="Unidades por caja" value="{{ old('unidad_caja', $inventario->cantidad_caja) }}">
+                                <input type="number" id="unidad_caja" step="0.01" min="0.01" name="unidad_caja" placeholder="Unidades por caja" value="{{ old('unidad_caja', $inventario->unidad_caja) }}">
                                 @error('unidad_caja')
                                     <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
                                 @enderror
+                                    <!-- Unidades totales mostrar -->
+                                <label class="unidades_existencia">Unidades en existencia</label>
+                                <div class="div_existencia">
+                                    {{ number_format($inventario->total_unidad,) }}
+                                </div>
 
 
                                 <!-- Fecha de caducidad  seleccionar despues de la actual-->

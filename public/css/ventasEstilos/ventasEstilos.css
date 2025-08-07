@@ -39,7 +39,9 @@ h3,p,h4 {
     width: 1px;
     height: 1px;
     overflow: hidden;
+    
 }
+
 
 /* Estilos de la búsqueda */
 .search {
@@ -58,6 +60,7 @@ h3,p,h4 {
     border-radius: 5px;
     border: 1px solid #ccc;
     padding: 5px 10px;
+    font-size: 18px;
 }
 
 .search-select {

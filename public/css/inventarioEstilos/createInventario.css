@@ -76,6 +76,25 @@ body {
     transition: border-color 0.3s, box-shadow 0.3s;
     height: 40px;
   }
+  .div_existencia {
+    padding: 13px;
+    background-color: rgb(235, 235, 235);
+    border: 1px solid #ebebeb;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: green;
+    width: fit-content;
+    margin-bottom: 10px;
+    margin-left: 60px;
+}
+
+.unidades_existencia {
+    display: block;
+    margin-bottom: 5px; 
+    color: black;
+}
+  
   
   
   /* Estilo cuando pasa el mouse  */
