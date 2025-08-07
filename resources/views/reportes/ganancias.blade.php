@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
      <link rel="stylesheet" href="{{ asset('css/reportesEstilos/ganancias.css') }}">
+      <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
+      <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
      <meta name="csrf-token" content="{{ csrf_token() }}">
     @extends('dashboard.index')
-    <title>Document</title>
+    <title>Reporte de ganancias</title>
 </head>
 <body>
     @section('contenido')
