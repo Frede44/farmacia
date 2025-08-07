@@ -90,7 +90,7 @@
             <p id="ventas-totales">Q0.00</p>
         </div>
         <div class="kpi-card">
-            <h4>Compras Totales</h4>
+            <h4>Cantidad Gastada en productos</h4>
             <p id="compras-totales">Q0.00</p>
         </div>
         <div class="kpi-card">
