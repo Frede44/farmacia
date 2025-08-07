@@ -94,7 +94,7 @@
             <p id="compras-totales">Q0.00</p>
         </div>
         <div class="kpi-card">
-            <h4>Ticket Promedio</h4>
+            <h4>Promedio de Ventas</h4>
             <p id="ticket-promedio">Q0.00</p>
         </div>
     </section>
