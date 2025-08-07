@@ -8,7 +8,7 @@
     <title>Reporte</title>
     <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/reportesEstilos/estilos.css') }}">
-     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
+    <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js"></script>
 </head>
@@ -32,6 +32,10 @@
         <button class="btn-exportar" onclick="abrirModal()">
             <i class="fa-solid fa-download"></i> Exportar
         </button>
+
+        <a href="{{ route('vistaGanancia') }}" style="text-decoration:none;">
+            <button class="btn-exportar"><i class="fa-solid fa-money-bill"></i>Ver ganancias</button>
+        </a>
     </div>
 
     <!-- Modal flotante -->
@@ -40,13 +44,15 @@
             <h3>¿En qué formato deseas exportar?</h3>
             <div class="botones-modal">
                 <button onclick="exportarArchivo('pdf')">Exportar a PDF</button>
-            
+
             </div>
             <button class="cerrar" onclick="cerrarModal()">Cancelar</button>
         </div>
     </div>
 
 </section>
+
+
 
 <section class="section-card">
     <div class="card">
@@ -191,23 +197,23 @@
     <div class="categoria_conteiner">
         <h4>Ventas por categoria</h4>
         <p class="descripcion">Rendimiento de ventas agrupado por categorías de productos</p>
-    <div class="conteiner_categorias">
-          @foreach ($categoriasMasVendidas as $index => $categoria)
-        <div class="categoria_contenido">
-            <div class="categoria_item">
-                <p class="numero">{{ $index + 1 }}</p>
-                <div class="categoria_detalle">
-                    <p class="nombre">{{ $categoria->label }}</p>
-                    <p class="cantidad">{{ $categoria->y }} productos </p>
+        <div class="conteiner_categorias">
+            @foreach ($categoriasMasVendidas as $index => $categoria)
+            <div class="categoria_contenido">
+                <div class="categoria_item">
+                    <p class="numero">{{ $index + 1 }}</p>
+                    <div class="categoria_detalle">
+                        <p class="nombre">{{ $categoria->label }}</p>
+                        <p class="cantidad">{{ $categoria->y }} productos </p>
+                    </div>
+                </div>
+                <div class="categoria_total">
+                    <p class="total">Q{{ number_format($categoria->total, 2) }}</p>
+                    <p class="porcentaje">{{ $categoria->porcentaje }}% del total</p>
                 </div>
             </div>
-            <div class="categoria_total">
-                <p class="total">Q{{ number_format($categoria->total, 2) }}</p>
-                <p class="porcentaje">{{ $categoria->porcentaje }}% del total</p>
-            </div>
+            @endforeach
         </div>
-        @endforeach
-    </div>
 
 
 
@@ -250,6 +256,8 @@
 
         var ventasPorDia = @json($ventasPorDia);
 
+        console.log(ventasPorDia);
+
         var dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
         var ventasData = [];
         var ingresosData = [];
@@ -257,11 +265,11 @@
         ventasPorDia.forEach(function(item) {
             let dia = new Date(item.created_at).getDay();
             ventasData.push({
-                label: item.dia.substring(0, 3),
+                label: item.dia,
                 y: parseInt(item.ventas)
             });
             ingresosData.push({
-                label: item.dia.substring(0, 3),
+                label: item.dia,
                 y: parseFloat(item.ingresos)
             });
         });
@@ -297,6 +305,12 @@
             title: {
                 text: "Ingresos por Día"
             },
+            axisX: {
+              
+                title: "Día de la Semana",
+                interval: 1,
+                gridThickness: 0
+            },
             axisY: {
                 lineThickness: 0, // Oculta la línea del eje Y
                 tickLength: 0, // Elimina las marcas de las divisiones
@@ -305,10 +319,12 @@
                 }, // Elimina los números (etiquetas)
                 gridThickness: 0 // Elimina las líneas horizontales del grid
             },
+
             data: [{
                 type: "column",
                 color: "#34A853", // verde
-                indexLabel: "{y}",
+                indexLabel: "Q{y}",
+                toolTipContent: "<strong>{label}</strong>: ${y}",
                 dataPoints: ingresosData
             }]
         });
@@ -347,7 +363,7 @@
         productosMasVendidos.forEach((producto) => {
             let ventasProducto = parseInt(producto.y);
             let porcentaje = ((ventasProducto / totalVentas) * 100).toFixed(0);
-            console.log(`Producto: ${producto.label}, Ventas: ${ventasProducto}, Porcentaje: ${porcentaje}%`);
+            
             let item = `
         <div class="producto">
             <div class="info">

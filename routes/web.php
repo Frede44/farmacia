@@ -46,34 +46,35 @@ Route::post("/login-w", [loginController::class, "store"])->name("login.store");
 Route::get("/logout", [loginController::class, "destroy"])->name("logout.store");
 
 
+Route::post('/reporteGanancias', [reporteController::class, 'reporteGanancias'])->name('reporteGanancias');
 
 Route::middleware(['auth'])->group(function () {
-     Route::get('/', [PanelController::class, 'index'])->name('panel.index');
-    Route::resource('/productos', ProcutosProductosController::class)->parameters(['productos '=> 'producto' ]);
+    Route::get('/', [PanelController::class, 'index'])->name('panel.index');
+    Route::resource('/productos', ProcutosProductosController::class)->parameters(['productos ' => 'producto']);
     Route::get('/', [PanelController::class, 'index'])->name('panel.index');
 
 
-    Route::resource('/usuarios', usuariosController::class)->parameters(['usuarios'=> 'usuario']);
+    Route::resource('/usuarios', usuariosController::class)->parameters(['usuarios' => 'usuario']);
 
-    Route::resource('/categorias', categoriaController::class)->parameters(['categorias '=> 'categoria' ]);
+    Route::resource('/categorias', categoriaController::class)->parameters(['categorias ' => 'categoria']);
 
-    Route::resource('/inventario', InventarioInventarioController::class)->parameters(['inventario '=> 'inventario' ]);
+    Route::resource('/inventario', InventarioInventarioController::class)->parameters(['inventario ' => 'inventario']);
 
-    Route::resource('/proveedor', ProveedorController::class)->parameters(['proveedor '=> 'proveedor' ]);
+    Route::resource('/proveedor', ProveedorController::class)->parameters(['proveedor ' => 'proveedor']);
 
-    Route::resource('/rol', rolController::class)->parameters(['rol'=> 'rol' ]);
+    Route::resource('/rol', rolController::class)->parameters(['rol' => 'rol']);
 
-    Route::resource('/persona', personasController::class)->parameters(['persona'=> 'persona']);
+    Route::resource('/persona', personasController::class)->parameters(['persona' => 'persona']);
 
-    Route::resource('/ventas', ventasController::class)->parameters(['ventas'=> 'venta' ]);
+    Route::resource('/ventas', ventasController::class)->parameters(['ventas' => 'venta']);
 
-    Route::resource('/reportes', reporteController::class)->parameters(['reportes'=> 'reporte' ]);
+    Route::resource('/reportes', reporteController::class)->parameters(['reportes' => 'reporte']);
 
     Route::get('/', [PanelController::class, 'index'])->name('panel.index');
 
-    Route::resource('/compras', comprasController::class)->parameters(['compras'=> 'compra']);
+    Route::resource('/compras', comprasController::class)->parameters(['compras' => 'compra']);
 
     Route::get('/exportar', [reporteController::class, 'exportar'])->name('exportar');
 
-
+    Route::get('/vistaGanancia', [reporteController::class, 'vistaGanancia'])->name('vistaGanancia');
 });

@@ -187,7 +187,7 @@ return "rgb($rojo, $verde_azul, $verde_azul)";
                 </div>
                 <div class="datos-categoria">
                     <p>{{ $producto->categoria->nombre }}</p>
-                    <span>Minimo 100</span>
+                    <span>Minimo 5</span>
                 </div>
             </div>
             <div class="progress-container">
@@ -211,7 +211,7 @@ return "rgb($rojo, $verde_azul, $verde_azul)";
         // Asegúrate que la variable $ventasPorDiaSemana esté disponible y sea un JSON válido
         var dataPointsSemana = @json($ventasParaGrafico ?? []); // Usa '?? []' para evitar error si la variable no está definida
 
-        console.log("Data Points Semana:", dataPointsSemana); // Verifica los datos que estás recibiendo
+      
         if (dataPointsSemana.length === 0) {
             console.log("No hay datos de ventas para la semana actual para mostrar en el gráfico.");
             // Opcionalmente, puedes mostrar un mensaje en el contenedor del gráfico

@@ -103,9 +103,6 @@
                     <td>{{ $detalle->cantidad }}</td>
                     <td>
                         {{ $detalle->producto->nombre }}
-                        @if ($detalle->producto->descripcion)
-                            <span class="item-descripcion">{{ $detalle->producto->descripcion }}</span>
-                        @endif
                     </td>
                     <td>Q{{ number_format($detalle->precio_unitario, 2) }}</td>
                     <td>Q{{ number_format($detalle->subtotal, 2) }}</td>

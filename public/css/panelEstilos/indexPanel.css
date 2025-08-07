@@ -33,6 +33,14 @@
     text-decoration: none;
 }
 
+.datos-categoria{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column  ;
+    width: 80px;
+}
+
 
 
 .acciones_rapidas{

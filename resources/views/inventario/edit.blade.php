@@ -92,7 +92,7 @@
 
                                 <!-- Numero de cajas -->
                                 <label for="cantidad_caja">Cantidad de cajas</label>
-                                <input type="number" id="cantidad_caja" step="0.01" min="0.01" name="cantidad_caja" placeholder="Cantidad de cajas" value="{{ old('cantidad_caja', $inventario->cantidad_caja) }}">
+                                <input type="number" id="cantidad_caja" step="0.01" min="0.01" name="cantidad_caja" placeholder="Cantidad de cajas" value="{{ old('cantidad_caja',  ) }}">
                                 @error('cantidad_caja')
                                     <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
                                 @enderror
