@@ -86,7 +86,7 @@
             <p id="ganancia-total">Q0.00</p>
         </div>
         <div class="kpi-card">
-            <h4>Ventas Totales</h4>
+            <h4>Ingresos Totales</h4>
             <p id="ventas-totales">Q0.00</p>
         </div>
         <div class="kpi-card">
