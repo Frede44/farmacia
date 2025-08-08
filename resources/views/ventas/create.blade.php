@@ -77,7 +77,7 @@
                     @if(isset($inventario->xcaja) && $inventario->xcaja > 0)
                     <span class="precio">Caja: Q{{number_format($inventario->xcaja, 2)}}</span>
                     @endif
-                    <span class="stock">Stock: {{$inventario->total_unidad}} unidades</span>
+                    <span class="stock">Stock: {{$inventario->total_unidad}} Unidades</span>
                 </div>
                 <div class="div-btn">
                     <button class="agregar-unidad">Agregar unidad</button>

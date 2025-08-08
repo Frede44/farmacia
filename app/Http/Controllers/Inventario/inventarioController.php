@@ -44,8 +44,8 @@ class InventarioController extends Controller
         $request->validate([
             'id_producto' => 'required|exists:productos,id',
           //  'compra' => 'required|numeric',
-            'xunidad' => 'required|numeric',
-            'xcaja' => 'required|numeric',
+           'xcaja' => 'required|numeric|min:0',
+            'xunidad' => 'required|numeric|min:0',
             'caducidad' => 'required|date',
             'cantidad_caja' => 'required|integer',
             'unidad_caja'=> 'required|integer',
@@ -95,6 +95,7 @@ class InventarioController extends Controller
             'caducidad' => 'required|date',
             'cantidad_caja' => 'required|integer',
             'unidad_caja'=> 'required|integer',
+            'unidad_existencia' => 'required|integer'
         ]);
 
         $inventario->update([
@@ -106,6 +107,7 @@ class InventarioController extends Controller
             'cantidad_caja' => $request->cantidad_caja,
             'total_unidad' => $request->cantidad_caja * $request->unidad_caja,
             'unidad_caja' => $request->unidad_caja,
+            'unidad_existencia' => $request->total_unidad
            // "estado" => true, // Por defecto, el inventario está activo
         ]);
 

@@ -108,6 +108,12 @@
                      <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
                      @enderror
 
+                      <!-- Unidades totales mostrar -->
+                    <label class="unidades_existencia">Unidades totales</label>
+                    <div class="div_existencia" id="existencia_total">
+                    </div>
+
+
 
                      <!-- Fecha de caducidad  seleccionar despues de la actual-->
                      @php
@@ -210,6 +216,36 @@
              document.getElementById("imageModal").style.display = "none";
          }
      </script>
+
+ <!-- Mostrar los calculos del producto  -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cantidadCajaInput = document.getElementById('cantidad_caja');
+        const unidadCajaInput = document.getElementById('unidad_caja');
+        const existenciaDiv = document.getElementById('existencia_total');
+
+        function calcularExistencia() {
+            const cantidadCaja = parseFloat(cantidadCajaInput.value);
+            const unidadCaja = parseFloat(unidadCajaInput.value);
+
+            const cajaValida = !isNaN(cantidadCaja) && cantidadCaja > 0;
+            const unidadValida = !isNaN(unidadCaja) && unidadCaja > 0;
+
+            if (cajaValida && unidadValida) {
+                existenciaDiv.textContent = (cantidadCaja * unidadCaja).toFixed(0);
+            } else if (cajaValida) {
+                existenciaDiv.textContent = cantidadCaja.toFixed(0);
+            } else if (unidadValida) {
+                existenciaDiv.textContent = unidadCaja.toFixed(0);
+            } else {
+                existenciaDiv.textContent = '';
+            }
+        }
+
+        cantidadCajaInput.addEventListener('input', calcularExistencia);
+        unidadCajaInput.addEventListener('input', calcularExistencia);
+    });
+</script>
 
    
 
