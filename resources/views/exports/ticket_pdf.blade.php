@@ -82,10 +82,15 @@
         <img src="https://farmacia.farmaciasaludyahorro.com.gt/img/LocoFarmacia.png" alt="Logo">
     </div>
 
+       <div class="datos-ticket">
+        <p><strong>Fecha:</strong> {{ $venta->created_at->format('d/m/Y') }}</p>
+        <p><strong>Hora:</strong> {{ $venta->created_at->format('H:i') }}</p>
+    </div>
+
     <div class="titulo">FARMACIA SALUD & AHORRO</div>
 
     <div class="datos-ticket">
-        <p><strong>Núm ticket:</strong> {{ sprintf('%05d', $venta->id) }}</p>
+        <p><strong>Recibo de pago:</strong> {{ sprintf('%05d', $venta->id) }}</p>
     </div>
 
     <table>
@@ -119,10 +124,7 @@
         <strong>Total: Q{{ number_format($venta->total, 2) }}</strong>
     </div>
 
-    <div class="datos-ticket">
-        <p><strong>Fecha:</strong> {{ $venta->created_at->format('d/m/Y') }}</p>
-        <p><strong>Hora:</strong> {{ $venta->created_at->format('H:i') }}</p>
-    </div>
+ 
 
     <div class="footer">
         <p>AGRADECEMOS SU PREFERENCIA</p>
