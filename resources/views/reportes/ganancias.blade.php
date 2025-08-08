@@ -106,6 +106,47 @@
             <canvas id="graficaGanancias"></canvas>
         </div>
     </section>
+
+     {{-- NUEVA SECCIÓN: ANÁLISIS DE RENTABILIDAD POR PRODUCTO --}}
+<!--  <section class="product-analysis-section">
+        <h3>Análisis de Rentabilidad por Producto</h3>
+        <div class="product-selector-container">
+            <label for="productSelect">Selecciona un Producto:</label>
+            <select id="productSelect" class="form-control" style="width: auto; display: inline-block;">
+                <option value="">Elige un producto  </option>
+                {{-- Aquí se llenarán los productos desde el controlador --}}
+                @foreach($productos as $producto)
+                    <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="profit-details">
+            {{-- Detalles por Caja --}}
+            <div class="profit-card compra">
+                <h5>Último Precio Compra (Caja)</h5>
+                <p id="precio-compra-caja">Q0.00</p>
+            </div>
+            <div class="profit-card venta">
+                <h5>Precio Venta (Caja)</h5>
+                <p id="precio-venta-caja">Q0.00</p>
+            </div>
+            <div class="profit-card ganancia">
+                <h5>Ganancia (Caja)</h5>
+                <p id="ganancia-caja">Q0.00</p>
+            </div>
+            
+            {{-- Detalles por Unidad --}}
+            <div class="profit-card venta">
+                <h5>Precio Venta (Unidad)</h5>
+                <p id="precio-venta-unidad">Q0.00</p>
+            </div>
+            <div class="profit-card ganancia">
+                <h5>Ganancia (Unidad)</h5>
+                <p id="ganancia-unidad">Q0.00</p>
+            </div>
+        </div>
+    </section> -->
    </div>
 </body>
 
@@ -273,7 +314,61 @@
         // Cargar los datos del día actual al entrar a la página
         mandarDatosControlador();
     });
+
+
+     // --- NUEVO JAVASCRIPT para el análisis de producto ---
+    document.getElementById('productSelect').addEventListener('change', function() {
+        const productoId = this.value;
+
+        if (!productoId) {
+            // Si el usuario deselecciona, limpiar los campos
+            resetProductInfo();
+            return;
+        }
+
+        const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+        
+        // Creamos un objeto FormData para enviar el ID
+        const formData = new FormData();
+        formData.append('producto_id', productoId);
+
+        fetch('/getProductoInfo', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': csrfToken,
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('precio-compra-caja').innerText = 'Q' + data.precio_compra_caja;
+            document.getElementById('precio-venta-caja').innerText = 'Q' + data.precio_venta_caja;
+            document.getElementById('ganancia-caja').innerText = 'Q' + data.ganancia_caja;
+            document.getElementById('precio-venta-unidad').innerText = 'Q' + data.precio_venta_unidad;
+            document.getElementById('ganancia-unidad').innerText = 'Q' + data.ganancia_unidad;
+        })
+        .catch(error => {
+            console.error('Error al obtener la info del producto:', error);
+            resetProductInfo();
+        });
+    });
+
+    function resetProductInfo() {
+        document.getElementById('precio-compra-caja').innerText = 'Q0.00';
+        document.getElementById('precio-venta-caja').innerText = 'Q0.00';
+        document.getElementById('ganancia-caja').innerText = 'Q0.00';
+        document.getElementById('precio-venta-unidad').innerText = 'Q0.00';
+        document.getElementById('ganancia-unidad').innerText = 'Q0.00';
+    }
+
+    // --- INICIALIZACIÓN (código anterior) ---
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('specificDate').value = new Date().toISOString().split('T')[0];
+        mandarDatosControlador();
+    });
 </script>
+
 
 @endsection
 

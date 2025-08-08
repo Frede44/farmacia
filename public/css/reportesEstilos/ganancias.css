@@ -137,3 +137,42 @@
             margin-bottom: 20px;
             color: #333;
         }
+
+         /* NUEVOS ESTILOS para el análisis de producto */
+        .product-analysis-section {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .product-selector-container {
+            margin-bottom: 20px;
+        }
+        .product-selector-container label {
+            font-weight: 500;
+            margin-right: 10px;
+        }
+        .profit-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+        .profit-card {
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #eee;
+        }
+        .profit-card.compra { border-left: 4px solid #f0ad4e; }
+        .profit-card.venta { border-left: 4px solid #5cb85c; }
+        .profit-card.ganancia { border-left: 4px solid #337ab7; }
+        .profit-card h5 { margin-top: 0; font-size: 0.9rem; color: #888; text-transform: uppercase; }
+        .profit-card p { margin-bottom: 0; font-size: 1.5rem; font-weight: 600; }
+
+        .form-control{
+             padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
+        }

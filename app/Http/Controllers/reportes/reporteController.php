@@ -5,7 +5,9 @@ namespace App\Http\Controllers\reportes;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Ventas\ventasController;
 use App\Models\Compras;
+use App\Models\DetalleCompras;
 use App\Models\DetalleVentas;
+use App\Models\Inventario;
 use App\Models\Productos;
 use App\Models\Ventas;
 use Barryvdh\DomPDF\PDF;
@@ -100,14 +102,17 @@ class reporteController extends Controller
 
     public function vistaGanancia()
     {
+        // Obtenemos todos los productos activos para el selector de análisis por producto
+        $productos = Productos::where('estado', 1)->orderBy('nombre')->get();
 
-        return view('reportes.ganancias');
+        // Retornamos la vista y le pasamos la colección de productos
+        return view('reportes.ganancias', ['productos' => $productos]);
     }
 
     public function reporteGanancias(Request $request)
     {
         $filterType = $request->input('filterType', 'day');
-        
+
         // Inicializamos las consultas para poder aplicar filtros dinámicamente
         $queryVentas = Ventas::query();
         $queryCompras = Compras::query();
@@ -220,4 +225,38 @@ class reporteController extends Controller
 
         return back()->with('error', 'Tipo de exportación no válido.');
     }
+
+  /*  public function getProductoInfo(Request $request)
+    {
+        $request->validate(['producto_id' => 'required|integer|exists:productos,id']);
+        $producto_id = $request->input('producto_id');
+
+        // 1. Obtener el último precio de compra (por caja)
+        $ultimaCompra = DetalleCompras::where('producto_id', $producto_id)
+            ->latest('id')
+            ->first();
+        $precioCompraCaja = $ultimaCompra ? $ultimaCompra->precio : 0;
+
+        // 2. Obtener precios de venta y unidades por caja del inventario
+        $inventario = Inventario::where('id_producto', $producto_id)->first();
+        $precioVentaCaja = $inventario ? $inventario->xcaja : 0;
+        $precioVentaUnidad = $inventario ? $inventario->xunidad : 0;
+        $unidadesPorCaja = $inventario ? $inventario->unidad_caja : 1;
+
+        // 3. Calcular el costo por unidad
+        $costoPorUnidad = ($unidadesPorCaja > 0) ? $precioCompraCaja / $unidadesPorCaja : 0;
+
+        // 4. Calcular ganancias
+        $gananciaPorCaja = $precioVentaCaja - $precioCompraCaja;
+        $gananciaPorUnidad = $precioVentaUnidad - $costoPorUnidad;
+
+        // 5. Devolver los datos en formato JSON
+        return response()->json([
+            'precio_compra_caja' => number_format($precioCompraCaja, 2, '.', ''),
+            'precio_venta_caja' => number_format($precioVentaCaja, 2, '.', ''),
+            'ganancia_caja' => number_format($gananciaPorCaja, 2, '.', ''),
+            'precio_venta_unidad' => number_format($precioVentaUnidad, 2, '.', ''),
+            'ganancia_unidad' => number_format($gananciaPorUnidad, 2, '.', ''),
+        ]);
+    }*/
 }

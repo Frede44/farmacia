@@ -12,7 +12,7 @@ class Inventario extends Model
     protected $fillable=[
         'id',
         'id_producto', // Relación con la tabla productos
-       // 'compra',
+    
         'xunidad',
         'xcaja',
         'caducidad',

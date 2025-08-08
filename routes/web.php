@@ -47,6 +47,7 @@ Route::get("/logout", [loginController::class, "destroy"])->name("logout.store")
 
 
 Route::post('/reporteGanancias', [reporteController::class, 'reporteGanancias'])->name('reporteGanancias');
+Route::post('/getProductoInfo', [ReporteController::class, 'getProductoInfo']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [PanelController::class, 'index'])->name('panel.index');
