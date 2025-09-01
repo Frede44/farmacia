@@ -73,7 +73,9 @@ class ventasController extends Controller
         //validar si la cantidad de producto es mayor a la cantidad en inventario
 
         foreach ($request->productos as $producto) {
-            $inventario = Inventario::where('id_producto', $producto['id_producto'])->first();
+            $inventario = Inventario::where('id_producto', $producto['id_producto'])
+            ->where('estado', true)
+            ->first();
 
             if (!$inventario) {
                 return redirect()->back()->withErrors(['error' => 'Producto no encontrado en inventario.']);
@@ -115,6 +117,7 @@ class ventasController extends Controller
 
             // Obtener inventario FIFO (por fecha más próxima)
             $inventarios = Inventario::where('id_producto', $producto['id_producto'])
+                ->where('estado', true)
                 ->orderBy('caducidad', 'asc')
                 ->get();
 

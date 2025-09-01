@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuarios</title>
+    <title>Crear Ventas</title>
     <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/ventasEstilos/ventasEstilos.css') }}">
     <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
@@ -72,16 +72,22 @@
                 </div>
                 <p>{{$inventario->producto->descripcion}}</p>
                 <div class="precio-stock">
-                    {{-- Mostrar ambos precios podría ser útil para el usuario --}}
-                    <span class="precio">Unidad: Q{{number_format($inventario->xunidad, 2)}}</span>
-                    @if(isset($inventario->xcaja) && $inventario->xcaja > 0)
-                    <span class="precio">Caja: Q{{number_format($inventario->xcaja, 2)}}</span>
-                    @endif
-                    <span class="stock">Stock: {{$inventario->total_unidad}} Unidades</span>
+                    <div class="divPrecios">
+                        {{-- Mostrar ambos precios podría ser útil para el usuario --}}
+                        <span class="precio">Unidad: Q{{number_format($inventario->xunidad, 2)}}</span>
+                        @if(isset($inventario->xcaja) && $inventario->xcaja > 0)
+                        <span class="precio">Caja: Q{{number_format($inventario->xcaja, 2)}}</span>
+                        @endif
+                    </div>
+                    <div class="divStock">
+                        <span class="stock">Stock: {{$inventario->total_unidad}} Unidades</span>
+                        <span class="stock">Stock: {{$inventario->cantidad_caja}} cajas</span>
+                    </div>
+
                 </div>
                 <div class="div-btn">
                     <button class="agregar-unidad">Agregar unidad</button>
-                    <button class="agregar-caja" @if(!isset($inventario->xcaja) || $inventario->xcaja <= 0) disabled title="Precio por caja no definido" @endif>Agregar caja</button>
+                    <button class="agregar-caja" @if(!isset($inventario->cantidad_caja) || $inventario->cantidad_caja <= 0) disabled title="Precio por caja no definido" style="display: none;" @endif>Agregar caja</button>
                 </div>
             </div>
             @endforeach

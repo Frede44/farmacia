@@ -116,8 +116,7 @@ class InventarioController extends Controller
     public function destroy($id)
     {
         $inventario = Inventario::findOrFail($id);
-        $inventario->estado = false;
-        $inventario->save();
+        $inventario->delete();
         return redirect()->route('inventario.index')->with('success', '¡Producto eliminado correctamente!');
     }
 

@@ -1,34 +1,36 @@
+h3,
+p,
+h4 {
 
-h3,p,h4 {
-    
     margin: 0;
 
 }
 
-  .custom-alert {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        z-index: 1050;
-        min-width: 250px;
-        padding: 15px 20px;
-        border-radius: 8px;
-        background-color: #f44336;
-        color: white;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        animation: slideFadeInRight 0.5s ease-out;
+.custom-alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1050;
+    min-width: 250px;
+    padding: 15px 20px;
+    border-radius: 8px;
+    background-color: #f44336;
+    color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    animation: slideFadeInRight 0.5s ease-out;
+}
+
+@keyframes slideFadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
     }
 
-    @keyframes slideFadeInRight {
-        from {
-            opacity: 0;
-            transform: translateX(30px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
+}
 
 
 /* Clase para accesibilidad visual oculta */
@@ -39,7 +41,7 @@ h3,p,h4 {
     width: 1px;
     height: 1px;
     overflow: hidden;
-    
+
 }
 
 
@@ -125,7 +127,7 @@ h3,p,h4 {
 .producto img {
     width: 100%;
     height: 200px;
-    background-image: cover cover ;
+    background-image: cover cover;
     border-radius: 5px;
     margin-bottom: 10px;
 }
@@ -133,27 +135,49 @@ h3,p,h4 {
 .producto h3,
 .producto p {
     text-align: left;
-    
+
     margin-bottom: 5px;
     padding-left: 10px;
 }
 
 .precio-stock {
     display: flex;
-    justify-content: space-around;
     align-items: center;
     width: 100%;
-   
-    margin-top: 10px;
-    margin-bottom: 10px;
+    flex-direction: column;
+    margin: 10px;
+
+
+}
+
+.divPrecios {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.divStock {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .precio {
+     margin-top: 5px;
     font-size: 1.2em;
     font-weight: bold;
     color: #333;
 }
 
+.stock {
+    margin-top: 5px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
 
 
 .categoria {
@@ -180,7 +204,7 @@ h3,p,h4 {
     transition: background-color 0.3s ease;
 }
 
-.div-btn{
+.div-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -242,8 +266,10 @@ h3,p,h4 {
     border: 1px solid #ddd;
     border-radius: 5px;
     transition: background-color 0.3s, border 0.3s;
-     cursor: pointer; /* Esto cambia el puntero al pasar encima */
+    cursor: pointer;
+    /* Esto cambia el puntero al pasar encima */
 }
+
 .carito-titulo h3:hover {
     background-color: #e2e2e2;
     border-color: #0227f800;
@@ -252,7 +278,8 @@ h3,p,h4 {
 .carito-titulo h3.activo {
     background-color: #174eb4;
     border-color: #0227f800;
-    color: white; /* Cambia el color del texto a blanco */
+    color: white;
+    /* Cambia el color del texto a blanco */
 }
 
 .carrito-productos {
@@ -405,7 +432,7 @@ h3,p,h4 {
 /* Contenedor principal de la sección cliente */
 .contenido-informacion {
     background-color: #f9f9f9;
-    
+
     margin-top: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -433,53 +460,66 @@ h3,p,h4 {
     margin: 10px;
 }
 
- /* Estilos adicionales para la búsqueda de clientes */
-        .cliente.seleccionado {
-            background-color: #f0f0f0; /* Cambia el color de fondo para indicar selección */
-            font-weight: bold;
-        }
+/* Estilos adicionales para la búsqueda de clientes */
+.cliente.seleccionado {
+    background-color: #f0f0f0;
+    /* Cambia el color de fondo para indicar selección */
+    font-weight: bold;
+}
 
-        #nombre_cliente {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 100%;
-            max-width: 300px; /* Limita el ancho del input */
-            margin-right: 10px;
-            margin-bottom: 10px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease; /* Transición suave para el color del borde */
-        }
+#nombre_cliente {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 300px;
+    /* Limita el ancho del input */
+    margin-right: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    /* Transición suave para el color del borde */
+}
 
-        #nombre_cliente:focus {
-            border-color: #007bff; /* Cambia el borde al hacer foco (azul de Bootstrap, por ejemplo) */
-            outline: none; /* Elimina el outline por defecto del navegador */
-            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25); /* Añade una sombra suave al hacer foco */
-        }
-        .lista_clientes {
-            max-height: 200px; /* Altura máxima de la lista */
-            overflow-y: auto; /* Agrega scrollbar vertical si es necesario */
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin-top: 10px;
-            padding: 5px;
-            background-color: #fff;
-        }
+#nombre_cliente:focus {
+    border-color: #007bff;
+    /* Cambia el borde al hacer foco (azul de Bootstrap, por ejemplo) */
+    outline: none;
+    /* Elimina el outline por defecto del navegador */
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    /* Añade una sombra suave al hacer foco */
+}
 
-        .cliente {
-            padding: 8px;
-            border-bottom: 1px solid #eee; /* Separador entre clientes */
-            cursor: pointer;
-            transition: background-color 0.2s ease; /* Transición suave para el fondo */
-        }
+.lista_clientes {
+    max-height: 200px;
+    /* Altura máxima de la lista */
+    overflow-y: auto;
+    /* Agrega scrollbar vertical si es necesario */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 5px;
+    background-color: #fff;
+}
 
-        .cliente:hover {
-            background-color: #f8f9fa; /* Color de fondo al pasar el mouse (gris claro de Bootstrap) */
-        }
+.cliente {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    /* Separador entre clientes */
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    /* Transición suave para el fondo */
+}
 
-        .cliente:last-child {
-            border-bottom: none; /* Elimina el borde del último cliente */
-        }
+.cliente:hover {
+    background-color: #f8f9fa;
+    /* Color de fondo al pasar el mouse (gris claro de Bootstrap) */
+}
+
+.cliente:last-child {
+    border-bottom: none;
+    /* Elimina el borde del último cliente */
+}
 
 .cliente .nombre {
     font-weight: bold;
@@ -556,6 +596,8 @@ h3,p,h4 {
         align-items: center;
     }
 
+
+
     .productos,
     .container-carrito {
         width: 90%;
@@ -567,5 +609,38 @@ h3,p,h4 {
         width: 100%;
     }
 
-  
+    .precio-stock {
+       display: flex;
+       width: 90%;
+       align-items: center;
+       margin: 10px 10px;
+      
+    }
+
+    .divPrecios {
+      display: flex;
+     
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .divStock {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+    }
+
+    .precio {
+        font-size: 1.0em;
+        
+    }
+
+    .stock {
+     
+        font-size: 1.0em;
+   
+        }
+
+
 }
