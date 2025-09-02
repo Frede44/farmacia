@@ -210,7 +210,11 @@ overflow: auto;
 background-color: rgba(0,0,0,0.4);
 }
 
-
+.tbInventario{
+  color:rgb(14, 156, 49);
+  font-weight: bold; /* pone en negrita */
+ 
+}
 
 
 

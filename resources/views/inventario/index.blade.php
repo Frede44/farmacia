@@ -78,7 +78,7 @@
                         <td>{{ $inventario->xcaja  ?? 'Sin Caja' }}</td>
                         <td>{{ $inventario->cantidad_caja  ?? 'Sin Caja' }}</td>
                         <td>{{ $inventario->unidad_caja  ?? 'Sin Unidad' }}</td>
-                        <td>{{ $inventario->total_unidad  ?? 'Sin Unidad' }}</td>
+                        <td class="tbInventario">{{ $inventario->total_unidad  ?? 'Sin Unidad' }}</td>
 
                         <td>
                         @if($inventario->diferenciaDias < 0)

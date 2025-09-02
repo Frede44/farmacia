@@ -7,6 +7,17 @@
     <title>Crear productos</title>
     <link rel="icon" type="image/png" href="{{ asset('img/pestaña.png') }}">
     <link rel="stylesheet" href="{{ asset('css/productosEstilos/createProductos.css') }}"> 
+<!-- CSS de Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- JS de Select2 -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+
     <!-- Iconos-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
      <link rel="icon" href="{{ asset('img/LocoFarmacia.png') }}" type="image/png">
@@ -47,16 +58,22 @@
 
                             
 
-                                <!--Categoria del producto-->
                                 <label for="categoria_id">Categoría</label>
-                                <select name="categoria_id">
-                                <option value="">Selecciona una categoría</option>
-                                @foreach ($categorias as $categoria)
-                                    <option value="{{ $categoria->id }}" >
-                                        {{ $categoria->nombre }}
-                                    </option>
-                                @endforeach
-                            </select>
+                                <select name="categoria_id" id="categoria_id" class="form-control select2">
+                                    <option value="">Selecciona una categoría</option>
+                                    @foreach ($categorias as $categoria)
+                                        <option value="{{ $categoria->id }}">
+                                            {{ $categoria->nombre }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+
+                         
+
+
+
+
                                 @error('categoria_id')
                                     <div role="alert" class="alert alert-error mt-4 p-2">
                                     <div class="error-message"><i class="fas fa-exclamation-circle" style="color: red;"></i> {{ $message }}</div>
@@ -131,6 +148,14 @@
       labelText.textContent = 'Sube tu imagen'; // Restaura texto si no es imagen
     }
   });
+</script>
+<script>
+    $(document).ready(function() {
+        $('.select2').select2({
+            placeholder: "Selecciona una categoría",
+            allowClear: true
+        });
+    });
 </script>
 
 
