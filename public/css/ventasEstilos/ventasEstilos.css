@@ -1,4 +1,3 @@
-
 h3,
 p,
 h4 {
@@ -144,7 +143,6 @@ h4 {
 .precio-stock {
     display: flex;
     align-items: center;
-    width: 100%;
     flex-direction: column;
     margin: 10px;
 
@@ -155,29 +153,34 @@ h4 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     width: 100%;
+
 }
 
 .divStock {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
     width: 100%;
+
+
 }
 
 .precio {
-     margin-top: 5px;
+    margin-top: 5px;
     font-size: 1.2em;
     font-weight: bold;
     color: #333;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 .stock {
     margin-top: 5px;
     font-size: 1.2em;
     font-weight: bold;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 
@@ -611,18 +614,18 @@ h4 {
     }
 
     .precio-stock {
-       display: flex;
-       width: 90%;
-       align-items: center;
-       margin: 10px 10px;
-      
+        display: flex;
+        width: 90%;
+        align-items: center;
+        margin: 10px 10px;
+
     }
 
     .divPrecios {
-      display: flex;
-     
-      align-items: center;
-      margin: 10px 0;
+        display: flex;
+
+        align-items: center;
+        margin: 10px 0;
     }
 
     .divStock {
@@ -634,14 +637,14 @@ h4 {
 
     .precio {
         font-size: 1.0em;
-        
+
     }
 
     .stock {
-     
+
         font-size: 1.0em;
-   
-        }
+
+    }
 
 
 }
