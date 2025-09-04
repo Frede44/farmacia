@@ -211,7 +211,11 @@ background-color: rgba(0,0,0,0.4);
 }
 
 
-
+.tbInventario {
+   
+    color: #2256e4; /* Color azul oscuro */
+    font-weight: bold;
+}
 
 
 
