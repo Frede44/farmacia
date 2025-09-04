@@ -77,6 +77,8 @@ class ventasController extends Controller
             ->where('estado', true)
             ->first();
 
+
+
             if (!$inventario) {
                 return redirect()->back()->withErrors(['error' => 'Producto no encontrado en inventario.']);
             }
@@ -137,7 +139,7 @@ class ventasController extends Controller
                         $inv->save();
                         $cantidadRestante = 0;
                     } else {
-                        // Vender todo lo disponible en este lote
+                        
                         $cantidadVendidaDesdeEsteLote = $inv->total_unidad;
 
                         $inv->total_unidad = 0;
