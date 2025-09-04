@@ -89,14 +89,22 @@ class InventarioController extends Controller
     {
         $request->validate([
             'id_producto' => 'required|exists:productos,id',
-          //  'compra' => 'required|numeric',
-            'xunidad' => 'required|numeric',
-            'xcaja' => 'required|numeric',
+           // 'compra' => 'required|numeric',
+            'xcaja' => 'required|numeric|min:0',
+            'xunidad' => 'required|numeric|min:0',
             'caducidad' => 'required|date',
             'cantidad_caja' => 'required|integer',
             'unidad_caja'=> 'required|integer',
-            'unidad_existencia' => 'required|integer'
         ]);
+
+       if ($request->cantidad_caja < 0 || $request->unidad_caja < 0) {
+            return redirect()->back()->withErrors(['error' => 'La cantidad y unidad por caja deben ser números positivos.'])->withInput();
+        }elseif ($request->cantidad_caja == 0) {
+                $total =  $request->unidad_caja;
+        }else{
+             $total = $request->cantidad_caja *  $request->unidad_caja;
+        }
+        $categoria = Productos::findOrFail($request->id_producto)->categoria_id;
 
         $inventario->update([
             'id_producto' => $request->id_producto,
@@ -105,13 +113,14 @@ class InventarioController extends Controller
             'xcaja' => $request->xcaja,
             'caducidad' => $request->caducidad,
             'cantidad_caja' => $request->cantidad_caja,
-            'total_unidad' => $request->cantidad_caja * $request->unidad_caja,
             'unidad_caja' => $request->unidad_caja,
-            'unidad_existencia' => $request->total_unidad
-           // "estado" => true, // Por defecto, el inventario está activo
-        ]);
+            'total_unidad' => $total,
+            'id_categoria' => $categoria,
+            'estado' => true, // Por defecto, el inventario está activo
+                ]);
+      return redirect()->route('inventario.index')->with('success', '¡Producto actualizado correctamente!');
 
-        return redirect()->route('inventario.index')->with('success', '¡Producto actualizado correctamente!');
+       
     }
     public function destroy($id)
     {
